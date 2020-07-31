@@ -9,7 +9,8 @@ export FZF_BASE="$HOME/.dotfiles/oh-my-zsh/custom/plugins/fzf"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="agnoster"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
