@@ -2,16 +2,16 @@ set +e
 set -u
 
 # config vim
-#echo 'source $HOME/.dotfiles/tool/vim/config.vim' >$HOME/.vimrc
-#if [ ! -d $HOME/.config/nvim ]; then
-#    echo "Neovim setup"
-#    mkdir $HOME/.config/nvim
-#fi
+echo 'source $HOME/.dotfiles/tool/vim/.vimrc' >$HOME/.vimrc
+# if [ ! -d $HOME/.config/nvim ]; then
+#     echo "Neovim setup"
+#     mkdir $HOME/.config/nvim
+# fi
 #echo -e "set runtimepath^=~/.vim runtimepath+=~/.vim/after\nlet &packpath = &runtimepath\nsource $HOME/.dotfiles/tool/vim/config.vim" >$HOME/.config/nvim/init.vim
-#
-#echo "PlugInstall for vim"
-#vim +PlugInstall +qall > /dev/null
-#echo "Installed Vim/Nvim configuration successfully ^~^"
+
+echo "PlugInstall for vim"
+vim +PlugInstall +qall > /dev/null
+echo "Installed Vim configuration successfully ^~^"
 
 # config tmux
 echo 'source ~/.dotfiles/tool/tmux/config.tmux' >$HOME/.tmux.conf

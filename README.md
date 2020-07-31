@@ -5,7 +5,7 @@ A set of vim/nvim, zsh, and tmux configuration files.
 
 Dotfiles is installed by running one of the following commands in your terminal. You can install this via the command-line with `git`.
 ```bash
-git clone https://github.com/toandaominh1997/dotfiles.git $HOME/.dotfiles/tool
+git clone https://github.com/vpeopleonatank/dotfiles.git $HOME/.dotfiles/tool
 bash $HOME/.dotfiles/tool/config.sh
 
 For detail:

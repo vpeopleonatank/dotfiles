@@ -33,7 +33,7 @@ else
     add-apt-repository ppa:jonathonf/vim
     apt-get update
     apt-get install -y vim
-    apt-get install vim-gnome
+    apt-get install vim-gtk3
 fi
 
 # install vim-plug

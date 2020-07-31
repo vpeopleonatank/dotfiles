@@ -81,6 +81,7 @@ plugins=(
     history
     extract
     copyfile
+    zsh-z
     )
 
 source $ZSH/oh-my-zsh.sh
@@ -110,3 +111,34 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+bindkey -v
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/vpeopleonatank/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/vpeopleonatank/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/vpeopleonatank/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/vpeopleonatank/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias t='tmux'
+alias ez='vim ~/.zshrc'
+alias lsh='source ~/.zshrc'
+alias jl='jupyter-lab'
+alias ca='conda activate'
+alias gt="bash ~/.scripts/generate_template.sh"
+alias countdown='~/git/countdown/countdown'
+alias cd_basic_algo_codelearn='cd /media/vpeopleonatank/Data/Code/algo_merge/contest/codelearn/basic_algo'
+export PATH=$PATH:/usr/local/go/bin
+
