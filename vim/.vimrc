@@ -129,7 +129,7 @@ hi Conceal ctermbg=none
 " TODO: Pick a leader key
 let mapleader = ","
 
-let maplocalleader = ";"
+let maplocalleader = " "
 
 
 " Security

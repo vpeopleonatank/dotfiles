@@ -141,5 +141,11 @@ alias ca='conda activate'
 alias gt="bash ~/.scripts/generate_template.sh"
 alias countdown='~/git/countdown/countdown'
 alias cd_basic_algo_codelearn='cd /media/vpeopleonatank/Data/Code/algo_merge/contest/codelearn/basic_algo'
+alias psudo='sudo env PATH="$PATH"'
 export PATH=$PATH:/usr/local/go/bin
+MANPATH=/usr/local/texlive/2020/texmf-dist/doc/man:$MANPATH;
+export MANPATH
+INFOPATH=/usr/local/texlive/2020/texmf-dist/doc/info:$INFOPATH;
+export INFOPATH
+export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-linux
 
