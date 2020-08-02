@@ -13,6 +13,8 @@ echo "PlugInstall for vim"
 vim +PlugInstall +qall > /dev/null
 echo "Installed Vim configuration successfully ^~^"
 
+
+
 # config tmux
 echo 'source ~/.dotfiles/tool/tmux/config.tmux' >$HOME/.tmux.conf
 echo "Installed Tmux configuration successfully ^~^"
@@ -106,3 +108,11 @@ else
   echo "$HOME/.scripts dir existed"
 fi
 ln -s $HOME/.dotfiles/tool/scripts/generate_template.sh $HOME/.scripts/generate_template.sh
+
+
+if [ ! -d $HOME/.vim/UltiSnips ]; then
+  mkdir $HOME/.vim/UltiSnips
+else
+  echo "$HOME/.vim/UltiSnips dir existed"
+fi
+cp $HOME/.dotfiles/tool/templates/tex.snippets $HOME/.vim/UltiSnips/
