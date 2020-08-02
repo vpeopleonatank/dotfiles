@@ -98,3 +98,11 @@ else
   echo "alacritty config dir existed"
 fi
 ln -s $HOME/.dotfiles/tool/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+
+
+if [ ! -d $HOME/.scripts ]; then
+  mkdir $HOME/.scripts
+else
+  echo "$HOME/.scripts dir existed"
+fi
+ln -s $HOME/.dotfiles/tool/scripts/generate_template.sh $HOME/.scripts/generate_template.sh
