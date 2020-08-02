@@ -43,9 +43,11 @@ bind C-c new-session
 bind C-f command-prompt -p find-session 'switch-client -t %%'
 
 # split current window horizontally
-bind - split-window -v
+bind - split-window -v -c "#{pane_current_path}"
 # split current window vertically
-bind _ split-window -h
+bind _ split-window -h -c "#{pane_current_path}"
+
+bind c new-window -c "#{pane_current_path}"
 
 # pane navigation
 bind -r h select-pane -L  # move left
