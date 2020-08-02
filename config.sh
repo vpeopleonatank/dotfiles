@@ -97,4 +97,4 @@ if [ ! -d $HOME/.config/alacritty ]; then
 else
   echo "alacritty config dir existed"
 fi
-cp $HOME/.dotfiles/tool/alacritty/alacritty.yml ~/.config/alacritty/
+ln -s $HOME/.dotfiles/tool/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
