@@ -221,7 +221,9 @@ map <leader>vv "+p
 imap jk <Esc>
 imap kj <Esc>
 
-inoremap {<CR>  {<CR>}<Esc>O
+nmap <space>e :CocCommand explorer<CR>
+
+" inoremap {<CR>  {<CR>}<Esc>O
 
 autocmd filetype cpp nnoremap <leader>r :w <bar> AsyncRun -mode=term -pos=thelp g++ -std=c++14 % -o %:r && ./%:r<CR>
 autocmd filetype cpp nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp ./%:r<CR>
