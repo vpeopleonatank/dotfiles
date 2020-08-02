@@ -36,6 +36,10 @@ Plug 'arcticicestudio/nord-vim'
 
  Plug 'itchyny/lightline.vim'
 
+ Plug 'skywind3000/asyncrun.vim'
+
+ Plug 'skywind3000/vim-terminal-help'
+
 call plug#end()
 
 
@@ -217,8 +221,8 @@ map <leader>vv "+p
 imap jk <Esc>
 imap kj <Esc>
 
-autocmd filetype cpp nnoremap <leader>r :w <bar> !g++ -std=c++14 % -o %:r && ./%:r<CR>
-autocmd filetype cpp nnoremap <leader>rf :!./%:r<CR>
+autocmd filetype cpp nnoremap <leader>r :w <bar> AsyncRun -mode=term -pos=thelp g++ -std=c++14 % -o %:r && ./%:r<CR>
+autocmd filetype cpp nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp ./%:r<CR>
 
 nnoremap <leader>lc :source $MYVIMRC<CR>
 
@@ -234,3 +238,8 @@ set background=dark
 colorscheme oceanic_material
 " colorscheme nord
 let g:lightline = { 'colorscheme': 'darcula' }
+
+if has('win32')
+    " Command output encoding for Windows
+    let g:asyncrun_encs = 'gbk'
+endif
