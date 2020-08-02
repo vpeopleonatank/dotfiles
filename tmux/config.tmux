@@ -119,3 +119,41 @@ bind-key -T copy-mode-vi 'C-j' select-pane -D
 bind-key -T copy-mode-vi 'C-k' select-pane -U
 bind-key -T copy-mode-vi 'C-l' select-pane -R
 bind-key -T copy-mode-vi 'C-\' select-pane -l
+
+
+# Status update interval
+set -g status-interval 1
+
+# Basic status bar colors
+set -g status-fg "#556572"
+set -g status-bg "#293845"
+
+# Left side of status bar
+set -g status-left-length 40
+set -g status-left "#[fg=#13222e,bg=#9770b2,bold] #S #[fg=#9770b2,bg=#6a7b88,nobold]#[fg=#293845,bg=#6a7b88] #(whoami) #[fg=#6a7b88,bg=#3f4f5b]#[fg=#6a7b88,bg=#3f4f5b] #I:#P #[fg=#3f4f5b,bg=#293845,nobold]"
+
+# Right side of status bar
+set -g status-right-length 150
+set -g status-right "#[fg=#3f4f5b,bg=#293845]#[fg=#6a7b88,bg=#3f4f5b] %H:%M:%S #[fg=#6a7b88,bg=#3f4f5b]#[fg=#293845,bg=#6a7b88] %d-%b-%y #[fg=#96a8b5,bg=#6a7b88]#[fg=#13222e,bg=#96a8b5,bold] #H "
+
+# Window status
+set -g window-status-format "#[fg=#acbecc]#[bg=#293845]  #I:#W#F  "
+set -g window-status-current-format "#[fg=#293845,bg=black]#[fg=#b35d8d,nobold] #I:#W#F #[fg=#293845,bg=black,nobold]"
+
+# Window separator
+set -g window-status-separator ""
+
+# Window status alignment
+set -g status-justify centre
+
+# Pane number indicator
+set -g display-panes-colour "#293845"
+set -g display-panes-active-colour "#96a8b5"
+
+# Clock mode
+set -g clock-mode-colour "#9770b2"
+set -g clock-mode-style 24
+
+
+set -g message-style fg=black,bg="#9770b2"
+set -g message-command-style fg=black,bg="#293845"

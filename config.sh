@@ -53,6 +53,22 @@ if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
 else
     echo "autosuggestions is installed"
 fi
+# k - ls alternative
+if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/k ]; then
+    echo "install k - ls alternative"
+    git clone https://github.com/supercrabtree/k $HOME/.dotfiles/oh-my-zsh/custom/plugins/k
+else
+    echo "k is installed"
+fi
+
+# zsh-z
+
+if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-z ]; then
+    echo "install zsh-z"
+    git clone  https://github.com/agkozak/zsh-z $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-z
+else
+    echo "zsh-z is installed"
+fi
 # nodejs
 if [ ! -d $HOME/.dotfiles/nodejs/bin ]; then
     echo "install nodejs"
@@ -69,7 +85,16 @@ if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/fzf ]; then
 else
     echo "FZF is installed"
 fi
+
 export ZSH=$HOME/.dotfiles/oh-my-zsh
 $HOME/.dotfiles/oh-my-zsh/tools/install.sh
 echo 'Complete OH MY ZSH'
 echo 'source $HOME/.dotfiles/tool/zsh/config.zsh' >$HOME/.zshrc
+
+# alacritty
+if [ ! -d $HOME/.config/alacritty ]; then
+  mkdir $HOME/.config/alacritty
+else
+  echo "alacritty config dir existed"
+fi
+cp $HOME/.dotfiles/tool/alacritty/alacritty.yml ~/.config/alacritty/

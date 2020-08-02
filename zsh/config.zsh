@@ -83,6 +83,7 @@ plugins=(
     extract
     copyfile
     zsh-z
+    k
     )
 
 source $ZSH/oh-my-zsh.sh
@@ -142,10 +143,16 @@ alias gt="bash ~/.scripts/generate_template.sh"
 alias countdown='~/git/countdown/countdown'
 alias cd_basic_algo_codelearn='cd /media/vpeopleonatank/Data/Code/algo_merge/contest/codelearn/basic_algo'
 alias psudo='sudo env PATH="$PATH"'
+fg() {
+  git add .
+  git commit -m "update"
+  git push
+}
 export PATH=$PATH:/usr/local/go/bin
 MANPATH=/usr/local/texlive/2020/texmf-dist/doc/man:$MANPATH;
 export MANPATH
 INFOPATH=/usr/local/texlive/2020/texmf-dist/doc/info:$INFOPATH;
 export INFOPATH
 export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-linux
-
+# fix ls directory color
+export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"

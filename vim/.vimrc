@@ -31,6 +31,10 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 Plug 'tyru/caw.vim'
 
 Plug 'hardcoreplayers/oceanic-material'
+Plug 'arcticicestudio/nord-vim'
+
+
+ Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -228,3 +232,5 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 " Color scheme (terminal)
 set background=dark
 colorscheme oceanic_material
+" colorscheme nord
+let g:lightline = { 'colorscheme': 'darcula' }

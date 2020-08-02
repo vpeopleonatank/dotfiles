@@ -17,3 +17,6 @@ For detail:
 
 <img src='./docs/plot.png'>
  
+### Theme style
+nightsky theme
+https://themer.dev/?colors.dark.accent0=%23CA3E5A&colors.dark.accent1=%23D8843E&colors.dark.accent2=%23EBB062&colors.dark.accent3=%2381A559&colors.dark.accent4=%2342ABAB&colors.dark.accent5=%234496CD&colors.dark.accent6=%239770B2&colors.dark.accent7=%23B35D8D&colors.dark.shade0=%2313222E&colors.dark.shade7=%23ACBECC&activeColorSet=dark&calculateIntermediaryShades.dark=true&calculateIntermediaryShades.light=true
