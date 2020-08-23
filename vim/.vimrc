@@ -24,9 +24,6 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-setlocal spell
-set spelllang=en_us
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 Plug 'tyru/caw.vim'
 
@@ -34,13 +31,17 @@ Plug 'hardcoreplayers/oceanic-material'
 Plug 'arcticicestudio/nord-vim'
 
 
- Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
- Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim'
 
- Plug 'skywind3000/vim-terminal-help'
+Plug 'skywind3000/vim-terminal-help'
+
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 
 call plug#end()
+
 
 
 " For plugins to load correctly
@@ -49,9 +50,9 @@ call plug#end()
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+     \ pumvisible() ? "\<C-n>" :
+     \ <SID>check_back_space() ? "\<TAB>" :
+     \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -225,10 +226,12 @@ nmap <space>e :CocCommand explorer<CR>
 
 inoremap {<CR>  {<CR>}<Esc>O
 
-autocmd filetype cpp nnoremap <leader>r :w <bar> AsyncRun -mode=term -pos=thelp g++ -std=c++14 % -o %:r && ./%:r<CR>
-autocmd filetype cpp nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp ./%:r<CR>
+autocmd filetype cpp nnoremap <leader>r :w <bar> AsyncRun -mode=term -pos=thelp g++ -std=c++14 % -o %:r && %:r<CR>
+autocmd filetype cpp nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp %:r<CR>
+autocmd filetype python nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp python3 %<CR>
 
 nnoremap <leader>lc :source $MYVIMRC<CR>
+nnoremap <leader>ev :tabe $MYVIMRC<CR>
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
@@ -240,6 +243,14 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 " Color scheme (terminal)
 set background=dark
 colorscheme oceanic_material
+
+" fix cursor color in gvim
+highlight Cursor guifg=white guibg=black
+highlight iCursor guifg=white guibg=steelblue
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
 " colorscheme nord
 let g:lightline = { 'colorscheme': 'darcula' }
 
@@ -247,3 +258,17 @@ if has('win32')
     " Command output encoding for Windows
     let g:asyncrun_encs = 'gbk'
 endif
+
+setlocal spell
+set spelllang=en_us
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
+let g:clap_theme = 'material_design_dark'
+nnoremap <leader>ff :Clap files<CR>
+nnoremap <leader>fa :Clap grep2<CR>
+
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+set nobackup
+set nowb
+set noswapfile
+

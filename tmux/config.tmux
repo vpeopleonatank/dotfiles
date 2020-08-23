@@ -166,3 +166,11 @@ set -g clock-mode-style 24
 
 set -g message-style fg=black,bg="#9770b2"
 set -g message-command-style fg=black,bg="#293845"
+
+
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+set -g @continuum-restore 'on'
+
+run '~/.tmux/plugins/tpm/tpm'

@@ -116,3 +116,12 @@ else
   echo "$HOME/.vim/UltiSnips dir existed"
 fi
 cp $HOME/.dotfiles/tool/templates/tex.snippets $HOME/.vim/UltiSnips/
+
+
+if [ ! -d $HOME/.tmux/plugins/tpm ]; then
+    echo "install zsh-z"
+
+  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+else
+    echo "tpm is installed"
+fi
