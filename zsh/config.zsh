@@ -119,14 +119,14 @@ bindkey -v
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/vpeopleonatank/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/vpoat/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/vpeopleonatank/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/vpeopleonatank/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/vpoat/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/vpoat/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/vpeopleonatank/anaconda3/bin:$PATH"
+        export PATH="/home/vpoat/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -141,7 +141,7 @@ alias jl='jupyter-lab'
 alias ca='conda activate'
 alias gt="bash ~/.scripts/generate_template.sh"
 alias countdown='~/git/countdown/countdown'
-alias cd_basic_algo_codelearn='cd /media/vpeopleonatank/Data/Code/algo_merge/contest/codelearn/basic_algo'
+alias cd_basic_algo_codelearn='cd /media/vpoat/Data/Code/algo_merge/contest/codelearn/basic_algo'
 alias psudo='sudo env PATH="$PATH"'
 fg() {
   git add .
@@ -156,3 +156,7 @@ export INFOPATH
 export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-linux
 # fix ls directory color
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH=$PATH:/home/vpoat/.dotfiles/nodejs/bin
