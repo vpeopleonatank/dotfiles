@@ -84,6 +84,7 @@ plugins=(
     copyfile
     zsh-z
     k
+    zshmarks
     )
 
 source $ZSH/oh-my-zsh.sh
@@ -141,7 +142,7 @@ alias jl='jupyter-lab'
 alias ca='conda activate'
 alias gt="bash ~/.scripts/generate_template.sh"
 alias countdown='~/git/countdown/countdown'
-alias cd_basic_algo_codelearn='cd /media/vpoat/Data/Code/algo_merge/contest/codelearn/basic_algo'
+alias cd_basic_algo_codelearn='cd /mnt/vpoat/Data/Code/algo_merge/contest/codelearn/basic_algo'
 alias psudo='sudo env PATH="$PATH"'
 fg() {
   git add .
@@ -154,9 +155,36 @@ export MANPATH
 INFOPATH=/usr/local/texlive/2020/texmf-dist/doc/info:$INFOPATH;
 export INFOPATH
 export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-linux
+export PATH=$PATH:/snap/bin
 # fix ls directory color
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH=$PATH:/home/vpoat/.dotfiles/nodejs/bin
+alias esl='sudo vim /etc/apt/sources.list'
+
+
+alias j="jump"
+alias s="bookmark"
+alias d="deletemark"
+alias p="showmarks"
+alias l="showmarks"
+
+export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/snapd/desktop"
+# cp /var/lib/snapd/desktop/applications/code_code.desktop ~/.local/share/applications/
+
+alias youtube-dl-best='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" '
+alias youtube-dl-480='youtube-dl -f "bestvideo[height<=480][ext=mp4]+bestaudio[ext=m4a]" '
+alias youtube-dl-720='youtube-dl -f "bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]" '
+alias youtube-dl-4k='echo -e "This will transcode the video from webm to h264 which could take a long time\n\n"; youtube-dl -f "bestvideo[ext=webm]+bestaudio[ext=m4a]" --recode-video mp4 '
+alias youtube-dl-mp3='youtube-dl --extract-audio -f bestaudio[ext=mp3] --no-playlist '
+
+alias onenote='~/bin/P3X-OneNote-2020.10.111.AppImage'
+alias setclip="xclip -selection c"
+alias getclip="xclip -selection c -o"
+  show-process() {
+ps -eo size,pid,user,command --sort -size | \
+  awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |\
+  cut -d "" -f2 | cut -d "-" -f1
+}

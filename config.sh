@@ -55,6 +55,16 @@ if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
 else
     echo "autosuggestions is installed"
 fi
+
+
+# install syntax-highlighting
+if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zshmarks ]; then
+    echo "install zshmarks"
+    git clone https://github.com/jocelynmallon/zshmarks $HOME/.dotfiles/oh-my-zsh/custom/plugins/zshmarks
+else
+    echo "zshmarks is installed"
+fi
+
 # k - ls alternative
 if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/k ]; then
     echo "install k - ls alternative"

@@ -77,6 +77,21 @@ bind -n M-h select-pane -R
 bind -n M-k select-pane -U
 bind -n M-j select-pane -D
 
+
+bind -n C-M-l next-window
+bind -n C-M-h previous-window
+
+# switch windows alt+number
+bind-key -n M-1 select-window -t 1
+bind-key -n M-2 select-window -t 2
+bind-key -n M-3 select-window -t 3
+bind-key -n M-4 select-window -t 4
+bind-key -n M-5 select-window -t 5
+bind-key -n M-6 select-window -t 6
+bind-key -n M-7 select-window -t 7
+bind-key -n M-8 select-window -t 8
+bind-key -n M-9 select-window -t 9
+
 # window navigation
 unbind n
 unbind p
@@ -173,4 +188,5 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 
 set -g @continuum-restore 'on'
 
+# Press prefix + I(capital i) to fetch plugin
 run '~/.tmux/plugins/tpm/tpm'

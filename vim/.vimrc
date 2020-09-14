@@ -69,6 +69,7 @@ set ruler
 
 " Blink cursor on error instead of beeping (grr)
 set visualbell
+set t_vb=
 
 " Encoding
 set encoding=utf-8
@@ -97,6 +98,8 @@ set hidden
 
 " Rendering
 " set ttyfast
+set lazyredraw
+
 
 " Status bar
 set laststatus=2
@@ -114,6 +117,9 @@ set ignorecase
 set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
+
+set wildmenu
+set wildmode=longest:full,full
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -193,7 +199,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Formatting
 "map <leader>q gqip
 
-map <leader>q :q<CR>
+map <leader>qa :qa<CR>
 
 map <leader>s :w<CR>
 
@@ -515,7 +521,7 @@ set listchars=tab:▸\ ,eol:¬
 " Uncomment this to enable by default:
 " set list " To enable by default
 " Or use your leader key + l to toggle on/off
-map <leader>l :set list!<CR> " Toggle tabs and EOL
+" map <leader>l :set list!<CR> " Toggle tabs and EOL
 
 " Color scheme (terminal)
 set background=dark
