@@ -12,6 +12,7 @@ set -s focus-events on
 set -g prefix2 C-a                        # GNU-Screen compatible prefix
 bind C-a send-prefix -2
 
+
 set -q -g status-utf8 on                  # expect UTF-8 (tmux < 2.2)
 setw -q -g utf8 on
 
@@ -145,43 +146,55 @@ bind-key -T copy-mode-vi 'C-l' select-pane -R
 bind-key -T copy-mode-vi 'C-\' select-pane -l
 
 
-# Status update interval
-set -g status-interval 1
+# monitor windows for activity
+setw -g monitor-activity on
 
-# Basic status bar colors
-set -g status-fg "#556572"
-set -g status-bg "#293845"
+# don't wait for escape sequences
+set -sg escape-time 0
 
-# Left side of status bar
-set -g status-left-length 40
-set -g status-left "#[fg=#13222e,bg=#9770b2,bold] #S #[fg=#9770b2,bg=#6a7b88,nobold]#[fg=#293845,bg=#6a7b88] #(whoami) #[fg=#6a7b88,bg=#3f4f5b]#[fg=#6a7b88,bg=#3f4f5b] #I:#P #[fg=#3f4f5b,bg=#293845,nobold]"
+# display pane numbers for longer
+set -g display-panes-time 2000
 
-# Right side of status bar
-set -g status-right-length 150
-set -g status-right "#[fg=#3f4f5b,bg=#293845]#[fg=#6a7b88,bg=#3f4f5b] %H:%M:%S #[fg=#6a7b88,bg=#3f4f5b]#[fg=#293845,bg=#6a7b88] %d-%b-%y #[fg=#96a8b5,bg=#6a7b88]#[fg=#13222e,bg=#96a8b5,bold] #H "
+set -g status-left-length 20
+set -g status-left '#{?pane_input_off,#[fg=colour160],#[fg=colour136]}[#[fg=colour136]#S:#I.#P#{?pane_input_off,#[fg=colour160],#[fg=colour136]}] '
+set -g status-right '#[fg=colour33]%d %b %Y #{?client_prefix,#[fg=colour160],#[fg=colour61]}- #[fg=colour64]%I:%M %p #{?client_prefix,#[fg=colour160],#[fg=colour61]}- #[fg=colour37]#([ -f $HOME/.name ] && cat $HOME/.name || hostname)'
 
-# Window status
-set -g window-status-format "#[fg=#acbecc]#[bg=#293845]  #I:#W#F  "
-set -g window-status-current-format "#[fg=#293845,bg=black]#[fg=#b35d8d,nobold] #I:#W#F #[fg=#293845,bg=black,nobold]"
+# increase scrollback lines
+set -g history-limit 65536
 
-# Window separator
-set -g window-status-separator ""
+# keybinding to clear history
+bind C-k clear-history \; display-message "history cleared"
 
-# Window status alignment
-set -g status-justify centre
+# C-b ! breaks current pane into separate window
+# join a pane/window from the current session into the current window
+bind @ command-prompt -p "create pane from:" "join-pane -s ':%%'"
 
-# Pane number indicator
-set -g display-panes-colour "#293845"
-set -g display-panes-active-colour "#96a8b5"
+# reload the .tmux.conf file with Ctrl-r
+bind C-r source-file ~/.tmux.conf \; display-message "configuration reloaded"
 
-# Clock mode
-set -g clock-mode-colour "#9770b2"
-set -g clock-mode-style 24
+# toggle passthrough of prefix
+bind P if-shell "[ \"$(tmux show-options -g prefix)\" = \"prefix C-a\" ]" '\
+    set -g prefix C-b; display-message "passthrough enabled"; refresh-client -S; \
+    ' '\
+    set -g prefix C-a; display-message "passthrough disabled"; refresh-client -S; \
+    '
 
+#### color (Solarized 256)
+set -g status-style bg=colour235,fg=colour136
+setw -g window-status-style fg=colour244
+setw -g window-status-current-style fg=colour166
+setw -g window-status-activity-style fg=colour61
+setw -g window-status-bell-style fg=colour61
+set -g pane-border-style fg=colour235
+set -g pane-active-border-style fg=colour240
+set -g message-style bg=colour235,fg=colour166
 
-set -g message-style fg=black,bg="#9770b2"
-set -g message-command-style fg=black,bg="#293845"
+# pane number display
+set -g display-panes-active-colour colour166 #blue
+set -g display-panes-colour colour33 #orange
 
+# clock
+setw -g clock-mode-colour colour64 #green
 
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'

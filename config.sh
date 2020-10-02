@@ -65,14 +65,6 @@ else
     echo "zshmarks is installed"
 fi
 
-# k - ls alternative
-if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/k ]; then
-    echo "install k - ls alternative"
-    git clone https://github.com/supercrabtree/k $HOME/.dotfiles/oh-my-zsh/custom/plugins/k
-else
-    echo "k is installed"
-fi
-
 # zsh-z
 
 if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-z ]; then
@@ -102,6 +94,10 @@ export ZSH=$HOME/.dotfiles/oh-my-zsh
 $HOME/.dotfiles/oh-my-zsh/tools/install.sh
 echo 'Complete OH MY ZSH'
 echo 'source $HOME/.dotfiles/tool/zsh/config.zsh' >$HOME/.zshrc
+
+# install pure prompt for zsh
+mkdir -p "$HOME/.zsh"
+git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 
 # alacritty
 if [ ! -d $HOME/.config/alacritty ]; then

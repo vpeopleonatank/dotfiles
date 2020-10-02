@@ -1,5 +1,24 @@
+  # zmodload zsh/zprof 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+
+# Execute code in the background to not affect the current session
+{
+  # Compile zcompdump, if modified, to increase startup speed.
+  zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+    zcompile "$zcompdump"
+  fi
+} &!
+
+ autoload -Uz compinit 
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.dotfiles/oh-my-zsh"
@@ -10,8 +29,8 @@ export FZF_BASE="$HOME/.dotfiles/oh-my-zsh/custom/plugins/fzf"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="powerlevel9k/powerlevel9k"
-ZSH_THEME="agnoster"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+ZSH_THEME=""
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -83,7 +102,7 @@ plugins=(
     extract
     copyfile
     zsh-z
-    k
+    # k
     zshmarks
     )
 
@@ -174,11 +193,7 @@ alias l="showmarks"
 export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/snapd/desktop"
 # cp /var/lib/snapd/desktop/applications/code_code.desktop ~/.local/share/applications/
 
-alias youtube-dl-best='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" '
-alias youtube-dl-480='youtube-dl -f "bestvideo[height<=480][ext=mp4]+bestaudio[ext=m4a]" '
-alias youtube-dl-720='youtube-dl -f "bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]" '
-alias youtube-dl-4k='echo -e "This will transcode the video from webm to h264 which could take a long time\n\n"; youtube-dl -f "bestvideo[ext=webm]+bestaudio[ext=m4a]" --recode-video mp4 '
-alias youtube-dl-mp3='youtube-dl --extract-audio -f bestaudio[ext=mp3] --no-playlist '
+alias youtube-dl-mp3='youtube-dl --extract-audio --audio-format mp3'
 
 alias onenote='~/bin/P3X-OneNote-2020.10.111.AppImage'
 alias setclip="xclip -selection c"
@@ -188,3 +203,16 @@ ps -eo size,pid,user,command --sort -size | \
   awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |\
   cut -d "" -f2 | cut -d "-" -f1
 }
+
+fpath+=$HOME/.zsh/pure
+
+autoload -U promptinit; promptinit
+
+# optionally define some options
+PURE_CMD_MAX_EXEC_TIME=10
+
+# turn on git stash status
+zstyle :prompt:pure:git:stash show yes
+prompt pure
+# zprof
+
