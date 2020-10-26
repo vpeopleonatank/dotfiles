@@ -198,6 +198,9 @@ alias youtube-dl-mp3='youtube-dl --extract-audio --audio-format mp3'
 alias onenote='~/bin/P3X-OneNote-2020.10.111.AppImage'
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
+alias matlab_gpu='/home/vpoat/.scripts/matlab_gpu.sh'
+alias make_files='/home/vpoat/.scripts/make_files.sh'
+alias grader='/home/vpoat/.scripts/grader.sh'
   show-process() {
 ps -eo size,pid,user,command --sort -size | \
   awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |\
@@ -216,3 +219,7 @@ zstyle :prompt:pure:git:stash show yes
 prompt pure
 # zprof
 
+fpath+=$HOME/.zsh/pure
+
+autoload -U promptinit; promptinit
+prompt pure

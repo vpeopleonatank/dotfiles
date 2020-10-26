@@ -216,6 +216,7 @@ imap kj <Esc>
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
+
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
@@ -549,3 +550,6 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 let g:clap_theme = 'material_design_dark'
 nnoremap <leader>ff :Clap files<CR>
 nnoremap <leader>fa :Clap grep2<CR>
+
+" Remap <C-i>
+nnoremap <C-i> <C-i>

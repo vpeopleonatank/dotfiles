@@ -114,6 +114,9 @@ else
   echo "$HOME/.scripts dir existed"
 fi
 ln -s $HOME/.dotfiles/tool/scripts/generate_template.sh $HOME/.scripts/generate_template.sh
+ln -s /home/vpoat/.dotfiles/tool/scripts/download_prob.py $HOME/.scripts/download_prob.py
+ln -s /home/vpoat/.dotfiles/tool/scripts/make_prob.sh $HOME/.scripts/make_prob.sh
+ln -s /home/vpoat/.dotfiles/tool/scripts/grader.sh $HOME/.scripts/grader.sh
 
 
 if [ ! -d $HOME/.vim/UltiSnips ]; then

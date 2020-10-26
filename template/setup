@@ -1,0 +1,3 @@
+echo "Running Setup"
+bear make
+echo "Setup end"
