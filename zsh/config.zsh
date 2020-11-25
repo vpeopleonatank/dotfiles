@@ -201,6 +201,7 @@ alias getclip="xclip -selection c -o"
 alias matlab_gpu='/home/vpoat/.scripts/matlab_gpu.sh'
 alias make_files='/home/vpoat/.scripts/make_files.sh'
 alias grader='/home/vpoat/.scripts/grader.sh'
+alias lg='lazygit'
   show-process() {
 ps -eo size,pid,user,command --sort -size | \
   awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |\
