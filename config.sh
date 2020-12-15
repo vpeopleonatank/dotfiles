@@ -13,7 +13,10 @@ echo "PlugInstall for vim"
 vim +PlugInstall +qall > /dev/null
 echo "Installed Vim configuration successfully ^~^"
 
-
+echo "Symlink vim and neovim 's coc-settings.json"
+sudo ln -s $HOME/.dotfiles/tool/vim/coc-settings-nvim.json $HOME/.config/nvim/coc-settings.json
+sudo ln -s $HOME/.dotfiles/tool/vim/coc-settings-vim.json $HOME/.vim/coc-settings.json
+echo "Symlink done"
 
 # config tmux
 echo 'source ~/.dotfiles/tool/tmux/config.tmux' >$HOME/.tmux.conf
