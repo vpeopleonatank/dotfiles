@@ -24,6 +24,9 @@ fi;
 export ZSH="$HOME/.dotfiles/oh-my-zsh"
 
 export FZF_BASE="$HOME/.dotfiles/oh-my-zsh/custom/plugins/fzf"
+export FZF_DEFAULT_OPTS='--height 70% --border'
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -93,7 +96,7 @@ plugins=(
     colored-man-pages
     python
     tmux
-    fzf
+    # fzf
     vscode
     vundle
     command-not-found
@@ -179,9 +182,9 @@ export PATH=$PATH:/snap/bin
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH=$PATH:/home/vpoat/.dotfiles/nodejs/bin
 alias esl='sudo vim /etc/apt/sources.list'
+alias show_opening_port='sudo netstat -tulpn | grep LISTEN'
 
 
 alias j="jump"
@@ -202,6 +205,9 @@ alias matlab_gpu='/home/vpoat/.scripts/matlab_gpu.sh'
 alias make_files='/home/vpoat/.scripts/make_files.sh'
 alias grader='/home/vpoat/.scripts/grader.sh'
 alias lg='lazygit'
+alias gcache='git config --global credential.helper 'cache --timeout 900000''
+alias gfcache='git credential-cache exit'
+
   show-process() {
 ps -eo size,pid,user,command --sort -size | \
   awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |\

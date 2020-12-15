@@ -94,7 +94,7 @@ nnoremap j gj
 nnoremap k gk
 
 " Allow hidden buffers
-set hidden
+" set hidden
 
 " Rendering
 " set ttyfast
@@ -334,8 +334,9 @@ Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+autocmd BufEnter,BufNew *.md setf md.tex
 
-"Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
@@ -352,6 +353,7 @@ Plug 'tyru/caw.vim'
 
 Plug 'hardcoreplayers/oceanic-material'
 Plug 'arcticicestudio/nord-vim'
+Plug 'cormacrelf/vim-colors-github'
 
 
 Plug 'itchyny/lightline.vim'
@@ -533,6 +535,8 @@ set listchars=tab:▸\ ,eol:¬
 " map <leader>l :set list!<CR> " Toggle tabs and EOL
 
 " Color scheme (terminal)
+
+" use the dark theme
 set background=dark
 colorscheme oceanic_material
 
@@ -611,45 +615,64 @@ let g:slime_dont_ask_default = 1
 " Keyboard mappings. <Leader> is \ (backslash) by default
 
 " map <Leader>s to start IPython
-nnoremap <Leader>ms :SlimeSend1 ipython --matplotlib<CR>
+nnoremap <leader>as :SlimeSend1 ipython --matplotlib<CR>
 
 " map <Leader>r to run script
-nnoremap <Leader>mr :IPythonCellRun<CR>
+nnoremap <leader>ar :IPythonCellRun<CR>
 
 " map <Leader>R to run script and time the execution
-nnoremap <Leader>mR :IPythonCellRunTime<CR>
+nnoremap <leader>aR :IPythonCellRunTime<CR>
 
 " map <Leader>c to execute the current cell
-nnoremap <Leader>mc :IPythonCellExecuteCell<CR>
+nnoremap <leader>ac :IPythonCellExecuteCell<CR>
 
 " map <Leader>C to execute the current cell and jump to the next cell
-nnoremap <Leader>mC :IPythonCellExecuteCellJump<CR>
+nnoremap <leader>aC :IPythonCellExecuteCellJump<CR>
 
 " map <Leader>l to clear IPython screen
-nnoremap <Leader>ml :IPythonCellClear<CR>
+nnoremap <leader>al :IPythonCellClear<CR>
 
 " map <Leader>x to close all Matplotlib figure windows
-nnoremap <Leader>mx :IPythonCellClose<CR>
+nnoremap <leader>ax :IPythonCellClose<CR>
 
 " map [c and ]c to jump to the previous and next cell header
 nnoremap [c :IPythonCellPrevCell<CR>
 nnoremap ]c :IPythonCellNextCell<CR>
 
 " map <Leader>h to send the current line or current selection to IPython
-nmap <Leader>mh <Plug>SlimeLineSend
-xmap <Leader>mh <Plug>SlimeRegionSend
+nmap <leader>ah <Plug>SlimeLineSend
+xmap <leader>ah <Plug>SlimeRegionSend
 
 " map <Leader>p to run the previous command
-nnoremap <Leader>mp :IPythonCellPrevCommand<CR>
+nnoremap <leader>ap :IPythonCellPrevCommand<CR>
 
 " map <Leader>Q to restart ipython
-nnoremap <Leader>mQ :IPythonCellRestart<CR>
+nnoremap <leader>aQ :IPythonCellRestart<CR>
 
 " map <Leader>d to start debug mode
-nnoremap <Leader>md :SlimeSend1 %debug<CR>
+nnoremap <leader>ad :SlimeSend1 %debug<CR>
 
 " map <Leader>q to exit debug mode or IPython
-nnoremap <Leader>mq :SlimeSend1 exit<CR>
+nnoremap <leader>aq :SlimeSend1 exit<CR>
 
 let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
+
+" Coc-snippets configuration
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
 
