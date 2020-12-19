@@ -87,14 +87,14 @@ set noshiftround
 set scrolloff=3
 set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
-runtime! macros/matchit.vim
+" runtime! macros/matchit.vim
 
 " Move up/down editor lines
 nnoremap j gj
 nnoremap k gk
 
 " Allow hidden buffers
-" set hidden
+set hidden
 
 " Rendering
 " set ttyfast
@@ -115,7 +115,7 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-set showmatch
+" set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
 set wildmenu
@@ -142,8 +142,8 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <C-space> ?
+" map <space> /
+" map <C-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -156,13 +156,11 @@ map <C-l> <C-W>l
 
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
-
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+nmap <silent> <Leader>bn    <Plug>BufKillBack
+nmap <silent> <Leader>bp    <Plug>BufKillForward
+nmap <silent> <Leader>bd    <Plug>BufKillBd
+nmap <silent> <Leader>bu    <Plug>BufKillUndo
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -315,16 +313,6 @@ if has('nvim')
     runtime autoload/provider/clipboard.vim
 endif
 
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
 
 filetype off
 
@@ -338,8 +326,49 @@ autocmd BufEnter,BufNew *.md setf md.tex
 
 Plug 'honza/vim-snippets'
 
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+noremap <leader>mo :MarkdownPreview<CR>
+noremap <leader>mc :MarkdownPreviewStop<CR>
+" noremap <leader>mt <Plug>MarkdownPreviewToggle
+
+Plug 'liuchengxu/vim-which-key'
+
+set timeoutlen=500
+nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ' '<CR>
+Plug 'easymotion/vim-easymotion'
+
+nmap gsj <Plug>(easymotion-w)
+nmap gsk <Plug>(easymotion-b)
+nmap gsf <Plug>(easymotion-overwin-f)
+nmap gss <Plug>(easymotion-overwin-f2)
+
+Plug 'ryanoasis/vim-devicons'
+Plug 'qpkorr/vim-bufkill'
+" Plug 'bagrat/vim-buffet'
+Plug 'hardcoreplayers/vim-buffet'
+let g:buffet_powerline_separators = 1
+let g:buffet_tab_icon = "\uf00a"
+let g:buffet_left_trunc_icon = "\uf0a8"
+let g:buffet_right_trunc_icon = "\uf0a9"
+
+nmap <leader>1 <Plug>BuffetSwitch(1)
+nmap <leader>2 <Plug>BuffetSwitch(2)
+nmap <leader>3 <Plug>BuffetSwitch(3)
+nmap <leader>4 <Plug>BuffetSwitch(4)
+nmap <leader>5 <Plug>BuffetSwitch(5)
+nmap <leader>6 <Plug>BuffetSwitch(6)
+nmap <leader>7 <Plug>BuffetSwitch(7)
+nmap <leader>8 <Plug>BuffetSwitch(8)
+nmap <leader>9 <Plug>BuffetSwitch(9)
+nmap <leader>0 <Plug>BuffetSwitch(10)
+
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
+Plug 'liuchengxu/vista.vim'
+
+nnoremap <leader>i :Vista<CR>
 
 Plug 'lervag/vimtex'
 
@@ -351,12 +380,21 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'tyru/caw.vim'
 
+Plug 'tpope/vim-fugitive'
+
+" Theme
 Plug 'hardcoreplayers/oceanic-material'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'arcticicestudio/nord-vim'
 Plug 'cormacrelf/vim-colors-github'
 
-
+Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
+Plug 'sainnhe/artify.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'niklaas/lightline-gitdiff'
+" Plug 'maximbaz/lightline-ale'
+" Plug 'albertomontesg/lightline-asyncrun'
 
 Plug 'skywind3000/asyncrun.vim'
 
@@ -374,305 +412,407 @@ syntax on
 " =============================================================================================================================
 "	config copy
 " =============================================================================================================================
-"
-nnoremap <leader>y "+Y
-vnoremap <leader>y "+y
-nnoremap <leader>p "+p
-vnoremap <leader>p "+p
 
-"
-" =============================================================================================================================
-"	config coc.nvim
-" =============================================================================================================================
-"
-
-" Use tab for trigger cVompletion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
+ nnoremap <leader>y "+Y
+ vnoremap <leader>y "+y
+ nnoremap <leader>p "+p
+ vnoremap <leader>p "+p
+ 
+ "
+ " =============================================================================================================================
+ "	config coc.nvim
+ " =============================================================================================================================
+ "
+ 
+ " Use tab for trigger cVompletion with characters ahead and navigate.
+ " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+ " other plugin before putting this into your config.
+ inoremap <silent><expr> <TAB>
      \ pumvisible() ? "\<C-n>" :
      \ <SID>check_back_space() ? "\<TAB>" :
      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+ 
+ function! s:check_back_space() abort
+   let col = col('.') - 1
+   return !col || getline('.')[col - 1]  =~# '\s'
+ endfunction
+ 
+ 
+ inoremap <silent><expr> <c-space> coc#refresh()
+ 
+ " Use <c-space> to trigger completion.
+ if has('nvim')
+   inoremap <silent><expr> <c-space> coc#refresh()
+ else
+   inoremap <silent><expr> <c-@> coc#refresh()
+ endif
+ 
+ " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+ " position. Coc only does snippet and additional edit on confirm.
+ " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+ if exists('*complete_info')
+   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+ else
+   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+ endif
+ 
+ " Use `[g` and `]g` to navigate diagnostics
+ " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+ nmap <silent> [g <Plug>(coc-diagnostic-prev)
+ nmap <silent> ]g <Plug>(coc-diagnostic-next)
+ 
+ " GoTo code navigation.
+ nmap <silent> gd <Plug>(coc-definition)
+ nmap <silent> gy <Plug>(coc-type-definition)
+ nmap <silent> gi <Plug>(coc-implementation)
+ nmap <silent> gr <Plug>(coc-references)
+ 
+ " Use K to show documentation in preview window.
+ nnoremap <silent> K :call <SID>show_documentation()<CR>
+ 
+ function! s:show_documentation()
+   if (index(['vim','help'], &filetype) >= 0)
+     execute 'h '.expand('<cword>')
+   else
+     call CocAction('doHover')
+   endif
+ endfunction
+ 
+ " Highlight the symbol and its references when holding the cursor.
+ autocmd CursorHold * silent call CocActionAsync('highlight')
+ 
+ " Symbol renaming.
+ nmap <leader>rn <Plug>(coc-rename)
+ 
+ " Formatting selected code.
+ xmap <leader>f  <Plug>(coc-format-selected)
+ nmap <leader>f  <Plug>(coc-format-selected)
+ 
+ augroup mygroup
+   autocmd!
+   " Setup formatexpr specified filetype(s).
+   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+   " Update signature help on jump placeholder.
+   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+ augroup end
+ 
+ " Introduce function text object
+ " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+ xmap if <Plug>(coc-funcobj-i)
+ xmap af <Plug>(coc-funcobj-a)
+ omap if <Plug>(coc-funcobj-i)
+ omap af <Plug>(coc-funcobj-a)
+ 
+ " Use <TAB> for selections ranges.
+ " NOTE: Requires 'textDocument/selectionRange' support from the language server.
+ " coc-tsserver, coc-python are the examples of servers that support it.
+ nmap <silent> <TAB> <Plug>(coc-range-select)
+ xmap <silent> <TAB> <Plug>(coc-range-select)
+ 
+ " Add `:Format` command to format current buffer.
+ command! -nargs=0 Format :call CocAction('format')
+ 
+ " Add `:Fold` command to fold current buffer.
+ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+ 
+ " Add `:OR` command for organize imports of the current buffer.
+ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+ 
+ " Add (Neo)Vim's native statusline support.
+ " NOTE: Please see `:h coc-status` for integrations with external plugins that
+ " provide custom statusline: lightline.vim, vim-airline.
+ " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+ 
+ " Mappings using CoCList:
+ " Show all diagnostics.
+ nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+ " Manage extensions.
+ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+ " Show commands.
+ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+ " Find symbol of current document.
+ nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+ " Search workspace symbols.
+ nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+ " Do default action for next item.
+ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+ " Do default action for previous item.
+ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+ " Resume latest coc list.
+ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+ 
+ let g:coc_global_extensions = ['coc-python', 'coc-json', 'coc-prettier']
+ 
+ let g:tex_flavor='latex'
+ let g:vimtex_view_method='zathura'
+ let g:vimtex_quickfix_mode=0
+ "let g:vimtex_compiler_latexmk=1
+ 
+ set conceallevel=1
+ let g:tex_conceal='abdmg'
+ hi Conceal ctermbg=none
+ 
+ 
+ nmap <space>e :CocCommand explorer<CR>
+ 
+ inoremap {<CR>  {<CR>}<Esc>O
+ 
+ autocmd filetype cpp nnoremap <leader>r :w <bar> AsyncRun -mode=term -pos=thelp g++ -std=c++14 % -o %:r && %:r<CR>
+ autocmd filetype cpp nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp %:r<CR>
+ autocmd filetype python nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp python3 %<CR>
+ 
+ nnoremap <leader>lc :source $MYVIMRC<CR>
+ nnoremap <leader>ev :tabe $MYVIMRC<CR>
+ 
+ " Visualize tabs and newlines
+ set listchars=tab:▸\ ,eol:¬
+ " Uncomment this to enable by default:
+ " set list " To enable by default
+ " Or use your leader key + l to toggle on/off
+ " map <leader>l :set list!<CR> " Toggle tabs and EOL
+ 
+ " Color scheme (terminal)
+ 
+ " use the dark theme
+ set background=dark
+ colorscheme oceanic_material
+" colorscheme PaperColor
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+ " fix cursor color in gvim
+ highlight Cursor guifg=white guibg=black
+ highlight iCursor guifg=white guibg=steelblue
+ set guicursor=n-v-c:block-Cursor
+ set guicursor+=i:ver100-iCursor
+ set guicursor+=n-v-c:blinkon0
+ set guicursor+=i:blinkwait10
+ " colorscheme nord
+ function! CocCurrentFunction()
+     return get(b:, 'coc_current_function', '')
+ endfunction
+let g:lightline#gitdiff#indicator_added = 'A: '
+let g:lightline#gitdiff#indicator_deleted = 'D: '
+let g:lightline#gitdiff#indicator_modified = 'M: '
+let g:lightline#gitdiff#separator = ' '
+
+ 	function! LightlineFugitive() 
+ 		if exists('*FugitiveHead') 
+ 			let branch = FugitiveHead() 
+ 			return branch !=# '' ? ''.branch : '' 
+ 		endif 
+ 		return '' 
+ 	endfunction 
+
+function! LightlineGitGlobalStatus() abort
+  let global_git_status = get(g:, 'coc_git_status', '')
+  " return blame
+  return global_git_status
 endfunction
 
+ let g:lightline = {
+ \ 'enable': {
+ \   'tabline': 0
+ \ },
+ \ 'mode_map': {
+ \ 'n' : 'N',
+ \ 'i' : 'I',
+ \ 'R' : 'R',
+ \ 'v' : 'V',
+ \ 'V' : 'VL',
+ \ "\<C-v>": 'VB',
+ \ 'c' : 'C',
+ \ 's' : 'S',
+ \ 'S' : 'SL',
+ \ "\<C-s>": 'SB',
+ \ 't': 'T',
+ \ },
+ \ 'colorscheme': 'wombat',
+ \ 'active': {
+ \   'left': [ [ 'mode', 'paste' ],
+ \             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],
+ \             [ 'gitdiff' ] ],
+     \   'right': [ [ 'lineinfo' ],
+     \              [ 'percent' ] ]
+ \ },
+     \ 'inactive': {
+     \   'left': [ [ 'filename', 'gitversion' ] ],
+     \ },
+ \ 'component_function': {
+ \   'gitbranch': 'FugitiveHead',
+ \   'cocstatus': 'coc#status',
+  \   'currentfunction': 'CocCurrentFunction',
+  \   'gitstatus': 'LightlineGitGlobalStatus',
+ \ },
+     \ 'component_expand': {
+     \   'gitdiff': 'lightline#gitdiff#get',
+     \ },
+     \ 'component_type': {
+     \   'gitdiff': 'middle',
+     \ },
+ \ }
 
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Introduce function text object
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings using CoCList:
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-let g:coc_global_extensions = ['coc-python', 'coc-json', 'coc-prettier']
-
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-"let g:vimtex_compiler_latexmk=1
-
-set conceallevel=1
-let g:tex_conceal='abdmg'
-hi Conceal ctermbg=none
-
-
-nmap <space>e :CocCommand explorer<CR>
-
-inoremap {<CR>  {<CR>}<Esc>O
-
-autocmd filetype cpp nnoremap <leader>r :w <bar> AsyncRun -mode=term -pos=thelp g++ -std=c++14 % -o %:r && %:r<CR>
-autocmd filetype cpp nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp %:r<CR>
-autocmd filetype python nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp python3 %<CR>
-
-nnoremap <leader>lc :source $MYVIMRC<CR>
-nnoremap <leader>ev :tabe $MYVIMRC<CR>
-
-" Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
-" Uncomment this to enable by default:
-" set list " To enable by default
-" Or use your leader key + l to toggle on/off
-" map <leader>l :set list!<CR> " Toggle tabs and EOL
-
-" Color scheme (terminal)
-
-" use the dark theme
-set background=dark
-colorscheme oceanic_material
-
-" fix cursor color in gvim
-highlight Cursor guifg=white guibg=black
-highlight iCursor guifg=white guibg=steelblue
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
-set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkwait10
-" colorscheme nord
-" let g:lightline = { 'colorscheme': 'darcula' }
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction
-
-let g:lightline = {
-    \ 'mode_map': {
-      \ 'n' : 'N',
-      \ 'i' : 'I',
-      \ 'R' : 'R',
-      \ 'v' : 'V',
-      \ 'V' : 'VL',
-      \ "\<C-v>": 'VB',
-      \ 'c' : 'C',
-      \ 's' : 'S',
-      \ 'S' : 'SL',
-      \ "\<C-s>": 'SB',
-      \ 't': 'T',
-      \ },
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
-      \ },
-      \ }
-
-if has('win32')
-    " Command output encoding for Windows
-    let g:asyncrun_encs = 'gbk'
-endif
-
-setlocal spell
-set spelllang=en_us
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-
-let g:clap_theme = 'material_design_dark'
-nnoremap <leader>ff :Clap files<CR>
-nnoremap <leader>fa :Clap grep2<CR>
-
-" Remap <C-i>
-nnoremap <C-i> <C-i>
-
-"------------------------------------------------------------------------------
-" slime configuration 
-"------------------------------------------------------------------------------
-" always use tmux
-let g:slime_target = 'tmux'
-
-" fix paste issues in ipython
-let g:slime_python_ipython = 1
-
-" always send text to the top-right pane in the current tmux tab without asking
-let g:slime_default_config = {
+ if has('win32')
+     " Command output encoding for Windows
+     let g:asyncrun_encs = 'gbk'
+ endif
+ 
+ setlocal spell
+ set spelllang=en_us
+ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+ 
+ let g:clap_theme = 'material_design_dark'
+ nnoremap <leader>ff :Clap files<CR>
+ nnoremap <leader>fa :Clap grep<CR>
+ 
+ " Remap <C-i>
+ nnoremap <C-i> <C-i>
+ 
+ "------------------------------------------------------------------------------
+ " slime configuration 
+ "------------------------------------------------------------------------------
+ " always use tmux
+ let g:slime_target = 'tmux'
+ 
+ " fix paste issues in ipython
+ let g:slime_python_ipython = 1
+ 
+ " always send text to the top-right pane in the current tmux tab without asking
+ let g:slime_default_config = {
             \ 'socket_name': get(split($TMUX, ','), 0),
             \ 'target_pane': '{top-right}' }
-let g:slime_dont_ask_default = 1
+ let g:slime_dont_ask_default = 1
+ 
+ "------------------------------------------------------------------------------
+ " ipython-cell configuration
+ "------------------------------------------------------------------------------
+ " Keyboard mappings. <Leader> is \ (backslash) by default
+ 
+ " map <Leader>s to start IPython
+ nnoremap <leader>as :SlimeSend1 ipython --matplotlib<CR>
+ 
+ " map <Leader>r to run script
+ nnoremap <leader>ar :IPythonCellRun<CR>
+ 
+ " map <Leader>R to run script and time the execution
+ nnoremap <leader>aR :IPythonCellRunTime<CR>
+ 
+ " map <Leader>c to execute the current cell
+ nnoremap <leader>ac :IPythonCellExecuteCell<CR>
+ 
+ " map <Leader>C to execute the current cell and jump to the next cell
+ nnoremap <leader>aC :IPythonCellExecuteCellJump<CR>
+ 
+ " map <Leader>l to clear IPython screen
+ nnoremap <leader>al :IPythonCellClear<CR>
+ 
+ " map <Leader>x to close all Matplotlib figure windows
+ nnoremap <leader>ax :IPythonCellClose<CR>
+ 
+ " map [c and ]c to jump to the previous and next cell header
+ nnoremap [c :IPythonCellPrevCell<CR>
+ nnoremap ]c :IPythonCellNextCell<CR>
+ 
+ " map <Leader>h to send the current line or current selection to IPython
+ nmap <leader>ah <Plug>SlimeLineSend
+ xmap <leader>ah <Plug>SlimeRegionSend
+ 
+ " map <Leader>p to run the previous command
+ nnoremap <leader>ap :IPythonCellPrevCommand<CR>
+ 
+ " map <Leader>Q to restart ipython
+ nnoremap <leader>aQ :IPythonCellRestart<CR>
+ 
+ " map <Leader>d to start debug mode
+ nnoremap <leader>ad :SlimeSend1 %debug<CR>
+ 
+ " map <Leader>q to exit debug mode or IPython
+ nnoremap <leader>aq :SlimeSend1 exit<CR>
+ 
+ let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
+ 
+ " Coc-snippets configuration
+ " Use <C-l> for trigger snippet expand.
+ imap <C-l> <Plug>(coc-snippets-expand)
+ 
+ " Use <C-j> for select text for visual placeholder of snippet.
+ vmap <C-j> <Plug>(coc-snippets-select)
+ 
+ " Use <C-j> for jump to next placeholder, it's default of coc.nvim
+ let g:coc_snippet_next = '<c-j>'
+ 
+ " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+ let g:coc_snippet_prev = '<c-k>'
+ 
+ " Use <C-j> for both expand and jump (make expand higher priority.)
+ imap <C-j> <Plug>(coc-snippets-expand-jump)
+ 
+ " Use <leader>x for convert visual selected code to snippet
+ xmap <leader>x  <Plug>(coc-convert-snippet)
+ 
+ 
+ " Switch IBus dynamically
+ function! IBusOff()
+ 	" Lưu engine hiện tại
+ 	let g:ibus_prev_engine = system('ibus engine')
+ 	" Chuyển sang engine tiếng Anh
+ 	" Nếu bạn thấy cái cờ ở đây
+ 	" khả năng là font của bạn đang render emoji lung tung...
+ 	" xkb : us :: eng (không có dấu cách)
+ 	silent! execute '!ibus engine xkb:us::eng'
+ endfunction
+ 
+ 
+ function! IBusOn()
+ 	let l:current_engine = system('ibus engine')
+ 	" nếu engine được set trong normal mode thì
+ 	" lúc vào insert mode duùn luôn engine đó
+ 	if l:current_engine !~? 'xkb:us::eng'
+ 		let g:ibus_prev_engine = l:current_engine
+ 	endif
+ 	" Khôi phục lại engine
+ 	silent! execute '!ibus engine ' . g:ibus_prev_engine
+ endfunction
+ 
+ function! ToggleIBusHandler()
+     if !exists('g:AugroupToggleIBus')
+         let g:AugroupToggleIBus = 1
+     endif
+ 
+     " Enable if the group was previously disabled
+     if (g:AugroupToggleIBus == 1)
+         let g:AugroupToggleIBus = 0
+ 
+         echo "Toggle IBus Handler"
+         augroup IBusHandler
+           " Khôi phục ibus engine khi tìm kiếm
+           autocmd CmdLineEnter [/?] silent call IBusOn()
+           autocmd CmdLineLeave [/?] silent call IBusOff()
+           autocmd CmdLineEnter \? silent call IBusOn()
+           autocmd CmdLineLeave \? silent call IBusOff()
+           " Khôi phục ibus engine khi vào insert mode
+           autocmd InsertEnter * silent call IBusOn()
+           " Tắt ibus engine khi vào normal mode
+           autocmd InsertLeave * silent call IBusOff()
+         augroup END
+     else
+           echo "IBus Handler Turn off"
+           let g:AugroupToggleIBus = 1
+           augroup IBusHandler
+             autocmd!
+           augroup END
+     endif
+ endfunction
+ 
+ nnoremap <F4> :call ToggleIBusHandler() <CR>
+ nmap <localleader>cp :call coc#float#close_all() <CR>
+ 
+ " Disable auto comment in insertion mode
+ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+ 
+ let g:vimtex_indent_enabled = 0
 
-"------------------------------------------------------------------------------
-" ipython-cell configuration
-"------------------------------------------------------------------------------
-" Keyboard mappings. <Leader> is \ (backslash) by default
-
-" map <Leader>s to start IPython
-nnoremap <leader>as :SlimeSend1 ipython --matplotlib<CR>
-
-" map <Leader>r to run script
-nnoremap <leader>ar :IPythonCellRun<CR>
-
-" map <Leader>R to run script and time the execution
-nnoremap <leader>aR :IPythonCellRunTime<CR>
-
-" map <Leader>c to execute the current cell
-nnoremap <leader>ac :IPythonCellExecuteCell<CR>
-
-" map <Leader>C to execute the current cell and jump to the next cell
-nnoremap <leader>aC :IPythonCellExecuteCellJump<CR>
-
-" map <Leader>l to clear IPython screen
-nnoremap <leader>al :IPythonCellClear<CR>
-
-" map <Leader>x to close all Matplotlib figure windows
-nnoremap <leader>ax :IPythonCellClose<CR>
-
-" map [c and ]c to jump to the previous and next cell header
-nnoremap [c :IPythonCellPrevCell<CR>
-nnoremap ]c :IPythonCellNextCell<CR>
-
-" map <Leader>h to send the current line or current selection to IPython
-nmap <leader>ah <Plug>SlimeLineSend
-xmap <leader>ah <Plug>SlimeRegionSend
-
-" map <Leader>p to run the previous command
-nnoremap <leader>ap :IPythonCellPrevCommand<CR>
-
-" map <Leader>Q to restart ipython
-nnoremap <leader>aQ :IPythonCellRestart<CR>
-
-" map <Leader>d to start debug mode
-nnoremap <leader>ad :SlimeSend1 %debug<CR>
-
-" map <Leader>q to exit debug mode or IPython
-nnoremap <leader>aq :SlimeSend1 exit<CR>
-
-let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
-
-" Coc-snippets configuration
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-" Use <leader>x for convert visual selected code to snippet
-xmap <leader>x  <Plug>(coc-convert-snippet)
-
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif

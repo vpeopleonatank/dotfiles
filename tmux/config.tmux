@@ -198,6 +198,9 @@ setw -g clock-mode-colour colour64 #green
 
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+set -g @plugin 'tmux-plugins/tmux-net-speed'
+set -g @plugin 'samoshkin/tmux-plugin-sysstat'
 
 set -g @continuum-restore 'on'
 

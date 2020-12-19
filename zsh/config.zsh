@@ -207,6 +207,8 @@ alias grader='/home/vpoat/.scripts/grader.sh'
 alias lg='lazygit'
 alias gcache='git config --global credential.helper 'cache --timeout 900000''
 alias gfcache='git credential-cache exit'
+alias n='nvim'
+
 
   show-process() {
 ps -eo size,pid,user,command --sort -size | \
