@@ -197,12 +197,12 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Formatting
 "map <leader>q gqip
 
-map <leader>qa :qa<CR>
+map <leader>qa :qa!<CR>
 
 map <leader>s :w<CR>
 
-map <leader>cc :%y+<CR>
-map <leader>vv "+p
+map <leader>c "+y
+map <leader>v "+p
 
 imap jk <Esc>
 imap kj <Esc>
@@ -241,7 +241,7 @@ endif
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
+" map <leader>q :e ~/buffer<cr>
 
 " Quickly open a markdown buffer for scribble
 map <leader>x :e ~/buffer.md<cr>
@@ -337,13 +337,6 @@ Plug 'liuchengxu/vim-which-key'
 set timeoutlen=500
 nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ' '<CR>
-Plug 'easymotion/vim-easymotion'
-
-nmap gsj <Plug>(easymotion-w)
-nmap gsk <Plug>(easymotion-b)
-nmap gsf <Plug>(easymotion-overwin-f)
-nmap gss <Plug>(easymotion-overwin-f2)
-
 Plug 'ryanoasis/vim-devicons'
 Plug 'qpkorr/vim-bufkill'
 " Plug 'bagrat/vim-buffet'
@@ -408,7 +401,7 @@ let g:floaterm_wintype = 'popup'
 " Set floaterm window's background to black
 hi Floaterm guibg=black
 " Set floating window border line color to cyan, and background to orange
-hi FloatermBorder guibg=orange guifg=cyan
+" hi FloatermBorder guibg=orange guifg=cyan
 
 nnoremap   <silent>   <F7>    :FloatermNew<CR>
 tnoremap   <silent>   <F7>    <C-\><C-n>:FloatermNew<CR>
@@ -420,6 +413,8 @@ nnoremap   <silent>   <F12>   :FloatermToggle<CR>
 tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 " nnoremap <silent> <Leader>gz :<C-u>FloatermNew height=0.7 width=0.8 lazygit<CR>
 nnoremap <silent> <Leader>gz :<C-u>FloatermNew lazygit<CR>
+
+nnoremap <silent> <C-_>  :FloatermNew --height=0.5 --width=0.5 --wintype=popup --position=bottomright<CR>
 
 " let g:floaterm_keymap_kill = '<C-t>q'
 
@@ -652,7 +647,7 @@ endfunction
  \ "\<C-s>": 'SB',
  \ 't': 'T',
  \ },
- \ 'colorscheme': 'wombat',
+ "\ 'colorscheme': 'wombat',
  \ 'active': {
  \   'left': [ [ 'mode', 'paste' ],
  \             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],
@@ -842,3 +837,13 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
+
+let $DATA_PATH = '~/.vim'
+
+set nobackup
+set nowritebackup
+set undofile noswapfile
+set directory=$DATA_PATH/swap//,$DATA_PATH,~/tmp,/var/tmp,/tmp
+set undodir=$DATA_PATH/undo//,$DATA_PATH,~/tmp,/var/tmp,/tmp
+set backupdir=$DATA_PATH/backup/,$DATA_PATH,~/tmp,/var/tmp,/tmp
+

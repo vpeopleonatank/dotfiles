@@ -2,20 +2,21 @@
 font:
   # The normal (roman) font face to use.
   normal:
-    family: DejaVu Sans Mono for Powerline
+    family: MesloLGS NF
+    # family: DejaVu Sans Mono for Powerline
     # Style can be specified to pick a specific face.
     style: Regular
 
   # The bold font face
   bold:
-    family: DejaVu Sans Mono for Powerline
+    family: MesloLGS NF
     # Style can be specified to pick a specific face.
     # style: Bold
 
   # The italic font face
   italic:
-    family: DejaVu Sans Mono for Powerline
-    # Style can be specified to pick a specific face.
+    family: MesloLGS NF
+      # Style can be specified to pick a specific face.
     # style: Italic
 
 # Themer Alacritty
@@ -66,4 +67,4 @@ colors:
     white: '#80919f'
 
 
-    #background_opacity: 0.8
+    # background_opacity: 0.8

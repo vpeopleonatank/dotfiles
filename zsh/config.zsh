@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
   # zmodload zsh/zprof 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -208,6 +215,7 @@ alias lg='lazygit'
 alias gcache='git config --global credential.helper 'cache --timeout 900000''
 alias gfcache='git credential-cache exit'
 alias n='nvim'
+alias piping_help='curl https://ppng.io/help'
 
 
   show-process() {
@@ -216,19 +224,28 @@ ps -eo size,pid,user,command --sort -size | \
   cut -d "" -f2 | cut -d "-" -f1
 }
 
-fpath+=$HOME/.zsh/pure
+export PATH=$PATH:$(go env GOPATH)/bin
+export GOPATH=$(go env GOPATH)
 
-autoload -U promptinit; promptinit
+# fpath+=$HOME/.zsh/pure
+
+# autoload -U promptinit; promptinit
 
 # optionally define some options
-PURE_CMD_MAX_EXEC_TIME=10
+# PURE_CMD_MAX_EXEC_TIME=10
 
 # turn on git stash status
-zstyle :prompt:pure:git:stash show yes
-prompt pure
+#prompt pure
+#zstyle :prompt:pure:git:stash show yes
 # zprof
 
-fpath+=$HOME/.zsh/pure
+# fpath+=$HOME/.zsh/pure
 
-autoload -U promptinit; promptinit
-prompt pure
+#autoload -U promptinit; promptinit
+#prompt pure
+
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme

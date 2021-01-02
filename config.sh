@@ -98,9 +98,9 @@ $HOME/.dotfiles/oh-my-zsh/tools/install.sh
 echo 'Complete OH MY ZSH'
 echo 'source $HOME/.dotfiles/tool/zsh/config.zsh' >$HOME/.zshrc
 
-# install pure prompt for zsh
-mkdir -p "$HOME/.zsh"
-git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+# install powerlevel10k for zsh
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+p10k configure
 
 # alacritty
 if [ ! -d $HOME/.config/alacritty ]; then
