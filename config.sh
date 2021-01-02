@@ -101,6 +101,7 @@ echo 'source $HOME/.dotfiles/tool/zsh/config.zsh' >$HOME/.zshrc
 # install powerlevel10k for zsh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 p10k configure
+sed -i '/CONTENT,VISUAL_IDENTIFIER/d' ~/.p10k.zsh
 
 # alacritty
 if [ ! -d $HOME/.config/alacritty ]; then
