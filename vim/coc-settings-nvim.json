@@ -1,12 +1,11 @@
 {
- // "suggest.triggerAfterInsertEnter": false,
- // "suggest.timeout": 2000,
- // "suggest.noselect": false,
- // "suggest.detailField": "abbr",
- // "suggest.snippetIndicator": "🌟",
- // "suggest.triggerCompletionWait": 300,
- // "suggest.echodocSupport": true,
-  "python.jediEnabled": true,
+  "suggest.triggerAfterInsertEnter": false,
+  "suggest.timeout": 500,
+  "suggest.noselect": false,
+  "suggest.detailField": "abbr",
+  "suggest.snippetIndicator": "🌟",
+  "suggest.triggerCompletionWait": 100,
+  "suggest.echodocSupport": true,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
@@ -66,13 +65,13 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "html",
     "css",
-    //"markdown",
+    "markdown",
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact",
     "go",
-    "//json"
+    "json"
   ],
   "prettier.statusItemText": "ⓟ ",
   "prettier.eslintIntegration": true,
@@ -150,7 +149,6 @@
     "yml",
     "vim"
   ],
-  "pairs.disableLanguages": ["latex", "markdown"],
   "python.linting.flake8Enabled": true,
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "/home/vpoat/anaconda3/envs/tf/bin/black"
