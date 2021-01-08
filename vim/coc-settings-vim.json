@@ -157,5 +157,7 @@
   "snippets.extends": {
     "markdown": ["markdown", "tex"]
   },
-  "pairs.disableLanguages": ["tex"]
+  "pairs.disableLanguages": ["tex"],
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false
 }
