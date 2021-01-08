@@ -186,7 +186,10 @@ export INFOPATH
 export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-linux
 export PATH=$PATH:/snap/bin
 # fix ls directory color
-export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
+# tw = cd autocompletion directory color
+export LS_COLORS="ow=1;34:tw=1;34:di=1;34:$LS_COLORS"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
 
 
 export PATH=$PATH:/home/vpoat/.dotfiles/nodejs/bin
