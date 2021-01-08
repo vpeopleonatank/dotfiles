@@ -30,12 +30,12 @@ else
     echo "Oh-my-zsh is installed"
 fi
 # install powerlevel9k
-if [ ! -d $HOME/.dotfiles/oh-my-zsh/themes/powerlevel9k ]; then
-    echo "install powerlevel9k"
-    git clone https://github.com/Powerlevel9k/powerlevel9k.git $HOME/.dotfiles/oh-my-zsh/themes/powerlevel9k
-else
-    echo "Powerlevel9k is installed"
-fi
+# if [ ! -d $HOME/.dotfiles/oh-my-zsh/themes/powerlevel9k ]; then
+#     echo "install powerlevel9k"
+#     git clone https://github.com/Powerlevel9k/powerlevel9k.git $HOME/.dotfiles/oh-my-zsh/themes/powerlevel9k
+# else
+#     echo "Powerlevel9k is installed"
+# fi
 # install fonts
 if [ ! -d $HOME/.dotfiles/fonts ]; then
     echo "install fonts"
@@ -100,8 +100,20 @@ echo 'source $HOME/.dotfiles/tool/zsh/config.zsh' >$HOME/.zshrc
 
 # install powerlevel10k for zsh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+exec $(which zsh)
+source $HOME/.zshrc
 p10k configure
 sed -i '/CONTENT,VISUAL_IDENTIFIER/d' ~/.p10k.zsh
+
+# Install fonts and rebuild font cache
+if [ ! -d $HOME/.local/share/fonts/NerdFonts ]; then
+		mkdir -p $HOME/.local/share/fonts/NerdFonts
+else
+	echo "~/.local/share/fonts/NerdFonts dir existed"
+fi
+cp ./fonts/* $HOME/.local/share/fonts/NerdFonts/
+sudo fc-cache -f -v
+echo "Install and recache fonts"
 
 # alacritty
 if [ ! -d $HOME/.config/alacritty ]; then
@@ -112,15 +124,16 @@ fi
 ln -s $HOME/.dotfiles/tool/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
 
-if [ ! -d $HOME/.scripts ]; then
-  mkdir $HOME/.scripts
-else
-  echo "$HOME/.scripts dir existed"
-fi
-ln -s $HOME/.dotfiles/tool/scripts/generate_template.sh $HOME/.scripts/generate_template.sh
-ln -s /home/vpoat/.dotfiles/tool/scripts/download_prob.py $HOME/.scripts/download_prob.py
-ln -s /home/vpoat/.dotfiles/tool/scripts/make_prob.sh $HOME/.scripts/make_prob.sh
-ln -s /home/vpoat/.dotfiles/tool/scripts/grader.sh $HOME/.scripts/grader.sh
+# script
+# if [ ! -d $HOME/.scripts ]; then
+#   mkdir $HOME/.scripts
+# else
+#   echo "$HOME/.scripts dir existed"
+# fi
+# ln -s $HOME/.dotfiles/tool/scripts/generate_template.sh $HOME/.scripts/generate_template.sh
+# ln -s /home/vpoat/.dotfiles/tool/scripts/download_prob.py $HOME/.scripts/download_prob.py
+# ln -s /home/vpoat/.dotfiles/tool/scripts/make_prob.sh $HOME/.scripts/make_prob.sh
+# ln -s /home/vpoat/.dotfiles/tool/scripts/grader.sh $HOME/.scripts/grader.sh
 
 
 if [ ! -d $HOME/.vim/UltiSnips ]; then
