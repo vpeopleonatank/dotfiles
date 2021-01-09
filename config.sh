@@ -151,3 +151,7 @@ if [ ! -d $HOME/.tmux/plugins/tpm ]; then
 else
     echo "tpm is installed"
 fi
+
+echo "config LS_COLORS"
+mkdir /tmp/LS_COLORS && curl -L https://api.github.com/repos/vpeopleonatank/LS_COLORS/tarball/master | tar xzf - --directory=/tmp/LS_COLORS --strip=1
+( cd /tmp/LS_COLORS && sh install.sh )

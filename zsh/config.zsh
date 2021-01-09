@@ -187,9 +187,10 @@ export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-linux
 export PATH=$PATH:/snap/bin
 # fix ls directory color
 # tw = cd autocompletion directory color
-export LS_COLORS="ow=1;34:tw=1;34:di=1;34:$LS_COLORS"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# export LS_COLORS="ow=43;30:tw=1;34:di=1;34:$LS_COLORS"
 
+
+# zstyle ':completion:*' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
 
 export PATH=$PATH:/home/vpoat/.dotfiles/nodejs/bin
@@ -250,3 +251,7 @@ export GOPATH=$(go env GOPATH)
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# export LS_COLORS="ow=38;5;220;1:tw=1;34:di=1;34:ex=38;5;208;1:$LS_COLORS:ow=38;5;220;1:tw=1;34:di=1;34:ex=38;5;208;1:"
+ . "/home/vpoat/.local/share/lscolors.sh"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
