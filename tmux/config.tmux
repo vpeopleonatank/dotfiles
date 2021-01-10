@@ -103,6 +103,13 @@ bind -r C-h previous-window # select previous window
 bind -r C-l next-window     # select next window
 bind Tab last-window        # move to last active window
 
+# toggle pane
+# bind-key ! break-pane -d -n _hidden_pane
+bind-key ! break-pane -d
+bind-key s join-pane -v -p 35 -s $.1
+bind-key v join-pane -h -p 35 -s $.1
+bind-key = resize-pane -Z
+
 # toggle mouse
 bind m run "cut -c3- ~/.tmux.conf | sh -s _toggle_mouse"
 

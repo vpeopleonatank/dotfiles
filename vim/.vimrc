@@ -336,7 +336,7 @@ Plug 'liuchengxu/vim-which-key'
 
 set timeoutlen=500
 nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  ' '<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
 Plug 'ryanoasis/vim-devicons'
 Plug 'qpkorr/vim-bufkill'
 " Plug 'bagrat/vim-buffet'

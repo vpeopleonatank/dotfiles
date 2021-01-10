@@ -159,5 +159,7 @@
   },
   "pairs.disableLanguages": ["tex"],
   "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": false
+  "python.linting.pylintEnabled": false,
+  "highlight.disableLanguages": ["txt"],
+  "highlight.colorNames.enable": false
 }
