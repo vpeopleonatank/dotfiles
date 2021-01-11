@@ -21,6 +21,9 @@ setw -q -g utf8 on
 
 set -g history-limit 10000                 # boost history
 
+# edit configuration
+bind e new-window -n "~/.tmux.conf" "EDITOR=\${EDITOR//mvim/vim} && EDITOR=\${EDITOR//gvim/vim} && \${EDITOR:-vim} ~/.tmux.conf && tmux source ~/.tmux.conf && tmux display \"~/.tmux.conf sourced\""
+
 # reload configuration
 bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
 
@@ -30,6 +33,7 @@ set -g base-index 1           # start windows numbering at 1
 setw -g pane-base-index 1     # make pane numbering consistent with windows
 
 #setw -g automatic-rename false   # rename window to reflect current program
+set allow-rename off
 set -g renumber-windows on    # renumber windows when a window is closed
 
 set -g set-titles on          # set terminal title
@@ -61,14 +65,18 @@ bind -r l select-pane -R  # move right
 bind > swap-pane -D       # swap current pane with the next one
 bind < swap-pane -U       # swap current pane with the previous one
 
+# swap window
+bind -n C-S-Left { swap-window -t -1; previous-window }
+bind -n C-S-Right { swap-window -t +1; next-window }
+
 # maximize current pane
 bind + run 'cut -c3- ~/.tmux.conf | sh -s _maximize_pane "#{session_name}" #D'
 
 # pane resizing
-bind -r H resize-pane -L 2
-bind -r J resize-pane -D 2
-bind -r K resize-pane -U 2
-bind -r L resize-pane -R 2
+bind -r H resize-pane -L 30
+bind -r J resize-pane -D 30
+bind -r K resize-pane -U 30
+bind -r L resize-pane -R 30
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
