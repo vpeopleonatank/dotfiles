@@ -169,6 +169,7 @@ alias ez='vim ~/.zshrc'
 alias lsh='source ~/.zshrc'
 alias jl='jupyter-lab'
 alias ca='conda activate'
+alias cap='conda activate pytorch'
 alias gt="bash ~/.scripts/generate_template.sh"
 alias countdown='~/git/countdown/countdown'
 alias cd_basic_algo_codelearn='cd /mnt/vpoat/Data/Code/algo_merge/contest/codelearn/basic_algo'
