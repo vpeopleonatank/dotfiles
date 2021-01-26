@@ -221,12 +221,19 @@ alias gcache='git config --global credential.helper 'cache --timeout 900000''
 alias gfcache='git credential-cache exit'
 alias n='nvim'
 alias piping_help='curl https://ppng.io/help'
+alias listening_port='sudo  netstat -tulpn | grep LISTEN'
 
 
-  show-process() {
+show-process() {
 ps -eo size,pid,user,command --sort -size | \
   awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |\
   cut -d "" -f2 | cut -d "-" -f1
+}
+
+sync_jupyter() {
+  fname="$PWD"/"$1".ipynb
+  jupytext --sync $fname
+  ipython $fname
 }
 
 export PATH=$PATH:$(go env GOPATH)/bin
@@ -256,3 +263,4 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # export LS_COLORS="ow=38;5;220;1:tw=1;34:di=1;34:ex=38;5;208;1:$LS_COLORS:ow=38;5;220;1:tw=1;34:di=1;34:ex=38;5;208;1:"
  . "/home/vpoat/.local/share/lscolors.sh"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+source $HOME/git/fzf-marks/fzf-marks.plugin.zsh
