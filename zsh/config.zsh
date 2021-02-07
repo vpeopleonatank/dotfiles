@@ -245,12 +245,19 @@ source_openvino() {
 add_pyright() {
   pyright="{
     \"venvPath\": \"/home/vpoat/anaconda3/envs\",
-      \"venv\": \"pytorch\"
-    }
+      \"venv\": \"pytorch\",
+    \"executionEnvironments\": [
+        {\"root\": \".\"}
+    ]
+	}
   "
   if [[ -n $1 ]]; then
     pyright=${pyright/pytorch/$1}
   fi
+
+	if [[ -n $2  ]]; then
+    pyright=${pyright/./$2}
+	fi
   echo $pyright > pyrightconfig.json
 }
 
