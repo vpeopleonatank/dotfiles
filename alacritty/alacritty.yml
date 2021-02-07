@@ -29,9 +29,9 @@ colors:
     background: '#13222e'
     foreground: '#96a8b5'
 
-  cursor:
-    text: '#13222e'
-    cursor: '#9770b2'
+  # cursor:
+  #   text: '#13222e'
+  #   cursor: '#9770b2'
 
   selection:
     text: '#13222e'
