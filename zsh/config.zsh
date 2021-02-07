@@ -242,6 +242,19 @@ source_openvino() {
   cd -
 }
 
+add_pyright() {
+  pyright="{
+    \"venvPath\": \"/home/vpoat/anaconda3/envs\",
+      \"venv\": \"pytorch\"
+    }
+  "
+  if [[ -n $1 ]]; then
+    pyright=${pyright/pytorch/$1}
+    echo $pyright > pyrightconfig.json
+  fi
+}
+
+
 export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
 
