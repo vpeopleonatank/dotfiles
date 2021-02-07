@@ -236,6 +236,12 @@ sync_jupyter() {
   ipython $fname
 }
 
+source_openvino() {
+  cd /opt/intel/openvino_2021/inference_engine 
+  source /opt/intel/openvino_2021/bin/setupvars.sh
+  cd -
+}
+
 export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
 
@@ -263,4 +269,4 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # export LS_COLORS="ow=38;5;220;1:tw=1;34:di=1;34:ex=38;5;208;1:$LS_COLORS:ow=38;5;220;1:tw=1;34:di=1;34:ex=38;5;208;1:"
  . "/home/vpoat/.local/share/lscolors.sh"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-source $HOME/git/fzf-marks/fzf-marks.plugin.zsh
+# source $HOME/git/fzf-marks/fzf-marks.plugin.zsh

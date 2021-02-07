@@ -563,7 +563,7 @@ syntax on
  " Resume latest coc list.
  nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
  
- let g:coc_global_extensions = ['coc-python', 'coc-json', 'coc-prettier']
+ let g:coc_global_extensions = ['coc-pyright', 'coc-json', 'coc-prettier']
  
  let g:tex_flavor='latex'
  let g:vimtex_view_method='zathura'
