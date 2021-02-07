@@ -250,8 +250,8 @@ add_pyright() {
   "
   if [[ -n $1 ]]; then
     pyright=${pyright/pytorch/$1}
-    echo $pyright > pyrightconfig.json
   fi
+  echo $pyright > pyrightconfig.json
 }
 
 
