@@ -219,7 +219,7 @@ alias grader='/home/vpoat/.scripts/grader.sh'
 alias lg='lazygit'
 alias gcache='git config --global credential.helper 'cache --timeout 900000''
 alias gfcache='git credential-cache exit'
-alias n='nvim'
+alias n='~/bin/nvim.appimage'
 alias piping_help='curl https://ppng.io/help'
 alias listening_port='sudo  netstat -tulpn | grep LISTEN'
 
