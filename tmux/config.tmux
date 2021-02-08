@@ -228,6 +228,14 @@ set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 set -g @plugin 'tmux-plugins/tmux-net-speed'
 set -g @plugin 'samoshkin/tmux-plugin-sysstat'
 
+set -g @plugin 'dracula/tmux'  
+set -g @dracula-show-weather false
+set -g @dracula-show-powerline true
+set -g @dracula-military-time true
+set -g @dracula-show-flags true
+set -g @dracula-show-left-icon session
+set -g @dracula-day-month true
+
 set -g @continuum-restore 'on'
 
 # Press prefix + I(capital i) to fetch plugin
