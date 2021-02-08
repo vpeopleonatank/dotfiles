@@ -380,6 +380,7 @@ Plug 'hardcoreplayers/oceanic-material'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'arcticicestudio/nord-vim'
 Plug 'cormacrelf/vim-colors-github'
+Plug 'dracula/vim'
 
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
@@ -597,7 +598,8 @@ syntax on
  
  " use the dark theme
  set background=dark
- colorscheme oceanic_material
+ " colorscheme oceanic_material
+ colorscheme dracula
 " colorscheme PaperColor
 
  " fix cursor color in gvim
