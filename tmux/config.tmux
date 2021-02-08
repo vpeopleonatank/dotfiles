@@ -1,9 +1,17 @@
 set -g mouse on
-set-option -sa terminal-overrides ',XXX:RGB'
+# set-option -sa terminal-overrides ',XXX:RGB'
 tmux_conf_copy_to_os_clipboard=true # copy and paster with xclip
 bind -Tcopy-mode-vi M-y send -X copy-pipe "xclip -i -sel p -f | xclip -i -sel c" \; display-message "copied to system clipboard"
 # -- general -------------------------------------------------------------------
-set -g default-terminal 'screen-256color' # colors!
+# set -g default-terminal "tmux-256color"
+# set -ga terminal-overrides ",screen-256color:Tc"
+set -g default-terminal 'tmux-256color'
+# set -ga terminal-overrides ',xterm-256color:Tc'
+set -ga terminal-overrides ',alacritty:Tc'
+# set -as terminal-overrides ",gnome*:Tc"
+
+set-option -g default-command zsh
+
 setw -g xterm-keys on
 set -s escape-time 10                     # faster command sequences
 set -sg repeat-time 600                   # increase repeat timeout

@@ -102,7 +102,7 @@ plugins=(
     zsh-autosuggestions
     colored-man-pages
     python
-    tmux
+    # tmux
     # fzf
     vscode
     vundle
