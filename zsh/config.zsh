@@ -252,7 +252,7 @@ add_pyright() {
   "
 
 	if [[ -n $1  ]]; then
-    pyright=${pyright/./$2}
+    pyright=${pyright/./$1}
 	fi
   echo $pyright > pyrightconfig.json
 }
