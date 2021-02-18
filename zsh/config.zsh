@@ -174,6 +174,7 @@ alias gt="bash ~/.scripts/generate_template.sh"
 alias countdown='~/git/countdown/countdown'
 alias cd_basic_algo_codelearn='cd /mnt/vpoat/Data/Code/algo_merge/contest/codelearn/basic_algo'
 alias psudo='sudo env PATH="$PATH"'
+alias lzd='sudo lazydocker'
 fg() {
   git add .
   git commit -m "update"
@@ -244,18 +245,13 @@ source_openvino() {
 
 add_pyright() {
   pyright="{
-    \"venvPath\": \"/home/vpoat/anaconda3/envs\",
-      \"venv\": \"pytorch\",
     \"executionEnvironments\": [
         {\"root\": \".\"}
     ]
 	}
   "
-  if [[ -n $1 ]]; then
-    pyright=${pyright/pytorch/$1}
-  fi
 
-	if [[ -n $2  ]]; then
+	if [[ -n $1  ]]; then
     pyright=${pyright/./$2}
 	fi
   echo $pyright > pyrightconfig.json
