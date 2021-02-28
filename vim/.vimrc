@@ -649,7 +649,7 @@ endfunction
  \ "\<C-s>": 'SB',
  \ 't': 'T',
  \ },
- "\ 'colorscheme': 'wombat',
+ \ 'colorscheme': 'dracula',
  \ 'active': {
  \   'left': [ [ 'mode', 'paste' ],
  \             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],

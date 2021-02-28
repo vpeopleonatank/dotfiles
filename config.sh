@@ -36,14 +36,16 @@ fi
 # else
 #     echo "Powerlevel9k is installed"
 # fi
+
 # install fonts
-if [ ! -d $HOME/.dotfiles/fonts ]; then
-    echo "install fonts"
-    git clone https://github.com/powerline/fonts.git $HOME/.dotfiles/fonts
-    sh $HOME/.dotfiles/fonts/install.sh
-else
-    echo "fonts is installed"
-fi
+# if [ ! -d $HOME/.dotfiles/fonts ]; then
+#     echo "install fonts"
+#     git clone https://github.com/powerline/fonts.git $HOME/.dotfiles/fonts
+#     sh $HOME/.dotfiles/fonts/install.sh
+# else
+#     echo "fonts is installed"
+# fi
+
 # install syntax-highlighting
 if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     echo "install syntax-highlighting"
@@ -111,7 +113,9 @@ if [ ! -d $HOME/.local/share/fonts/NerdFonts ]; then
 else
 	echo "~/.local/share/fonts/NerdFonts dir existed"
 fi
-cp ./fonts/* $HOME/.local/share/fonts/NerdFonts/
+
+unzip "./fonts/*.zip" -d ${HOME}/.local/share/fonts/NerdFonts/
+# cp ./fonts/* $HOME/.local/share/fonts/NerdFonts/
 sudo fc-cache -f -v
 echo "Install and recache fonts"
 

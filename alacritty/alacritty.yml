@@ -2,23 +2,26 @@
 font:
   # The normal (roman) font face to use.
   normal:
-    family: MesloLGS NF
+    family: JetBrains Mono
+    # family: MesloLGS NF
     # family: DejaVu Sans Mono for Powerline
     # Style can be specified to pick a specific face.
     # style: Regular
 
   # The bold font face
   bold:
-    family: MesloLGS NF
+    family: JetBrains Mono
+    # family: MesloLGS NF
     # Style can be specified to pick a specific face.
     # style: Bold
 
   # The italic font face
   italic:
-    family: MesloLGS NF
+    family: JetBrains Mono
+    # family: MesloLGS NF
       # Style can be specified to pick a specific face.
     # style: Italic
-  size: 11.0
+  size: 14.0
 # env:
   # TERM variable
   #
@@ -36,7 +39,7 @@ font:
 #   primary:
 #     background: '0x1b2b34'
 #     foreground: '0xd8dee9'
-# 
+#
 #   # Normal colors
 #   normal:
 #     black:   '0x29414f'
@@ -47,7 +50,7 @@ font:
 #     magenta: '0xc594c5'
 #     cyan:    '0x5fb3b3'
 #     white:   '0x65737e'
-# 
+#
 #   # Bright colors
 #   bright:
 #     black:   '0x405860'
@@ -65,7 +68,7 @@ colors:
   primary:
     background: '0x282a36'
     foreground: '0xf8f8f2'
- 
+
   # Normal colors
   normal:
     black:   '0x000000'
@@ -76,7 +79,7 @@ colors:
     magenta: '0xff79c6'
     cyan:    '0x8be9fd'
     white:   '0xbbbbbb'
- 
+
   # Bright colors
   bright:
     black:   '0x555555'
