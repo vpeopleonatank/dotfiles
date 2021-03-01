@@ -248,7 +248,8 @@ add_pyright() {
   pyright="{
     \"executionEnvironments\": [
         {\"root\": \".\"}
-    ]
+    ],
+  \"python.analysis.typeCheckingMode\": \"off\"
 	}
   "
 
