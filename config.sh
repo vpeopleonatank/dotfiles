@@ -46,6 +46,17 @@ fi
 #     echo "fonts is installed"
 # fi
 
+
+# install zsh-vi-mode
+if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
+    echo "install zsh-vi-mode"
+    git clone https://github.com/jeffreytse/zsh-vi-mode \
+      $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-vi-mode
+else
+    echo "zsh-vi-mode is installed"
+fi
+
+
 # install syntax-highlighting
 if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     echo "install syntax-highlighting"

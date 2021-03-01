@@ -114,6 +114,7 @@ plugins=(
     zsh-z
     # k
     zshmarks
+    zsh-vi-mode
     )
 
 source $ZSH/oh-my-zsh.sh
