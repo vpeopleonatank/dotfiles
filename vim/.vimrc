@@ -154,8 +154,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-nnoremap <C-[> :vertical resize -5<cr>
-nnoremap <C-]> :vertical resize +5<cr>
+nnoremap <C-W>h :vertical resize -5<cr>
+nnoremap <C-W>l :vertical resize +5<cr>
 
 
 " Close the current buffer
