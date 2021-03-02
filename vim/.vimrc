@@ -70,6 +70,7 @@ set ruler
 " Blink cursor on error instead of beeping (grr)
 set visualbell
 set t_vb=
+set cursorline
 
 " Encoding
 set encoding=utf-8
