@@ -428,6 +428,11 @@ let g:floaterm_autoclose = 1
 "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 
+Plug 'thaerkh/vim-workspace'
+nnoremap <leader>ts :ToggleWorkspace<CR>
+let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+
+
 call plug#end()
 
 filetype plugin indent on
