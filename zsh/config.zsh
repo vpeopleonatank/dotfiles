@@ -176,6 +176,7 @@ alias countdown='~/git/countdown/countdown'
 alias cd_basic_algo_codelearn='cd /mnt/vpoat/Data/Code/algo_merge/contest/codelearn/basic_algo'
 alias psudo='sudo env PATH="$PATH"'
 alias lzd='sudo lazydocker'
+alias vno='HOME=$(mktemp -d) nvim -u NONE -U NONE -N -i NONE -u $HOME/.dotfiles/tool/vim/.vimrc_server'
 fg() {
   git add .
   git commit -m "update"
