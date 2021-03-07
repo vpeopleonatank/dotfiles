@@ -417,7 +417,7 @@ tnoremap   <silent>   <F9>    <C-\><C-n>:FloatermNext<CR>
 nnoremap   <silent>   <F12>   :FloatermToggle<CR>
 tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 " nnoremap <silent> <Leader>gz :<C-u>FloatermNew height=0.7 width=0.8 lazygit<CR>
-nnoremap <silent> <Leader>gz :<C-u>FloatermNew lazygit<CR>
+nnoremap <silent> <Leader>gz :FloatermNew --height=0.8 --width=0.8 lazygit<CR>
 
 nnoremap <silent> <C-_>  :FloatermNew --height=0.5 --width=0.5 --wintype=popup --position=bottomright<CR>
 
