@@ -73,8 +73,8 @@ cursor:
 
   style:
     shape: Block
-    blinking: Always
-    blink_interval: 100
+    # blinking: Always
+    # blink_interval: 2000
 # Colors (Dracula)
 colors:
   # Default colors
@@ -86,7 +86,8 @@ colors:
     text: '#000000'
     cursor: '#528bff'
 
-  #   style:
+    # style:
+    #   blink_interval: 10000
   #     shape: Block
   #     unfocused_hollow: true
   #     blinking: On
