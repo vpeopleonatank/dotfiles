@@ -694,6 +694,7 @@ endfunction
 
  let g:clap_theme = 'material_design_dark'
  nnoremap <leader>ff :Clap files<CR>
+ nnoremap <leader>fb :Clap filer<CR>
  nnoremap <leader>fa :Clap grep<CR>
 
  " Remap <C-i>

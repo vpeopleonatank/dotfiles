@@ -227,6 +227,13 @@ alias n='~/bin/nvim.appimage'
 alias piping_help='curl https://ppng.io/help'
 alias listening_port='sudo  netstat -tulpn | grep LISTEN'
 
+get_compile_command() {
+  mkdir build; cd build;
+  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
+  cd ..
+  ln -s $(pwd)/build/compile_commands.json $(pwd)/compile_commands.json
+}
+
 
 show-process() {
 ps -eo size,pid,user,command --sort -size | \
