@@ -19,6 +19,8 @@ fi
   fi
 } &!
 
+
+fpath=( ~/.dotfiles/tool/cheat/ $fpath  )
  autoload -Uz compinit 
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
 	compinit;
@@ -271,6 +273,9 @@ add_pyright() {
 
 export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
+export CHEAT_CONFIG_PATH="~/.dotfiles/tool/cheat/conf.yml"
+export CHEAT_USE_FZF=true
+
 
 # fpath+=$HOME/.zsh/pure
 
