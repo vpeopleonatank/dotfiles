@@ -330,6 +330,8 @@ autocmd BufEnter,BufNew *.md setf md.tex
 
 Plug 'honza/vim-snippets'
 
+Plug 'untitled-ai/jupyter_ascending.vim'
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 noremap <leader>mo :MarkdownPreview<CR>

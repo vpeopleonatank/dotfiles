@@ -228,6 +228,7 @@ alias gfcache='git credential-cache exit'
 alias n='~/bin/nvim.appimage'
 alias piping_help='curl https://ppng.io/help'
 alias listening_port='sudo  netstat -tulpn | grep LISTEN'
+alias paste_image='xclip -selection clipboard -t image/png -o >'
 
 get_compile_command() {
   mkdir build; cd build;
