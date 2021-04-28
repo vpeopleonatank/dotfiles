@@ -112,6 +112,9 @@ bind-key -n M-7 select-window -t 7
 bind-key -n M-8 select-window -t 8
 bind-key -n M-9 select-window -t 9
 
+# List tmux windows in colllapsed view
+bind-key w choose-tree -Zs
+
 # window navigation
 unbind n
 unbind p
