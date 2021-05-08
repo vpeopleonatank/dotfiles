@@ -382,11 +382,9 @@ Plug 'tyru/caw.vim'
 Plug 'tpope/vim-fugitive'
 
 " Theme
-Plug 'hardcoreplayers/oceanic-material'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'arcticicestudio/nord-vim'
-Plug 'cormacrelf/vim-colors-github'
-Plug 'dracula/vim'
+Plug 'wadackel/vim-dogrun'
+Plug 'crusoexia/vim-monokai'
+Plug 'sainnhe/sonokai'
 
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
@@ -610,7 +608,7 @@ syntax on
  " use the dark theme
  set background=dark
  " colorscheme oceanic_material
- colorscheme dracula
+ colorscheme monokai
 " colorscheme PaperColor
 
  " fix cursor color in gvim
@@ -660,7 +658,7 @@ endfunction
  \ "\<C-s>": 'SB',
  \ 't': 'T',
  \ },
- \ 'colorscheme': 'dracula',
+ \ 'colorscheme': 'sonokai',
  \ 'active': {
  \   'left': [ [ 'mode', 'paste' ],
  \             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],
@@ -694,7 +692,8 @@ endfunction
  set spelllang=en_us
  inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
- let g:clap_theme = 'material_design_dark'
+let g:clap_theme = 'material_design_dark'
+" let g:clap_theme = 'dogrun'
  nnoremap <leader>ff :Clap files<CR>
  nnoremap <leader>fb :Clap filer<CR>
  nnoremap <leader>fa :Clap grep<CR>
