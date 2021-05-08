@@ -343,8 +343,8 @@ Plug 'liuchengxu/vim-which-key'
 set timeoutlen=500
 nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
-Plug 'ryanoasis/vim-devicons'
 Plug 'qpkorr/vim-bufkill'
+Plug 'ryanoasis/vim-devicons'
 " Plug 'bagrat/vim-buffet'
 Plug 'hardcoreplayers/vim-buffet'
 let g:buffet_powerline_separators = 1
@@ -368,6 +368,12 @@ Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 Plug 'liuchengxu/vista.vim'
 
 nnoremap <leader>i :Vista<CR>
+
+Plug 'thaerkh/vim-workspace'
+let g:workspace_autosave_always = 1
+let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+let g:workspace_undodir= $HOME . '/.vim/.undodir'
+
 
 Plug 'lervag/vimtex'
 
@@ -608,7 +614,7 @@ syntax on
  " use the dark theme
  set background=dark
  " colorscheme oceanic_material
- colorscheme monokai
+ colorscheme sonokai
 " colorscheme PaperColor
 
  " fix cursor color in gvim
