@@ -161,6 +161,7 @@ nnoremap <leader>[ :vertical resize +5<cr>
 
 " Close the current buffer
 
+
 nmap <silent> <Leader>bn    <Plug>BufKillBack
 nmap <silent> <Leader>bp    <Plug>BufKillForward
 nmap <silent> <Leader>bd    <Plug>BufKillBd
@@ -323,8 +324,8 @@ filetype off
 " TODO: Load plugins here (pathogen or vundle)
 call plug#begin('~/.vim/plugged')
 Plug 'sirver/ultisnips'
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsExpandTrigger = '<c-m>'
+" let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 autocmd BufEnter,BufNew *.md setf md.tex
 
@@ -345,8 +346,8 @@ nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
 Plug 'qpkorr/vim-bufkill'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'bagrat/vim-buffet'
-Plug 'hardcoreplayers/vim-buffet'
+Plug 'bagrat/vim-buffet'
+" Plug 'hardcoreplayers/vim-buffet'
 let g:buffet_powerline_separators = 1
 let g:buffet_tab_icon = "\uf00a"
 let g:buffet_left_trunc_icon = "\uf0a8"
@@ -388,10 +389,15 @@ Plug 'tyru/caw.vim'
 Plug 'tpope/vim-fugitive'
 
 " Theme
+Plug 'dracula/vim'
 Plug 'wadackel/vim-dogrun'
 Plug 'crusoexia/vim-monokai'
 Plug 'sainnhe/sonokai'
+Plug 'srcery-colors/srcery-vim'
+Plug 'glepnir/oceanic-material'
+Plug 'joshdick/onedark.vim'
 
+Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/artify.vim'
@@ -544,8 +550,8 @@ syntax on
  " Use <TAB> for selections ranges.
  " NOTE: Requires 'textDocument/selectionRange' support from the language server.
  " coc-tsserver, coc-python are the examples of servers that support it.
- nmap <silent> <TAB> <Plug>(coc-range-select)
- xmap <silent> <TAB> <Plug>(coc-range-select)
+ " nmap <silent> <TAB> <Plug>(coc-range-select)
+ " xmap <silent> <TAB> <Plug>(coc-range-select)
 
  " Add `:Format` command to format current buffer.
  command! -nargs=0 Format :call CocAction('format')
@@ -613,9 +619,8 @@ syntax on
 
  " use the dark theme
  set background=dark
- " colorscheme oceanic_material
- colorscheme sonokai
-" colorscheme PaperColor
+ colorscheme oceanic_material
+" colorscheme srcery
 
  " fix cursor color in gvim
  highlight Cursor guifg=white guibg=black
@@ -664,7 +669,7 @@ endfunction
  \ "\<C-s>": 'SB',
  \ 't': 'T',
  \ },
- \ 'colorscheme': 'sonokai',
+ \ 'colorscheme': 'onedark',
  \ 'active': {
  \   'left': [ [ 'mode', 'paste' ],
  \             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],
@@ -866,3 +871,6 @@ set directory=$DATA_PATH/swap//,$DATA_PATH,~/tmp,/var/tmp,/tmp
 set undodir=$DATA_PATH/undo//,$DATA_PATH,~/tmp,/var/tmp,/tmp
 set backupdir=$DATA_PATH/backup/,$DATA_PATH,~/tmp,/var/tmp,/tmp
 
+
+nmap <silent> <tab>    :bn<cr>
+nmap <silent> <S-tab>    :bp<cr>
