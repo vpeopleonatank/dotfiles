@@ -379,6 +379,7 @@ let g:workspace_undodir= $HOME . '/.vim/.undodir'
 Plug 'lervag/vimtex'
 
 Plug 'KeitaNakamura/tex-conceal.vim'
+" Plug 'wellle/context.vim'
 
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
