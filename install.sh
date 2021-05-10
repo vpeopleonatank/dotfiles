@@ -31,6 +31,13 @@ function install_jc() {
   rm "$deb"
 }
 
+function install_kitty() {
+  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
+  cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications
+  ~/.local/share/applications/kitty.desktop
+}
+
 function install_bat() {
   local v="0.17.1"
   ! command -v bat &>/dev/null || [[ "$(bat --version)" != *" $v" ]] || return 0
@@ -110,3 +117,4 @@ install_ripgrep
 install_jc
 install_bat
 install_exa
+install_kitty

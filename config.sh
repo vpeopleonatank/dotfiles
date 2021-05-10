@@ -38,13 +38,13 @@ fi
 # fi
 
 # install fonts
-# if [ ! -d $HOME/.dotfiles/fonts ]; then
-#     echo "install fonts"
-#     git clone https://github.com/powerline/fonts.git $HOME/.dotfiles/fonts
-#     sh $HOME/.dotfiles/fonts/install.sh
-# else
-#     echo "fonts is installed"
-# fi
+if [ ! -d $HOME/.dotfiles/fonts ]; then
+    echo "install fonts"
+    git clone https://github.com/powerline/fonts.git $HOME/.dotfiles/fonts
+    sh $HOME/.dotfiles/fonts/install.sh
+else
+    echo "fonts is installed"
+fi
 
 
 # install zsh-vi-mode
@@ -138,6 +138,14 @@ else
 fi
 ln -s $HOME/.dotfiles/tool/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
+# Symlink Kitty terminal config
+if [ ! -d $HOME/.config/kitty ]; then
+  mkdir $HOME/.config/kitty
+else
+  echo "kitty config dir existed"
+fi
+ln -s ~/.dotfiles/tool/kitty/kitty.conf ~/.config/kitty/kitty.conf
+
 
 # script
 # if [ ! -d $HOME/.scripts ]; then
@@ -174,18 +182,23 @@ mkdir /tmp/LS_COLORS && curl -L https://api.github.com/repos/vpeopleonatank/LS_C
 echo "turn off tmux auto restore"
 touch ~/tmux_no_auto_restore
 
-function install_fira_code() {
-  #!/usr/bin/env bash
+function install_fonts() {
 
-  fonts_dir="${HOME}/.local/share/fonts"
-  if [ ! -d "${fonts_dir}" ]; then
+    # Install JetBrainsMono font
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+
+    # Install FiraCode font
+    #!/usr/bin/env bash
+
+    fonts_dir="${HOME}/.local/share/fonts"
+    if [ ! -d "${fonts_dir}" ]; then
       echo "mkdir -p $fonts_dir"
       mkdir -p "${fonts_dir}"
-  else
+    else
       echo "Found fonts dir $fonts_dir"
-  fi
+    fi
 
-  for type in Bold Light Medium Regular Retina; do
+    for type in Bold Light Medium Regular Retina; do
       file_path="${HOME}/.local/share/fonts/FiraCode-${type}.ttf"
       file_url="https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true"
       if [ ! -e "${file_path}" ]; then
@@ -194,8 +207,9 @@ function install_fira_code() {
       else
     echo "Found existing file $file_path"
       fi;
-  done
+    done
 
-  echo "fc-cache -f"
-  sudo fc-cache -f
+    echo "fc-cache -f"
+    sudo fc-cache -f
 }
+
