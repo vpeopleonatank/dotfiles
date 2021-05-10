@@ -300,22 +300,10 @@ set -g @dracula-show-weather false
 set -g @dracula-show-powerline true
 set -g @dracula-military-time true
 set -g @dracula-show-flags true
-set -g @dracula-show-left-icon smiley
+set -g @dracula-show-left-icon session
 set -g @dracula-day-month true
 
 set -g @continuum-restore 'on'
 
 # Press prefix + I(capital i) to fetch plugin
 run '~/.tmux/plugins/tpm/tpm'
-white='#f8f8f2'
-gray='#44475a'
-dark_gray='#282a36'
-light_purple='#bd93f9'
-dark_purple='#6272a4'
-cyan='#8be9fd'
-green='#50fa7b'
-orange='#ffb86c'
-red='#ff5555'
-pink='#ff79c6'
-yellow='#f1fa8c'
-set -g status-left "#[bg=${green},fg=${dark_gray}]#{?client_prefix,#[bg=${yellow}],} #H #[fg=${green},bg=${gray}]#{?client_prefix,#[fg=${yellow}],}"
