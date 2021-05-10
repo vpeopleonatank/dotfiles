@@ -774,7 +774,9 @@ let g:clap_theme = 'material_design_dark'
  " map <Leader>q to exit debug mode or IPython
  nnoremap <leader>aq :SlimeSend1 exit<CR>
 
- let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
+ if strlen($TMUX) != 0
+   let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
+ endif
 
  " Coc-snippets configuration
  " Use <C-l> for trigger snippet expand.
