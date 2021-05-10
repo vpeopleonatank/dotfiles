@@ -324,7 +324,7 @@ filetype off
 " TODO: Load plugins here (pathogen or vundle)
 call plug#begin('~/.vim/plugged')
 Plug 'sirver/ultisnips'
-let g:UltiSnipsExpandTrigger = '<c-m>'
+let g:UltiSnipsExpandTrigger = '<c-l>'
 " let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 autocmd BufEnter,BufNew *.md setf md.tex
