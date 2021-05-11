@@ -41,7 +41,7 @@ set -g base-index 1           # start windows numbering at 1
 setw -g pane-base-index 1     # make pane numbering consistent with windows
 
 #setw -g automatic-rename false   # rename window to reflect current program
-set allow-rename off
+set -g allow-rename off
 set -g renumber-windows on    # renumber windows when a window is closed
 
 set -g set-titles on          # set terminal title
