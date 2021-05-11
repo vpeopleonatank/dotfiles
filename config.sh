@@ -185,7 +185,7 @@ touch ~/tmux_no_auto_restore
 function install_fonts() {
 
     # Install JetBrainsMono font
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+    # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 
     # Install FiraCode font
     #!/usr/bin/env bash
@@ -198,10 +198,14 @@ function install_fonts() {
       echo "Found fonts dir $fonts_dir"
     fi
 
-    for type in Bold Light Medium Regular Retina; do
-      file_path="${HOME}/.local/share/fonts/FiraCode-${type}.ttf"
-      file_url="https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true"
-      if [ ! -e "${file_path}" ]; then
+    for type in Bold Medium Italic 'Bold Italic'; do
+      file_path="${HOME}/.local/share/fonts/JetBrainsMono-${type}.ttf"
+      file_url="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/${type}/complete/JetBrains%20Mono%20${type}%20Nerd%20Font%20Complete%20Mono.ttf?raw=true"
+      if [ "$type" == "Bold Italic" ]; then
+        file_url="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/BoldItalic/complete/JetBrains%20Mono%20${type}%20Nerd%20Font%20Complete%20Mono.ttf?raw=true"
+      fi
+
+    if [ ! -e "${file_path}" ]; then
           echo "wget -O $file_path $file_url"
           wget -O "${file_path}" "${file_url}"
       else
@@ -209,7 +213,31 @@ function install_fonts() {
       fi;
     done
 
+    # for type in Bold Light Medium Regular Retina; do
+    #   file_path="${HOME}/.local/share/fonts/FiraCode-${type}.ttf"
+    #   file_url="https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true"
+    #   if [ ! -e "${file_path}" ]; then
+    #       echo "wget -O $file_path $file_url"
+    #       wget -O "${file_path}" "${file_url}"
+    #   else
+    # echo "Found existing file $file_path"
+    #   fi;
+    # done
+
     echo "fc-cache -f"
     sudo fc-cache -f
 }
 
+install_fonts
+
+# If use kitty terminal, add following line to $HOME/.config/fontconfig/fonts.conf
+# Source: https://github.com/ryanoasis/nerd-fonts/issues/268#issuecomment-693481697
+
+# <match target="scan">
+#       <test name="family">
+#           <string>JetBrainsMono Nerd Font</string>
+#       </test>
+#       <edit name="spacing">
+#           <int>100</int>
+#       </edit>
+#   </match>
