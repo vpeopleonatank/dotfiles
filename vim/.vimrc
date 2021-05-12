@@ -409,7 +409,7 @@ Plug 'niklaas/lightline-gitdiff'
 
 Plug 'skywind3000/asyncrun.vim'
 
-Plug 'skywind3000/vim-terminal-help'
+" Plug 'skywind3000/vim-terminal-help'
 
 Plug 'voldikss/vim-floaterm'
 
