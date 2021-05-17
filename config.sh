@@ -241,3 +241,22 @@ install_fonts
 #           <int>100</int>
 #       </edit>
 #   </match>
+
+# TODO 've not found way to append multiple line to file in bash function
+# change_gnome_tittle_bar() {
+#     cat <<EOT >> ~/.config/gtk-3.0/gtk.css
+#         .titlebar {
+#             background: #6272A4;
+#             color:white;
+#         }
+#
+#         .titlebar:backdrop  {
+#             background: #777777;
+#             color:white;
+#         }
+#         EOT
+#
+#     setsid gnome-shell --replace
+# }
+#
+# change_gnome_tittle_bar

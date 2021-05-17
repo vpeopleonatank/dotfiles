@@ -217,7 +217,7 @@ export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/snapd/desktop"
 
 alias youtube-dl-mp3='youtube-dl --extract-audio --audio-format mp3'
 
-alias onenote='~/bin/P3X-OneNote-2020.10.111.AppImage'
+alias onenote='~/bin/P3X-OneNote'
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias matlab_gpu='/home/vpoat/.scripts/matlab_gpu.sh'
@@ -226,7 +226,7 @@ alias grader='/home/vpoat/.scripts/grader.sh'
 alias lg='lazygit'
 alias gcache='git config --global credential.helper 'cache --timeout 900000''
 alias gfcache='git credential-cache exit'
-alias n='~/bin/nvim.appimage'
+alias n='/usr/bin/nvim'
 alias piping_help='curl https://ppng.io/help'
 alias listening_port='sudo  netstat -tulpn | grep LISTEN'
 alias paste_image='xclip -selection clipboard -t image/png -o >'
@@ -290,6 +290,8 @@ export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
 export CHEAT_CONFIG_PATH="~/.dotfiles/tool/cheat/conf.yml"
 export CHEAT_USE_FZF=true
+export GLFW_IM_MODULE=ibus
+
 
 
 # fpath+=$HOME/.zsh/pure
@@ -317,3 +319,5 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
  . "/home/vpoat/.local/share/lscolors.sh"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # source $HOME/git/fzf-marks/fzf-marks.plugin.zsh
+alias downsub='youtube-dl --sub-lang en --write-auto-sub --sub-format srt  --skip-download '  # Only download sub
+alias downplaylistest='youtube-dl -f best -cit '
