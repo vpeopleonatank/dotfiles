@@ -35,7 +35,10 @@ export ZSH="$HOME/.dotfiles/oh-my-zsh"
 export FZF_BASE="$HOME/.dotfiles/oh-my-zsh/custom/plugins/fzf"
 export FZF_DEFAULT_OPTS='--height 70% --border'
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_CTRL_R_OPTS='--sort --exact'
+
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -30'"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -165,8 +168,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 alias t='tmux'
 alias ez='vim ~/.zshrc'
 alias lsh='source ~/.zshrc'

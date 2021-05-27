@@ -50,7 +50,7 @@ set tw=500
 
 set ai "Auto indent
 set si "Smart indent
-set wrap "Wrap lines
+" set wrap "Wrap lines
 
 " Security
 set modelines=0
@@ -472,9 +472,9 @@ syntax on
  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
  " other plugin before putting this into your config.
  inoremap <silent><expr> <TAB>
-     \ pumvisible() ? "\<C-n>" :
-     \ <SID>check_back_space() ? "\<TAB>" :
-     \ coc#refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
  function! s:check_back_space() abort
@@ -654,46 +654,46 @@ function! LightlineGitGlobalStatus() abort
 endfunction
 
  let g:lightline = {
- \ 'enable': {
- \   'tabline': 0
- \ },
- \ 'mode_map': {
- \ 'n' : 'N',
- \ 'i' : 'I',
- \ 'R' : 'R',
- \ 'v' : 'V',
- \ 'V' : 'VL',
- \ "\<C-v>": 'VB',
- \ 'c' : 'C',
- \ 's' : 'S',
- \ 'S' : 'SL',
- \ "\<C-s>": 'SB',
- \ 't': 'T',
- \ },
- \ 'colorscheme': 'onedark',
- \ 'active': {
- \   'left': [ [ 'mode', 'paste' ],
- \             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],
- \             [ 'gitdiff' ] ],
-     \   'right': [ [ 'lineinfo' ],
-     \              [ 'percent' ] ]
- \ },
-     \ 'inactive': {
-     \   'left': [ [ 'filename', 'gitversion' ] ],
-     \ },
- \ 'component_function': {
- \   'gitbranch': 'FugitiveHead',
- \   'cocstatus': 'coc#status',
-  \   'currentfunction': 'CocCurrentFunction',
-  \   'gitstatus': 'LightlineGitGlobalStatus',
- \ },
-     \ 'component_expand': {
-     \   'gitdiff': 'lightline#gitdiff#get',
-     \ },
-     \ 'component_type': {
-     \   'gitdiff': 'middle',
-     \ },
- \ }
+\ 'enable': {
+\   'tabline': 0
+\ },
+\ 'mode_map': {
+\ 'n' : 'N',
+\ 'i' : 'I',
+\ 'R' : 'R',
+\ 'v' : 'V',
+\ 'V' : 'VL',
+\ "\<C-v>": 'VB',
+\ 'c' : 'C',
+\ 's' : 'S',
+\ 'S' : 'SL',
+\ "\<C-s>": 'SB',
+\ 't': 'T',
+\ },
+\ 'colorscheme': 'onedark',
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ],
+\             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],
+\             [ 'gitdiff' ] ],
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ] ]
+\ },
+    \ 'inactive': {
+    \   'left': [ [ 'filename', 'gitversion' ] ],
+    \ },
+\ 'component_function': {
+\   'gitbranch': 'FugitiveHead',
+\   'cocstatus': 'coc#status',
+ \   'currentfunction': 'CocCurrentFunction',
+ \   'gitstatus': 'LightlineGitGlobalStatus',
+\ },
+    \ 'component_expand': {
+    \   'gitdiff': 'lightline#gitdiff#get',
+    \ },
+    \ 'component_type': {
+    \   'gitdiff': 'middle',
+    \ },
+\ }
 
  if has('win32')
      " Command output encoding for Windows
@@ -724,8 +724,8 @@ let g:clap_theme = 'material_design_dark'
 
  " always send text to the top-right pane in the current tmux tab without asking
  let g:slime_default_config = {
-            \ 'socket_name': get(split($TMUX, ','), 0),
-            \ 'target_pane': '{top-right}' }
+           \ 'socket_name': get(split($TMUX, ','), 0),
+           \ 'target_pane': '{top-right}' }
  let g:slime_dont_ask_default = 1
 
  "------------------------------------------------------------------------------
