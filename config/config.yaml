@@ -98,3 +98,8 @@ languages:
   lua:
     - <<: *lua-lua-format
     
+  yaml:
+    - <<: *yaml-yamllint
+
+  # make:
+  #   - <<: *make-checkmake
