@@ -18,6 +18,10 @@ echo "Symlink vim and neovim 's coc-settings.json"
 sudo ln -s $HOME/.dotfiles/tool/vim/coc-settings-vim.json $HOME/.vim/coc-settings.json
 echo "Symlink done"
 
+echo "Symlink efm-langserver config"
+sudo ln -s $HOME/.dotfiles/tool/config/config.yaml $HOME/.config/efm-langserver/config.yaml
+echo "Symlink done"
+
 # config tmux
 echo 'source ~/.dotfiles/tool/tmux/config.tmux' >$HOME/.tmux.conf
 echo "Installed Tmux configuration successfully ^~^"

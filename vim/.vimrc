@@ -875,5 +875,5 @@ set undodir=$DATA_PATH/undo//,$DATA_PATH,~/tmp,/var/tmp,/tmp
 set backupdir=$DATA_PATH/backup/,$DATA_PATH,~/tmp,/var/tmp,/tmp
 
 
-nmap <silent> <tab>    :bn<cr>
-nmap <silent> <S-tab>    :bp<cr>
+nmap <silent> `    :bn<cr>
+nmap <silent> ~    :bp<cr>
