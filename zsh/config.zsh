@@ -325,3 +325,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # source $HOME/git/fzf-marks/fzf-marks.plugin.zsh
 alias downsub='youtube-dl --sub-lang en --write-auto-sub --sub-format srt  --skip-download '  # Only download sub
 alias downplaylistest='youtube-dl -f best -cit '
+
+ export CUDA_HOME=/usr/local/cuda
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
