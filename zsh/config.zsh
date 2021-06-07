@@ -328,4 +328,5 @@ alias downplaylistest='youtube-dl -f best -cit '
 
  export CUDA_HOME=/usr/local/cuda
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
-export PATH="$PATH:`pwd`/flutter/bin"
+export PATH="$PATH:/home/vpoat/.cargo/bin"
+

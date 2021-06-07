@@ -403,13 +403,15 @@ Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 Plug 'liuchengxu/vista.vim'
 
 nnoremap <leader>i :Vista<CR>
-
+" 
 Plug 'thaerkh/vim-workspace'
-let g:workspace_autosave_always = 1
+" let g:workspace_autosave_always = 0
+let g:workspace_autosave = 0
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 let g:workspace_undodir= $HOME . '/.vim/.undodir'
-
-
+nnoremap <leader>ts :ToggleWorkspace<CR>
+" 
+" 
 Plug 'lervag/vimtex'
 
 Plug 'KeitaNakamura/tex-conceal.vim'
@@ -431,6 +433,8 @@ Plug 'sainnhe/sonokai'
 Plug 'srcery-colors/srcery-vim'
 Plug 'glepnir/oceanic-material'
 Plug 'joshdick/onedark.vim'
+
+Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
@@ -476,9 +480,6 @@ let g:floaterm_autoclose = 1
 "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 
-Plug 'thaerkh/vim-workspace'
-nnoremap <leader>ts :ToggleWorkspace<CR>
-let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 
 
 call plug#end()
@@ -497,6 +498,8 @@ nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 nnoremap x "_x
 
+ nnoremap <C-c> "+Y
+ vnoremap <C-c> "+y
  nnoremap <leader>y "+Y
  vnoremap <leader>y "+y
  nnoremap <leader>p "+p
