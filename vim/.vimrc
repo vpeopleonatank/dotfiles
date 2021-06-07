@@ -249,6 +249,27 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
+imap <c-h> <bs>
+imap <c-d> <del>
+imap <c-u> <C-G>u<C-U>
+imap <c-b> <Left>
+imap <c-f> <Right>
+imap <c-a> <ESC>^i
+imap <c-e> <End>
+imap <c-j> <ESC>o
+imap <c-k> <Esc>O
+
+" command line mode
+cmap <C-p> <Up>
+cmap <C-n> <Down>
+cmap <C-b> <Left>
+cmap <C-f> <Right>
+cmap <C-a> <Home>
+cmap <C-e> <End>
+cnoremap <C-d> <Del>
+cnoremap <C-h> <BS>
+cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -473,6 +494,7 @@ syntax on
 " nnoremap <S-C-p> "0p
 " Delete without yank
 nnoremap <leader>d "_d
+vnoremap <leader>d "_d
 nnoremap x "_x
 
  nnoremap <leader>y "+Y
