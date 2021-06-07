@@ -20,8 +20,8 @@ set -s focus-events on
 # set -g prefix2 C-a                        # GNU-Screen compatible prefix
 # bind C-a send-prefix -2
 unbind C-b
-set-option -g prefix C-a
-bind-key C-a send-prefix
+set-option -g prefix C-q
+bind-key C-q send-prefix
 
 
 set -q -g status-utf8 on                  # expect UTF-8 (tmux < 2.2)

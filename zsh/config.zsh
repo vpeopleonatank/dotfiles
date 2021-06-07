@@ -205,7 +205,7 @@ export PATH=$PATH:/snap/bin
 # zstyle ':completion:*' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
 
-export PATH=$PATH:/home/vpoat/.dotfiles/nodejs/bin
+# export PATH=$PATH:/home/vpoat/.dotfiles/nodejs/bin
 alias esl='sudo vim /etc/apt/sources.list'
 alias show_opening_port='sudo netstat -tulpn | grep LISTEN'
 
@@ -230,7 +230,7 @@ alias grader='/home/vpoat/.scripts/grader.sh'
 alias lg='lazygit'
 alias gcache='git config --global credential.helper 'cache --timeout 900000''
 alias gfcache='git credential-cache exit'
-alias n='/usr/bin/nvim'
+alias nv='/usr/bin/nvim'
 alias piping_help='curl https://ppng.io/help'
 alias listening_port='sudo  netstat -tulpn | grep LISTEN'
 alias paste_image='xclip -selection clipboard -t image/png -o >'
@@ -328,3 +328,4 @@ alias downplaylistest='youtube-dl -f best -cit '
 
  export CUDA_HOME=/usr/local/cuda
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export PATH="$PATH:`pwd`/flutter/bin"

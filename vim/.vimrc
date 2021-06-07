@@ -146,6 +146,26 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " map <space> /
 " map <C-space> ?
 
+" Split window
+nmap sq :close<Return>
+nmap ss :split<Return><C-w>w
+nmap sv :vsplit<Return><C-w>w
+" Move window
+nmap <Space> <C-w>w
+map s<left> <C-w>h
+map s<up> <C-w>k
+map s<down> <C-w>j
+map s<right> <C-w>l
+map sh <C-w>h
+map sk <C-w>k
+map sj <C-w>j
+map sl <C-w>l
+" Resize window
+nmap <C-w><left> <C-w><
+nmap <C-w><right> <C-w>>
+nmap <C-w><up> <C-w>+
+nmap <C-w><down> <C-w>-
+
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
@@ -206,9 +226,6 @@ map <leader>qa :qa!<CR>
 
 map <leader>s :w<CR>
 
-map <leader>c "+y
-map <leader>v "+p
-
 imap jk <Esc>
 imap kj <Esc>
 
@@ -218,13 +235,6 @@ imap kj <Esc>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
 map 0 ^
-
-
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
@@ -242,14 +252,13 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Save with root permission
+command! W w !sudo tee > /dev/null %
+
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-" Quickly open a buffer for scribble
-" map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -327,11 +336,15 @@ Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger = '<c-l>'
 " let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-autocmd BufEnter,BufNew *.md setf md.tex
+" autocmd BufEnter,BufNew *.md setf md.tex
 
 Plug 'honza/vim-snippets'
 
 Plug 'untitled-ai/jupyter_ascending.vim'
+
+Plug 'mg979/vim-visual-multi'
+
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
@@ -456,6 +469,11 @@ syntax on
 " =============================================================================================================================
 "	config copy
 " =============================================================================================================================
+
+" nnoremap <S-C-p> "0p
+" Delete without yank
+nnoremap <leader>d "_d
+nnoremap x "_x
 
  nnoremap <leader>y "+Y
  vnoremap <leader>y "+y

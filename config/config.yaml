@@ -73,7 +73,7 @@ tools:
 
 languages:
   python:
-    # - <<: *python-flake8
+    - <<: *python-flake8
     - <<: *python-black
     - <<: *python-isort
 
