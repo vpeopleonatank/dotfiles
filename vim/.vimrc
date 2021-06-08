@@ -23,9 +23,9 @@ set nocompatible
 
  " With a map leader it's possible to do extra key combinations
  " like <leader>w saves the current file
- let mapleader = ","
+ let mapleader = " "
 
-let maplocalleader = " "
+let maplocalleader = ","
 
  " Fast saving
  nmap <leader>w :w!<cr>
@@ -148,10 +148,10 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 " Split window
 nmap sq :close<Return>
-nmap ss :split<Return><C-w>w
-nmap sv :vsplit<Return><C-w>w
+nmap sm :split<Return><C-w>w
+nmap sn :vsplit<Return><C-w>w
 " Move window
-nmap <Space> <C-w>w
+nmap s<Space> <C-w>w
 map s<left> <C-w>h
 map s<up> <C-w>k
 map s<down> <C-w>j
@@ -475,8 +475,10 @@ nnoremap <silent> <C-_>  :FloatermNew --height=0.5 --width=0.5 --wintype=popup -
 let g:floaterm_autoclose = 1
 
 
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+nnoremap <leader>ft :Vista finder<CR>
 
 
 
@@ -565,7 +567,8 @@ nnoremap x "_x
  endfunction
 
  " Highlight the symbol and its references when holding the cursor.
- autocmd CursorHold * silent call CocActionAsync('highlight')
+ " Slow on large file
+ " autocmd CursorHold * silent call CocActionAsync('highlight')
 
  " Symbol renaming.
  nmap <leader>rn <Plug>(coc-rename)
@@ -627,7 +630,7 @@ nnoremap x "_x
  " Resume latest coc list.
  nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
- let g:coc_global_extensions = ['coc-pyright', 'coc-json', 'coc-prettier']
+ let g:coc_global_extensions = ['coc-pyright', 'coc-json', 'coc-tsserver']
 
  let g:tex_flavor='latex'
  let g:vimtex_view_method='zathura'
@@ -694,6 +697,10 @@ function! LightlineGitGlobalStatus() abort
   return global_git_status
 endfunction
 
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
  let g:lightline = {
 \ 'enable': {
 \   'tabline': 0
@@ -727,6 +734,7 @@ endfunction
 \   'cocstatus': 'coc#status',
 \   'currentfunction': 'CocCurrentFunction',
 \   'gitstatus': 'LightlineGitGlobalStatus',
+\   'method': 'NearestMethodOrFunction',
 \ },
    \ 'component_expand': {
    \   'gitdiff': 'lightline#gitdiff#get',
@@ -735,6 +743,8 @@ endfunction
    \   'gitdiff': 'middle',
    \ },
 \ }
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
 " 
 "  if has('win32')
 "      " Command output encoding for Windows

@@ -324,9 +324,26 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # source $HOME/git/fzf-marks/fzf-marks.plugin.zsh
 alias downsub='youtube-dl --sub-lang en --write-auto-sub --sub-format srt  --skip-download '  # Only download sub
-alias downplaylistest='youtube-dl -f best -cit '
+alias downplaylistbest='youtube-dl -f best -cit '
 
  export CUDA_HOME=/usr/local/cuda
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 export PATH="$PATH:/home/vpoat/.cargo/bin"
 
+function ghq-fzf() {
+  local selected_dir=$(ghq list | fzf --query="$LBUFFER")
+
+    if [ -n "$selected_dir"  ]; then
+          BUFFER="cd $(ghq root)/${selected_dir}"
+              zle accept-line
+                fi
+
+                  zle reset-prompt
+                  
+}
+
+zle -N ghq-fzf
+bindkey "^]" ghq-fzf
+
+alias ll="exa -l -g --icons"
+alias lla="ll -a"
