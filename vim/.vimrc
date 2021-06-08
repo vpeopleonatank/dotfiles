@@ -166,8 +166,6 @@ nmap <C-w><right> <C-w>>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -373,11 +371,11 @@ noremap <leader>mo :MarkdownPreview<CR>
 noremap <leader>mc :MarkdownPreviewStop<CR>
 " noremap <leader>mt <Plug>MarkdownPreviewToggle
 
-Plug 'liuchengxu/vim-which-key'
+" Plug 'liuchengxu/vim-which-key'
 
 set timeoutlen=500
-nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
+" nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+" nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
 Plug 'qpkorr/vim-bufkill'
 Plug 'ryanoasis/vim-devicons'
 Plug 'bagrat/vim-buffet'
