@@ -168,10 +168,10 @@ nmap <C-w><down> <C-w>-
 
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 nnoremap <leader>] :vertical resize -5<cr>
 nnoremap <leader>[ :vertical resize +5<cr>
@@ -424,15 +424,15 @@ Plug 'tyru/caw.vim'
 Plug 'tpope/vim-fugitive'
 
 " Theme
-Plug 'dracula/vim'
-Plug 'wadackel/vim-dogrun'
-Plug 'crusoexia/vim-monokai'
-Plug 'sainnhe/sonokai'
-Plug 'srcery-colors/srcery-vim'
+" Plug 'dracula/vim'
+" Plug 'wadackel/vim-dogrun'
+" Plug 'crusoexia/vim-monokai'
+" Plug 'sainnhe/sonokai'
+" Plug 'srcery-colors/srcery-vim'
 Plug 'glepnir/oceanic-material'
 Plug 'joshdick/onedark.vim'
 
-Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+" Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
@@ -490,8 +490,8 @@ syntax on
 "	config copy
 " =============================================================================================================================
 
-" nnoremap <S-C-p> "0p
-" Delete without yank
+nnoremap <S-C-p> "0p
+"Delete without yank
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 nnoremap x "_x
@@ -513,9 +513,9 @@ nnoremap x "_x
  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
  " other plugin before putting this into your config.
  inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ coc#refresh()
+   \ pumvisible() ? "\<C-n>" :
+   \ <SID>check_back_space() ? "\<TAB>" :
+   \ coc#refresh()
  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
  function! s:check_back_space() abort
@@ -716,35 +716,35 @@ endfunction
 \   'left': [ [ 'mode', 'paste' ],
 \             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],
 \             [ 'gitdiff' ] ],
-    \   'right': [ [ 'lineinfo' ],
-    \              [ 'percent' ] ]
+   \   'right': [ [ 'lineinfo' ],
+   \              [ 'percent' ] ]
 \ },
-    \ 'inactive': {
-    \   'left': [ [ 'filename', 'gitversion' ] ],
-    \ },
+   \ 'inactive': {
+   \   'left': [ [ 'filename', 'gitversion' ] ],
+   \ },
 \ 'component_function': {
 \   'gitbranch': 'FugitiveHead',
 \   'cocstatus': 'coc#status',
- \   'currentfunction': 'CocCurrentFunction',
- \   'gitstatus': 'LightlineGitGlobalStatus',
+\   'currentfunction': 'CocCurrentFunction',
+\   'gitstatus': 'LightlineGitGlobalStatus',
 \ },
-    \ 'component_expand': {
-    \   'gitdiff': 'lightline#gitdiff#get',
-    \ },
-    \ 'component_type': {
-    \   'gitdiff': 'middle',
-    \ },
+   \ 'component_expand': {
+   \   'gitdiff': 'lightline#gitdiff#get',
+   \ },
+   \ 'component_type': {
+   \   'gitdiff': 'middle',
+   \ },
 \ }
-
- if has('win32')
-     " Command output encoding for Windows
-     let g:asyncrun_encs = 'gbk'
- endif
-
- setlocal spell
- set spelllang=en_us
- inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-
+" 
+"  if has('win32')
+"      " Command output encoding for Windows
+"      let g:asyncrun_encs = 'gbk'
+"  endif
+" 
+"  setlocal spell
+"  set spelllang=en_us
+"  inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+" 
 let g:clap_theme = 'material_design_dark'
 " let g:clap_theme = 'dogrun'
  nnoremap <leader>ff :Clap files<CR>
@@ -765,8 +765,8 @@ let g:clap_theme = 'material_design_dark'
 
  " always send text to the top-right pane in the current tmux tab without asking
  let g:slime_default_config = {
-           \ 'socket_name': get(split($TMUX, ','), 0),
-           \ 'target_pane': '{top-right}' }
+          \ 'socket_name': get(split($TMUX, ','), 0),
+          \ 'target_pane': '{top-right}' }
  let g:slime_dont_ask_default = 1
 
  "------------------------------------------------------------------------------
