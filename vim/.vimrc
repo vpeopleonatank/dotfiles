@@ -180,10 +180,10 @@ nnoremap <leader>[ :vertical resize +5<cr>
 " Close the current buffer
 
 
-nmap <silent> <Leader>bn    <Plug>BufKillBack
-nmap <silent> <Leader>bp    <Plug>BufKillForward
-nmap <silent> <Leader>bd    <Plug>BufKillBd
-nmap <silent> <Leader>bu    <Plug>BufKillUndo
+nmap <silent> <Leader>xn    <Plug>BufKillBack
+nmap <silent> <Leader>xp    <Plug>BufKillForward
+nmap <silent> <Leader>xk    <Plug>BufKillBd
+nmap <silent> <Leader>xu    <Plug>BufKillUndo
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
