@@ -1,4 +1,18 @@
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/vpoat/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/vpoat/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/vpoat/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/vpoat/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
 
+# <<< conda initialize <<<
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse"
