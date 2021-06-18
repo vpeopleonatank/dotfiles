@@ -5,345 +5,107 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-  # zmodload zsh/zprof 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# source $HOME/.dotfiles/tool/zsh/config.zsh
+
+# Zstyles
+zstyle ':autocomplete:tab:*' insert-unambiguous yes # Make Tab first insert any common substring, before inserting full completions
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format 'completing %d:'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm,cmd -w -w"
+
+zstyle ':autocomplete:*' min-delay .3 # Wait for a minimum amount of time
+#zstyle ':autocomplete:*' min-input 3 # Wait for a minimum amount of input
+#zstyle ':autocomplete:*' ignored-input '..##' # Ignore certain inputs eg. don't trigger autocom when word consist solely of ..
+zstyle ':autocomplete:tab:*' widget-style menu-select # Do menu selection:
+#zstyle ':autocomplete:tab:*' fzf-completion yes # try Fzf's completion before using Zsh's
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
 
 
-# Execute code in the background to not affect the current session
-{
-  # Compile zcompdump, if modified, to increase startup speed.
-  zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
-  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
-    zcompile "$zcompdump"
-  fi
-} &!
-
-
-fpath=( ~/.dotfiles/tool/cheat/ $fpath  )
- autoload -Uz compinit 
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-	compinit;
-else
-	compinit -C;
-fi;
-
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.dotfiles/oh-my-zsh"
-
-export FZF_BASE="$HOME/.dotfiles/oh-my-zsh/custom/plugins/fzf"
-export FZF_DEFAULT_OPTS='--height 70% --border'
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-export FZF_CTRL_R_OPTS='--sort --exact'
-
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -30'"
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="powerlevel9k/powerlevel9k"
-ZSH_THEME=""
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-    github
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    colored-man-pages
-    python
-    # tmux
-    # fzf
-    vscode
-    vundle
-    command-not-found
-    web-search
-    history
-    extract
-    copyfile
-    zsh-z
-    # k
-    zshmarks
-    zsh-vi-mode
-    )
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-
-bindkey -v
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/vpoat/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/vpoat/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/vpoat/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/vpoat/anaconda3/bin:$PATH"
-    fi
+if [ ! -d "$HOME/.zsh/zsh-snap"  ]; then
+    git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git $HOME/.zsh/zsh-snap
 fi
-unset __conda_setup
-# <<< conda initialize <<<
+source $HOME/.zsh/zsh-snap/znap.zsh
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+znap source romkatv/powerlevel10k
+znap source jeffreytse/zsh-vi-mode
+function zvm_after_init() {
+  ZSH_AUTOSUGGEST_STRATEGY=( history  )
+  znap source zsh-users/zsh-autosuggestions  # On same line
+  export ZSH_AUTO_SUGGEST_USE_ASYNC=true
+  znap eval junegunn/fzf 'command -v fzf >/dev/null 2>&1 || {./install --bin} >/dev/null'
+  znap source junegunn/fzf shell/{completion,key-bindings}.zsh
+  path=(~[junegunn/fzf]/bin $path .)
+  znap source Aloxaf/fzf-tab
+  function ghq-fzf() {
+    local selected_dir=$(ghq list | fzf --query="$LBUFFER")
 
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-alias t='tmux'
-alias ez='vim ~/.zshrc'
-alias lsh='source ~/.zshrc'
-alias jl='jupyter-lab'
-alias ca='conda activate'
-alias cap='conda activate pytorch'
-alias gt="bash ~/.scripts/generate_template.sh"
-alias countdown='~/git/countdown/countdown'
-alias cd_basic_algo_codelearn='cd /mnt/vpoat/Data/Code/algo_merge/contest/codelearn/basic_algo'
-alias psudo='sudo env PATH="$PATH"'
-alias lzd='sudo lazydocker'
-# alias vno='HOME=$(mktemp -d) vim -u NONE -U NONE -N -i NONE -u $HOME/.dotfiles/tool/vim/.vimrc_server'
-alias vno='vim -u $HOME/.dotfiles/tool/vim/.vimrc_server -U NONE -N -i NONE'
-alias kill_unattached="tmux list-sessions | grep -v attached | awk 'BEGIN{FS=":"}{print $1}' | xargs -n 1 tmux kill-session -t || echo No sessions to kill"
-fg() {
-  git add .
-  git commit -m "update"
-  git push
+      if [ -n "$selected_dir"  ]; then
+            BUFFER="cd $(ghq root)/${selected_dir}"
+                zle accept-line
+                  fi
+
+                    zle reset-prompt
+
+  }
+
+  zle -N ghq-fzf
+  bindkey "^]" ghq-fzf
 }
-export PATH=$PATH:/usr/local/go/bin
-MANPATH=/usr/local/texlive/2020/texmf-dist/doc/man:$MANPATH;
-export MANPATH
-INFOPATH=/usr/local/texlive/2020/texmf-dist/doc/info:$INFOPATH;
-export INFOPATH
-export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-linux
-export PATH=$PATH:/snap/bin
-# fix ls directory color
-# tw = cd autocompletion directory color
-# export LS_COLORS="ow=43;30:tw=1;34:di=1;34:$LS_COLORS"
+ 
+znap source wfxr/forgit
+znap source zpm-zsh/colors
+znap source zpm-zsh/ls
+znap source hlissner/zsh-autopair
+znap source MichaelAquilina/zsh-you-should-use
+znap source zdharma/fast-syntax-highlighting
+znap source zsh-users/zsh-completions
+znap source agkozak/zsh-z
+znap source Tarrasch/zsh-autoenv 
 
+znap eval trapd00r/LS_COLORS '{ command -v gdircolors >/dev/null 2>&1  } && { gdircolors -b LS_COLORS } || { dircolors -b LS_COLORS }'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# znap eval fuck 'thefuck --alias'
+# znap eval pip 'python3 -m pip completion --zsh'
+# znap eval kitty 'kitty + complete setup zsh'
+# 
 
-# zstyle ':completion:*' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+# Load the aliases and custon functions and some:
+# for file in ~/dotfiles/zsh/{zaliases,zfunctions}; do
+# 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+# done
+# unset file
 
+EDITOR="nvim"
+command -v floaterm >/dev/null 2>&1 && EDITOR="floaterm"
 
-# export PATH=$PATH:/home/vpoat/.dotfiles/nodejs/bin
-alias esl='sudo vim /etc/apt/sources.list'
-alias show_opening_port='sudo netstat -tulpn | grep LISTEN'
-
-
-alias j="jump"
-alias s="bookmark"
-alias d="deletemark"
-alias p="showmarks"
-alias l="showmarks"
-
-export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/snapd/desktop"
-# cp /var/lib/snapd/desktop/applications/code_code.desktop ~/.local/share/applications/
-
-alias youtube-dl-mp3='youtube-dl --extract-audio --audio-format mp3'
-
-alias onenote='~/bin/P3X-OneNote'
-alias setclip="xclip -selection c"
-alias getclip="xclip -selection c -o"
-alias matlab_gpu='/home/vpoat/.scripts/matlab_gpu.sh'
-alias make_files='/home/vpoat/.scripts/make_files.sh'
-alias grader='/home/vpoat/.scripts/grader.sh'
-alias lg='lazygit'
-alias gcache='git config --global credential.helper 'cache --timeout 900000''
-alias gfcache='git credential-cache exit'
-alias nv='/usr/bin/nvim'
-alias piping_help='curl https://ppng.io/help'
-alias listening_port='sudo  netstat -tulpn | grep LISTEN'
-alias paste_image='xclip -selection clipboard -t image/png -o >'
-
-get_compile_command() {
-  mkdir build; cd build;
-  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
-  cd ..
-  ln -s $(pwd)/build/compile_commands.json $(pwd)/compile_commands.json
-}
-
-
-show-process() {
-ps -eo size,pid,user,command --sort -size | \
-  awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |\
-  cut -d "" -f2 | cut -d "-" -f1
-}
-
-sync_jupyter() {
-  fname="$PWD"/"$1".ipynb
-  jupytext --sync $fname
-  ipython $fname
-}
-
-source_openvino() {
-  cd /opt/intel/openvino_2021/inference_engine 
-  source /opt/intel/openvino_2021/bin/setupvars.sh
-  cd -
-}
-
-add_pyright() {
-  pyright="{
-    \"executionEnvironments\": [
-        {\"root\": \".\"}
-    ],
-  \"python.analysis.typeCheckingMode\": \"off\"
-	}
-  "
-
-	if [[ -n $1  ]]; then
-    pyright=${pyright/./$1}
-	fi
-  echo $pyright > pyrightconfig.json
-}
-
-# Codi
-# Usage: codi [filetype] [filename]
-codi() {
-  local syntax="${1:-python}"
-  shift
-  n -c \
-    "let g:startify_disable_at_vimenter = 1 |\
-    set bt=nofile ls=0 noru nonu nornu |\
-    hi ColorColumn ctermbg=NONE |\
-    hi VertSplit ctermbg=NONE |\
-    hi NonText ctermfg=0 |\
-    Codi $syntax" "$@"
-}
-
-export PATH=$PATH:$(go env GOPATH)/bin
-export GOPATH=$(go env GOPATH)
-export CHEAT_CONFIG_PATH="~/.dotfiles/tool/cheat/conf.yml"
-export CHEAT_USE_FZF=true
-export GLFW_IM_MODULE=ibus
-
-
-
-# fpath+=$HOME/.zsh/pure
-
-# autoload -U promptinit; promptinit
-
-# optionally define some options
-# PURE_CMD_MAX_EXEC_TIME=10
-
-# turn on git stash status
-#prompt pure
-#zstyle :prompt:pure:git:stash show yes
-# zprof
-
-# fpath+=$HOME/.zsh/pure
-
-#autoload -U promptinit; promptinit
-#prompt pure
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-# export LS_COLORS="ow=38;5;220;1:tw=1;34:di=1;34:ex=38;5;208;1:$LS_COLORS:ow=38;5;220;1:tw=1;34:di=1;34:ex=38;5;208;1:"
- . "/home/vpoat/.local/share/lscolors.sh"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# source $HOME/git/fzf-marks/fzf-marks.plugin.zsh
-alias downsub='youtube-dl --sub-lang en --write-auto-sub --sub-format srt  --skip-download '  # Only download sub
-alias downplaylistbest='youtube-dl -f best -cit '
+source $HOME/.dotfiles/tool/zsh/zaliases.zsh
+source $HOME/.dotfiles/tool/zsh/zfunctions.zsh
+source $HOME/.dotfiles/tool/zsh/zenvs.zsh
+# source $HOME/.dotfiles/tool/zsh
 
- export CUDA_HOME=/usr/local/cuda
-export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
-export PATH="$PATH:/home/vpoat/.cargo/bin"
 
-function ghq-fzf() {
-  local selected_dir=$(ghq list | fzf --query="$LBUFFER")
 
-    if [ -n "$selected_dir"  ]; then
-          BUFFER="cd $(ghq root)/${selected_dir}"
-              zle accept-line
-                fi
+# eval "$(mcfly init zsh)"
+# eval "$(zoxide init zsh)"
 
-                  zle reset-prompt
-                  
-}
+znap eval zoxide 'zoxide init zsh'
 
-zle -N ghq-fzf
-bindkey "^]" ghq-fzf
-
-alias ll="exa -l -g --icons"
-alias lla="ll -a"
+# znap eval mcfly 'mcfly init zsh'

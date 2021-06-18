@@ -500,8 +500,8 @@ nnoremap x "_x
 
  nnoremap <C-c> "+Y
  vnoremap <C-c> "+y
- nnoremap <leader>y "+Y
- vnoremap <leader>y "+y
+ " nnoremap <leader>y "+Y
+ " vnoremap <leader>y "+y
  nnoremap <leader>p "+p
  vnoremap <leader>p "+p
 
@@ -616,7 +616,7 @@ nnoremap x "_x
  " Show all diagnostics.
  nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
  " Manage extensions.
- nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+ " nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
  " Show commands.
  nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
  " Find symbol of current document.
@@ -628,7 +628,7 @@ nnoremap x "_x
  " Do default action for previous item.
  nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
  " Resume latest coc list.
- nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+ " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
  let g:coc_global_extensions = ['coc-pyright', 'coc-json', 'coc-tsserver']
 
