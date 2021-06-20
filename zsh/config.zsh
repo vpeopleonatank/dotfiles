@@ -109,3 +109,20 @@ source $HOME/.dotfiles/tool/zsh/zenvs.zsh
 znap eval zoxide 'zoxide init zsh'
 
 # znap eval mcfly 'mcfly init zsh'
+
+# define function that retrieves and runs last command
+function run-again {
+    # get previous history item
+        zle up-history
+            # confirm command
+                zle accept-line
+                
+}
+
+# define run-again widget from function of the same name
+zle -N run-again
+
+# bind widget to Ctrl+X in viins mode
+bindkey -M viins '^X' run-again 
+# bind widget to Ctrl+X in vicmd mode
+bindkey -M vicmd '^X' run-again

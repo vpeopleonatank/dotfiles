@@ -82,8 +82,8 @@ bind + run 'cut -c3- ~/.tmux.conf | sh -s _maximize_pane "#{session_name}" #D'
 
 # pane resizing
 bind -r H resize-pane -L 20
-bind -r J resize-pane -D 20
-bind -r K resize-pane -U 20
+bind -r J resize-pane -D 7
+bind -r K resize-pane -U 7
 bind -r L resize-pane -R 20
 
 # force Vi mode

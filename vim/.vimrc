@@ -444,6 +444,8 @@ Plug 'niklaas/lightline-gitdiff'
 " Plug 'albertomontesg/lightline-asyncrun'
 
 Plug 'skywind3000/asyncrun.vim'
+Plug 'preservim/vimux'
+Plug 'skywind3000/asyncrun.extra'
 
 " Plug 'skywind3000/vim-terminal-help'
 
@@ -498,12 +500,13 @@ nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 nnoremap x "_x
 
- nnoremap <C-c> "+Y
- vnoremap <C-c> "+y
+ nnoremap ,c "+Y
+ vnoremap ,c "+y
  " nnoremap <leader>y "+Y
  " vnoremap <leader>y "+y
- nnoremap <leader>p "+p
- vnoremap <leader>p "+p
+ nnoremap ,p "+p
+ vnoremap ,p "+p
+ nnoremap gA :%y+<CR>
 
  "
  " =============================================================================================================================
@@ -646,9 +649,9 @@ nnoremap x "_x
 
  inoremap {<CR>  {<CR>}<Esc>O
 
- autocmd filetype cpp nnoremap <leader>r :w <bar> AsyncRun -mode=term -pos=thelp g++ -std=c++14 % -o %:r && %:r<CR>
- autocmd filetype cpp nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp %:r<CR>
- autocmd filetype python nnoremap <leader>rf :AsyncRun -mode=term -pos=thelp python3 %<CR>
+ autocmd filetype cpp nnoremap ,r :AsyncRun -mode=term -pos=tmux  g++ -std=c++14 -O2 -Wall "%" -o "%:r"  && "./%:r"<CR>
+ autocmd filetype cpp nnoremap ,rf :AsyncRun -mode=term -pos=tmux %:r<CR>
+ autocmd filetype python nnoremap ,rf :AsyncRun -mode=term -pos=tmux python3 %<CR>
 
  nnoremap <leader>lc :source $MYVIMRC<CR>
  nnoremap <leader>ev :tabe $MYVIMRC<CR>
