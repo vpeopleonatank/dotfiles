@@ -1,4 +1,4 @@
-alias v="$EDITOR" vimdiff="nvim -d"
+alias v="vim" vimdiff="nvim -d"
 
 alias g="git" lg="EDITOR=nvim lazygit"
 alias t='tmux'
@@ -27,7 +27,7 @@ alias grader='/home/vpoat/.scripts/grader.sh'
 alias lg='lazygit'
 alias gcache='git config --global credential.helper 'cache --timeout 900000''
 alias gfcache='git credential-cache exit'
-alias nv='/usr/bin/nvim'
+alias nv='/usr/local/bin/nvim'
 alias piping_help='curl https://ppng.io/help'
 alias listening_port='sudo  netstat -tulpn | grep LISTEN'
 alias paste_image='xclip -selection clipboard -t image/png -o >'
