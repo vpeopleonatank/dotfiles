@@ -408,6 +408,12 @@ let g:workspace_autosave = 0
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 let g:workspace_undodir= $HOME . '/.vim/.undodir'
 nnoremap <leader>ts :ToggleWorkspace<CR>
+
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install()  }  }
+let g:doge_doc_standard_python = 'google'
+
+nnoremap ,gd :DogeGenerate<CR>
+
 " 
 " 
 Plug 'lervag/vimtex'
@@ -578,7 +584,7 @@ nnoremap x "_x
 
  " Formatting selected code.
  xmap <leader>f  <Plug>(coc-format-selected)
- nmap <leader>f  <Plug>(coc-format-selected)
+ nmap <leader>f  :Format<CR>
 
  augroup mygroup
    autocmd!
