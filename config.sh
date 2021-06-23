@@ -264,3 +264,11 @@ install_fonts
 # }
 #
 # change_gnome_tittle_bar
+
+# Install gdb-dashboard
+echo "Install gdb-dashboard"
+pip install pygments
+wget -P ~ https://git.io/.gdbinit
+mkdir $HOME/.gdbinit.d/
+touch $HOME/.gdbinit.d/init
+echo "dashboard -layout  expressions history stack breakpoints source variables" > $HOME/.gdbinit.d/init

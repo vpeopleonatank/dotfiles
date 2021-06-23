@@ -29,3 +29,15 @@ source_openvino() {
   source /opt/intel/openvino_2021/bin/setupvars.sh
   cd -
 }
+
+function com {
+  g++ -Wall -Wextra -Wshadow -D_GLIBCXX_ASSERTIONS -DDEBUG -ggdb3 -fmax-errors=2 -o $1{,.cpp}
+}
+
+function debug {
+  if [[ -z "$2" ]] then 
+    (echo "run < $1.in" && cat) | gdb -q $1
+  else
+    (echo "run < $2" && cat) | gdb -q $1
+  fi
+}
