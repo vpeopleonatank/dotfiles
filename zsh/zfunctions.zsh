@@ -42,6 +42,7 @@ function debug {
   fi
 }
 
+# cd on quit
 n ()
 {
     # Block nesting of nnn in subshells
