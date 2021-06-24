@@ -50,15 +50,16 @@ function zvm_after_init() {
   znap source junegunn/fzf shell/{completion,key-bindings}.zsh
   path=(~[junegunn/fzf]/bin $path .)
   znap source Aloxaf/fzf-tab
+  znap source urbainvaes/fzf-marks
   function ghq-fzf() {
     local selected_dir=$(ghq list | fzf --query="$LBUFFER")
 
       if [ -n "$selected_dir"  ]; then
-            BUFFER="cd $(ghq root)/${selected_dir}"
-                zle accept-line
-                  fi
+        BUFFER="cd $(ghq root)/${selected_dir}"
+        zle accept-line
+      fi
 
-                    zle reset-prompt
+      zle reset-prompt
 
   }
 
@@ -113,9 +114,9 @@ znap eval zoxide 'zoxide init zsh'
 # define function that retrieves and runs last command
 function run-again {
     # get previous history item
-        zle up-history
-            # confirm command
-                zle accept-line
+    zle up-history
+    # confirm command
+    zle accept-line
                 
 }
 
