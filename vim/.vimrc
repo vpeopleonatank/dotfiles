@@ -161,8 +161,8 @@ map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
 " Resize window
-nmap <C-w><left> <C-w><
-nmap <C-w><right> <C-w>>
+nmap <C-w>[ :vertical resize -5<CR>
+nmap <C-w>] :vertical resize +5<CR>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 
@@ -651,12 +651,72 @@ nnoremap x "_x
  hi Conceal ctermbg=none
 
 
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\     'root-uri': '~/.vim',
+\   },
+\   'cocConfig': {
+\      'root-uri': '~/.config/coc',
+\   },
+\   'tab': {
+\     'position': 'tab',
+\     'quit-on-open': v:true,
+\   },
+\   'tab:$': {
+\     'position': 'tab:$',
+\     'quit-on-open': v:true,
+\   },
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingTop': {
+\     'position': 'floating',
+\     'floating-position': 'center-top',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingLeftside': {
+\     'position': 'floating',
+\     'floating-position': 'left-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingRightside': {
+\     'position': 'floating',
+\     'floating-position': 'right-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'buffer': {
+\     'sources': [{'name': 'buffer', 'expand': v:true}]
+\   },
+\ }
+
+" Show filename in command bar
+function! s:ShowFilename()
+    let s:node_info = CocAction('runCommand', 'explorer.getNodeInfo', 0)
+    redraw | echohl Debug | echom exists('s:node_info.fullpath') ?
+    \ 'CoC Explorer: ' . s:node_info.fullpath : '' | echohl None
+endfunction
+autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
+" Use preset argument to open it
+nnoremap <space>ed :CocCommand explorer --preset .vim<CR>
+nnoremap <space>ef :CocCommand explorer --preset floating<CR>
+nnoremap <space>ec :CocCommand explorer --preset cocConfig<CR>
+nnoremap <space>eb :CocCommand explorer --preset buffer<CR>
+
+" List all presets
+nnoremap <space>el :CocList explPresets<CR>
  nmap <space>e :CocCommand explorer<CR>
 
  inoremap {<CR>  {<CR>}<Esc>O
 
  autocmd filetype cpp nnoremap ,r :AsyncRun -mode=term -pos=tmux  g++ -std=c++14 -O2 -Wall "%" -o "%:r"  && "./%:r"<CR>
  autocmd filetype cpp nnoremap ,rf :AsyncRun -mode=term -pos=tmux %:r<CR>
+ autocmd filetype cpp nnoremap ,c :AsyncRun -mode=term -pos=tmux pcm tt<CR>
  autocmd filetype python nnoremap ,rf :AsyncRun -mode=term -pos=tmux python3 %<CR>
 
  nnoremap <leader>lc :source $MYVIMRC<CR>
