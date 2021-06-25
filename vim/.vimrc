@@ -161,10 +161,6 @@ map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
 " Resize window
-nmap <C-w>[ :vertical resize -5<CR>
-nmap <C-w>] :vertical resize +5<CR>
-nmap <C-w><up> <C-w>+
-nmap <C-w><down> <C-w>-
 
 
 " Smart way to move between windows
@@ -173,8 +169,8 @@ nmap <C-w><down> <C-w>-
 " map <C-h> <C-W>h
 " map <C-l> <C-W>l
 
-nnoremap <leader>] :vertical resize -5<cr>
-nnoremap <leader>[ :vertical resize +5<cr>
+nnoremap <leader>[ :vertical resize -5<cr>
+nnoremap <leader>] :vertical resize +5<cr>
 
 
 " Close the current buffer
