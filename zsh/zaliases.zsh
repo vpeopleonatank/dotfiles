@@ -15,7 +15,6 @@ alias psudo='sudo env PATH="$PATH"'
 alias lzd='sudo lazydocker'
 # alias vno='HOME=$(mktemp -d) vim -u NONE -U NONE -N -i NONE -u $HOME/.dotfiles/tool/vim/.vimrc_server'
 alias vno='vim -u $HOME/.dotfiles/tool/vim/.vimrc_server -U NONE -N -i NONE'
-# alias kill_unattached="tmux list-sessions | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-session -t || echo No sessions to kill"
 
 alias esl='sudo vim /etc/apt/sources.list'
 alias show_opening_port='sudo netstat -tulpn | grep LISTEN'

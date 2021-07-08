@@ -29,7 +29,7 @@ let maplocalleader = ","
 
  " Fast saving
  nmap <leader>w :w!<cr>
- nmap ,s :w!<cr>
+ nmap <c-s> :w!<cr>
 
  " :W sudo saves the file
  " (useful for handling the permission-denied error)
