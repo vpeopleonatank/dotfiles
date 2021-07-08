@@ -29,7 +29,7 @@ let maplocalleader = ","
 
  " Fast saving
  nmap <leader>w :w!<cr>
- nmap <C-s> :w!<cr>
+ nmap ,s :w!<cr>
 
  " :W sudo saves the file
  " (useful for handling the permission-denied error)
@@ -666,7 +666,7 @@ autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
  autocmd filetype python nnoremap ,rf :AsyncRun -mode=term -pos=tmux python3 %<CR>
 
  nnoremap <leader>lc :source $MYVIMRC<CR>
- nnoremap <leader>ev :tabe $MYVIMRC<CR>
+ nnoremap <leader>ev :e $MYVIMRC<CR>
 
  " Visualize tabs and newlines
  set listchars=tab:▸\ ,eol:¬
