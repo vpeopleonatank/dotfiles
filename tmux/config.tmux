@@ -229,7 +229,7 @@ bind P if-shell "[ \"$(tmux show-options -g prefix)\" = \"prefix C-a\" ]" '\
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-save-interval '0'
-set -g @continuum-restore 'on'
+set -g @continuum-restore 'off'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 set -g @plugin 'tmux-plugins/tmux-net-speed'
 set -g @plugin 'samoshkin/tmux-plugin-sysstat'
@@ -242,7 +242,6 @@ set -g @dracula-show-flags true
 set -g @dracula-show-left-icon smiley
 set -g @dracula-day-month true
 
-set -g @continuum-restore 'on'
 
 # Press prefix + I(capital i) to fetch plugin
 run '~/.tmux/plugins/tpm/tpm'
@@ -289,6 +288,7 @@ setw -g clock-mode-colour colour64 #green
 
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-cowboy'
 set -g @continuum-save-interval '0'
 set -g @continuum-restore 'on'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
