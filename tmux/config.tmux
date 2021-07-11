@@ -208,43 +208,6 @@ bind P if-shell "[ \"$(tmux show-options -g prefix)\" = \"prefix C-a\" ]" '\
     ' '\
     set -g prefix C-a; display-message "passthrough disabled"; refresh-client -S; \
     '
-
-#### color (Solarized 256)
-# set -g status-style bg=colour235,fg=colour136
-# setw -g window-status-style fg=colour244
-# setw -g window-status-current-style fg=colour166
-# setw -g window-status-activity-style fg=colour61
-# setw -g window-status-bell-style fg=colour61
-# set -g pane-border-style fg=colour235
-# set -g pane-active-border-style fg=colour240
-# set -g message-style bg=colour235,fg=colour166
-# 
-# # pane number display
-# set -g display-panes-active-colour colour166 #blue
-# set -g display-panes-colour colour33 #orange
-# 
-# # clock
-# setw -g clock-mode-colour colour64 #green
-
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @continuum-save-interval '0'
-set -g @continuum-restore 'off'
-set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
-set -g @plugin 'tmux-plugins/tmux-net-speed'
-set -g @plugin 'samoshkin/tmux-plugin-sysstat'
-
-set -g @plugin 'dracula/tmux'
-set -g @dracula-show-weather false
-set -g @dracula-show-powerline true
-set -g @dracula-military-time true
-set -g @dracula-show-flags true
-set -g @dracula-show-left-icon smiley
-set -g @dracula-day-month true
-
-
-# Press prefix + I(capital i) to fetch plugin
-run '~/.tmux/plugins/tpm/tpm'
 # set -g status-left '[#S:#H]'
 set -g status-left '#{?pane_input_off,#[fg=colour160],#[fg=colour136]}[#[fg=colour136]#S:#I.#P#{?pane_input_off,#[fg=colour160],#[fg=colour136]}] '
 set -g status-right '#[fg=colour33]%d %b %Y #{?client_prefix,#[fg=colour160],#[fg=colour61]}- #[fg=colour64]%I:%M %p #{?client_prefix,#[fg=colour160],#[fg=colour61]}- #[fg=colour37]#([ -f $HOME/.name ] && cat $HOME/.name || hostname)'
