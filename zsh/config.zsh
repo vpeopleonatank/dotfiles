@@ -51,6 +51,26 @@ function zvm_after_init() {
   path=(~[junegunn/fzf]/bin $path .)
   znap source Aloxaf/fzf-tab
   znap source urbainvaes/fzf-marks
+
+  # define function that retrieves and runs last command
+  function run-again {
+      # get previous history item
+      zle up-history
+      # confirm command
+      zle accept-line
+                  
+  }
+
+  # define run-again widget from function of the same name
+  zle -N run-again
+  
+  # bind widget to Ctrl+X in viins mode
+  bindkey -M viins '^X' run-again 
+  # bind widget to Ctrl+X in vicmd mode
+  bindkey -M vicmd '^X' run-again
+
+  zle -N pet-select
+  bindkey '^[p' pet-select
   function ghq-fzf() {
     local selected_dir=$(ghq list | fzf --query="$LBUFFER")
 
@@ -59,6 +79,7 @@ function zvm_after_init() {
         zle accept-line
       fi
 
+      # zle should be before reset-prompt
       zle reset-prompt
 
   }
@@ -111,19 +132,3 @@ znap eval zoxide 'zoxide init zsh'
 
 # znap eval mcfly 'mcfly init zsh'
 
-# define function that retrieves and runs last command
-function run-again {
-    # get previous history item
-    zle up-history
-    # confirm command
-    zle accept-line
-                
-}
-
-# define run-again widget from function of the same name
-zle -N run-again
-
-# bind widget to Ctrl+X in viins mode
-bindkey -M viins '^X' run-again 
-# bind widget to Ctrl+X in vicmd mode
-bindkey -M vicmd '^X' run-again

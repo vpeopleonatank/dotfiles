@@ -76,3 +76,11 @@ kill_unattached()
   tmux list-sessions | grep -v attached | awk 'BEGIN{FS=":"}{print $1}' | xargs -n 1 tmux kill-session -t || echo No sessions to kill
 }
 
+pet-select () 
+{ 
+    # temporary fix termbox in tmux
+    TERM="${TERM/#tmux/screen}"
+    BUFFER=$(pet search --query "$READLINE_LINE");
+    READLINE_LINE=$BUFFER;
+    READLINE_POINT=${#BUFFER}
+}

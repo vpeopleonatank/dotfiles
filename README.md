@@ -16,3 +16,10 @@ For detail:
 
 
 <img src='./docs/plot.png'>
+
+### CLI tools
+```
+fzf
+zoxide
+pet
+```

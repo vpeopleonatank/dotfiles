@@ -268,5 +268,7 @@ set -g @dracula-day-month true
 
 set -g @continuum-restore 'on'
 
+set -g @plugin 'sainnhe/tmux-fzf'
+
 # Press prefix + I(capital i) to fetch plugin
 run '~/.tmux/plugins/tpm/tpm'
