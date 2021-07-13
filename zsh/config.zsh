@@ -132,3 +132,5 @@ znap eval zoxide 'zoxide init zsh'
 
 # znap eval mcfly 'mcfly init zsh'
 
+eval $(thefuck --alias f)
+
