@@ -50,3 +50,8 @@ SAVEHIST=$HISTSIZE
 setopt SHARE_HISTORY
 
 WORDCHARS=${WORDCHARS/\/}
+
+LFCD="$HOME/.config/lf/lfcd.sh"                                #  pre-built binary, make sure to use absolute path
+if [ -f "$LFCD"  ]; then
+        source "$LFCD"
+fi
