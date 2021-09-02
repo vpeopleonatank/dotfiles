@@ -35,8 +35,9 @@ alias paste_image='xclip -selection clipboard -t image/png -o >'
 
 alias downsub='youtube-dl --sub-lang en --write-auto-sub --sub-format srt  --skip-download '  # Only download sub
 alias downplaylistbest='youtube-dl -f best -cit '
+alias lv=lvim
 
-fg() {
+qg() {
   git add .
   git commit -m "update"
   git push

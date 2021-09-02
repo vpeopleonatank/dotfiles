@@ -397,6 +397,8 @@ Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 Plug 'liuchengxu/vista.vim'
 
 nnoremap <leader>i :Vista<CR>
+
+Plug 'Asheq/close-buffers.vim'
 " 
 Plug 'thaerkh/vim-workspace'
 " let g:workspace_autosave_always = 0

@@ -251,20 +251,25 @@ setw -g clock-mode-colour colour64 #green
 
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @plugin 'tmux-plugins/tmux-cowboy'
+set -g @plugin 'tmux-plugins/tmux-cowboy'  # Kill with prefix + *
 set -g @continuum-save-interval '0'
 set -g @continuum-restore 'on'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
-set -g @plugin 'tmux-plugins/tmux-net-speed'
-set -g @plugin 'samoshkin/tmux-plugin-sysstat'
+# set -g @plugin 'tmux-plugins/tmux-net-speed'
+# set -g @plugin 'samoshkin/tmux-plugin-sysstat'
 
 set -g @plugin 'dracula/tmux'
 set -g @dracula-show-weather false
-set -g @dracula-show-powerline true
+set -g @dracula-show-powerline false
 set -g @dracula-military-time true
-set -g @dracula-show-flags true
-set -g @dracula-show-left-icon session
+set -g @dracula-show-flags false
+set -g @dracula-show-left-iconsession
+set -g @dracula-left-icon-padding 0
+set -g @dracula-border-contrast true
 set -g @dracula-day-month true
+set -g @dracula-show-network false
+set -g @dracula-show-battery false
+
 
 set -g @continuum-restore 'on'
 
