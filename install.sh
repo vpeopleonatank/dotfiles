@@ -118,3 +118,4 @@ install_jc
 install_bat
 install_exa
 install_kitty
+
