@@ -22,6 +22,15 @@ echo "Symlink efm-langserver config"
 sudo ln -s $HOME/.dotfiles/tool/config/config.yaml $HOME/.config/efm-langserver/config.yaml
 echo "Symlink done"
 
+
+sudo ln -s $HOME/.dotfiles/tool/vim/init.vim $HOME/.config/nvim/init.vim
+echo "Symlink init.vim done"
+
+sudo ln -s $HOME/.dotfiles/tool/vim/coc-settings-nvim.json $HOME/.config/nvim/coc-settings.json
+echo "Symlink coc-settings-nvim.json done"
+
+sudo ln -s $HOME/.dotfiles/tool/vim/lua $HOME/.config/nvim/lua
+
 # config tmux
 echo 'source ~/.dotfiles/tool/tmux/config.tmux' >$HOME/.tmux.conf
 echo "Installed Tmux configuration successfully ^~^"
