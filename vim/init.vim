@@ -266,25 +266,10 @@ noremap <leader>mc :MarkdownPreviewStop<CR>
 " noremap <leader>mt <Plug>MarkdownPreviewToggle
 
 " Plug 'liuchengxu/vim-which-key'
-set timeoutlen=500
+set timeoutlen=200
 " nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
 " nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
 Plug 'qpkorr/vim-bufkill'
-Plug 'bagrat/vim-buffet'
-let g:buffet_powerline_separators = 1
-let g:buffet_tab_icon = "\uf00a"
-let g:buffet_left_trunc_icon = "\uf0a8"
-let g:buffet_right_trunc_icon = "\uf0a9"
-nmap <leader>1 <Plug>BuffetSwitch(1)
-nmap <leader>2 <Plug>BuffetSwitch(2)
-nmap <leader>3 <Plug>BuffetSwitch(3)
-nmap <leader>4 <Plug>BuffetSwitch(4)
-nmap <leader>5 <Plug>BuffetSwitch(5)
-nmap <leader>6 <Plug>BuffetSwitch(6)
-nmap <leader>7 <Plug>BuffetSwitch(7)
-nmap <leader>8 <Plug>BuffetSwitch(8)
-nmap <leader>9 <Plug>BuffetSwitch(9)
-nmap <leader>0 <Plug>BuffetSwitch(10)
 
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
@@ -315,6 +300,22 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/artify.vim'
 Plug 'niklaas/lightline-gitdiff'
+
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'romgrk/barbar.nvim'
+nmap <leader>1 :BufferGoto 1<CR>
+nmap <leader>2 :BufferGoto 2<CR>
+nmap <leader>3 :BufferGoto 3<CR>
+nmap <leader>4 :BufferGoto 4<CR>
+nmap <leader>5 :BufferGoto 5<CR>
+nmap <leader>6 :BufferGoto 6<CR>
+nmap <leader>7 :BufferGoto 7<CR>
+nmap <leader>8 :BufferGoto 8<CR>
+nmap <leader>9 :BufferGoto 9<CR>
+nmap <leader>0 :BufferGoto 0<CR>
+
+" Plug 'kyazdani42/nvim-tree.lua'
+"  nmap <leader>e :NvimTreeToggle<CR>
 
 " React
 Plug 'peitalin/vim-jsx-typescript'
@@ -512,7 +513,7 @@ syntax on
 function! s:ShowFilename()
     let s:node_info = CocAction('runCommand', 'explorer.getNodeInfo', 0)
     redraw | echohl Debug | echom exists('s:node_info.fullpath') ?
-    \ 'CoC Explorer: ' . s:node_info.fullpath : '' | echohl None
+   \ 'CoC Explorer: ' . s:node_info.fullpath : '' | echohl None
 endfunction
 autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
 
