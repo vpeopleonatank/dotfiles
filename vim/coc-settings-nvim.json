@@ -12,5 +12,6 @@
     "vue-html": "html",
     "javascript": "javascriptreact",
     "typescriptreact": "typescriptreact"
-  }
+  },
+  "python.analysis.typeCheckingMode": "off",
 }

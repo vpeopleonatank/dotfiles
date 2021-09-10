@@ -373,6 +373,7 @@ nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fa :RG<CR>
 nnoremap <leader>fg :GF?<CR>
 nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fl :BLines<CR>
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
@@ -448,8 +449,8 @@ syntax on
  nmap <leader>rn <Plug>(coc-rename)
 
  " Formatting selected code.
- xmap <leader>f  <Plug>(coc-format-selected)
- nmap <leader>f  :Format<CR>
+ xmap <leader>F  <Plug>(coc-format-selected)
+ nmap <leader>F  :Format<CR>
 
  augroup mygroup
    autocmd!
