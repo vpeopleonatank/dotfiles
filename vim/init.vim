@@ -160,7 +160,7 @@ nmap <silent> ~    :bp<cr>
 " Close the current buffer
 nmap <silent> <Leader>xn    <Plug>BufKillBack
 nmap <silent> <Leader>xp    <Plug>BufKillForward
-nmap <silent> <Leader>xk    <Plug>BufKillBd
+nmap <silent> <A-w>    :BufferClose<CR>
 nmap <silent> <Leader>xu    <Plug>BufKillUndo
 
 " Switch CWD to the directory of the open buffer
@@ -266,7 +266,7 @@ noremap <leader>mc :MarkdownPreviewStop<CR>
 " noremap <leader>mt <Plug>MarkdownPreviewToggle
 
 " Plug 'liuchengxu/vim-which-key'
-set timeoutlen=200
+set timeoutlen=300
 " nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
 " nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
 Plug 'qpkorr/vim-bufkill'
@@ -290,6 +290,7 @@ nnoremap ,gd :DogeGenerate<CR>
 Plug 'lervag/vimtex'
 Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'wellle/tmux-complete.vim'
 Plug 'tyru/caw.vim'
 Plug 'tpope/vim-fugitive'
 " UI
@@ -326,6 +327,7 @@ Plug 'vuki656/package-info.nvim'
 
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asyncrun.extra'
+Plug 'benmills/vimux'
 " Plug 'skywind3000/vim-terminal-help'
 
 Plug 'voldikss/vim-floaterm'
