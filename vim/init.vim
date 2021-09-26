@@ -240,7 +240,7 @@ set mouse+=a
 if has('nvim')
     set mouse+=nicr
 endif
-set clipboard+=unnamed,unnamedplus
+" set clipboard+=unnamed,unnamedplus
 if has('nvim')
     let g:loaded_clipboard_provider = 0
     unlet g:loaded_clipboard_provider
@@ -524,8 +524,8 @@ autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
 
  inoremap {<CR>  {<CR>}<Esc>O
 
- autocmd filetype cpp nnoremap ,r :AsyncRun -mode=term -pos=tmux  g++ -std=c++14 -O2 -Wall "%" -o "%:r"  && "./%:r"<CR>
- autocmd filetype cpp nnoremap ,rf :AsyncRun -mode=term -pos=tmux %:r<CR>
+ autocmd filetype cpp nnoremap ,r :AsyncRun -mode=term -pos=tmux  g++ -std=c++14 -O2 -Wall "%" -o "%:r".bin && "./%:r".bin <CR>
+ autocmd filetype cpp nnoremap ,rf :AsyncRun -mode=term -pos=tmux "%:r".bin<CR>
  autocmd filetype cpp nnoremap ,c :AsyncRun -mode=term -pos=tmux pcm tt<CR>
  autocmd filetype python nnoremap ,rf :AsyncRun -mode=term -pos=tmux python3 %<CR>
 
