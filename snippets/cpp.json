@@ -1,0 +1,38 @@
+{
+  "Creates a quick start template": {
+    "prefix": "cpst",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "",
+      "#define fastio                        \\",
+      "    ios_base::sync_with_stdio(false); \\",
+      "    cin.tie(NULL)",
+      "",
+      "#define endl \"\\n\"",
+      "",
+      "using namespace std;",
+      "",
+      "int main()",
+      "{",
+      "    fastio;",
+      "    ${1:// code goes here}",
+      "    return 0;",
+      "}"
+    ],
+    "description": "Creates a quick start template"
+  },
+  "Input test cases": {
+    "prefix": "cptc",
+    "body": [
+      "int ${1:t};",
+      "cin >> ${1:t};",
+      "",
+      "while(${1:t}--)",
+      "{",
+      "   ${2:// code goes here}",
+      "}"
+    ],
+    "description": "Input test cases"
+  }
+}
+

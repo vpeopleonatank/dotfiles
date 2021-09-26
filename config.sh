@@ -31,6 +31,8 @@ echo "Symlink coc-settings-nvim.json done"
 
 sudo ln -s $HOME/.dotfiles/tool/vim/lua $HOME/.config/nvim/lua
 
+sudo ln -s $HOME/.dotfiles/tool/snippets $HOME/.config/snippets
+
 # config tmux
 echo 'source ~/.dotfiles/tool/tmux/config.tmux' >$HOME/.tmux.conf
 echo "Installed Tmux configuration successfully ^~^"
