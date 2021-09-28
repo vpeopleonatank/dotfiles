@@ -381,6 +381,9 @@ nnoremap <leader>fl :BLines<CR>
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 
+Plug 'tyru/open-browser.vim'
+Plug 'aklt/plantuml-syntax'
+Plug 'weirongxu/plantuml-previewer.vim'
 call plug#end()
 
 filetype plugin indent on
