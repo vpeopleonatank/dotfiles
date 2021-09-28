@@ -154,8 +154,8 @@ map sl <C-w>l
 nnoremap <leader>[ :vertical resize -5<cr>
 nnoremap <leader>] :vertical resize +5<cr>
 
-nmap <silent> `    :bn<cr>
-nmap <silent> ~    :bp<cr>
+nmap <silent> `    :BufferNext<cr>
+nmap <silent> ~    :BufferPrevious<cr>
 
 " Close the current buffer
 nmap <silent> <Leader>xn    <Plug>BufKillBack
