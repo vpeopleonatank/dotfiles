@@ -28,8 +28,8 @@ set expandtab
 set smarttab
 
 " Linebreak on 500 characters
-set lbr
-set tw=500
+"set lbr
+"set tw=500
 
 set ai "Auto indent
 set si "Smart indent
@@ -140,7 +140,7 @@ nmap sq :close<Return>
 nmap sm :split<Return><C-w>w
 nmap sn :vsplit<Return><C-w>w
 " Move window
-nmap s<Space> <C-w>w
+"nmap s<Space> <C-w>w
 map s<left> <C-w>h
 map s<up> <C-w>k
 map s<down> <C-w>j
@@ -524,7 +524,7 @@ endfunction
 autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
 
 " List all presets
- nmap <space>e :CocCommand explorer<CR>
+ nmap <leader>e :CocCommand explorer<CR>
 
  inoremap {<CR>  {<CR>}<Esc>O
 
@@ -788,5 +788,11 @@ set undodir=$DATA_PATH/undo//,$DATA_PATH,~/tmp,/var/tmp,/tmp
 set backupdir=$DATA_PATH/backup/,$DATA_PATH,~/tmp,/var/tmp,/tmp
 
 lua << EOF
-require('init')
+  require('init')
+
+  require("which-key").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
 EOF
