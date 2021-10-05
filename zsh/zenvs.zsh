@@ -56,3 +56,5 @@ LFCD="$HOME/.config/lf/lfcd.sh"                                #  pre-built bina
 if [ -f "$LFCD"  ]; then
         source "$LFCD"
 fi
+
+source $HOME/Downloads/root/bin/thisroot.sh

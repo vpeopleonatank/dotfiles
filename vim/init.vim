@@ -168,7 +168,7 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 "map <leader>q gqip
 
-map <leader>qa :qa!<CR>
+map <leader>q :qa!<CR>
 
 map <leader>s :w<CR>
 
@@ -198,7 +198,7 @@ imap <c-b> <Left>
 imap <c-f> <Right>
 imap <c-a> <ESC>^i
 imap <c-e> <End>
-imap <c-j> <ESC>o
+imap <c-g> <ESC>o
 imap <c-k> <Esc>O
 
 " command line mode
@@ -257,7 +257,7 @@ let g:UltiSnipsExpandTrigger = '<c-l>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 " autocmd BufEnter,BufNew *.md setf md.tex
 Plug 'honza/vim-snippets'
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', { 'for': ['html', 'htmldjango']}
 Plug 'mg979/vim-visual-multi'
 Plug 'jiangmiao/auto-pairs'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -266,7 +266,8 @@ noremap <leader>mc :MarkdownPreviewStop<CR>
 " noremap <leader>mt <Plug>MarkdownPreviewToggle
 
 " Plug 'liuchengxu/vim-which-key'
-set timeoutlen=300
+Plug 'folke/which-key.nvim'
+set timeoutlen=100
 " nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
 " nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
 Plug 'qpkorr/vim-bufkill'
@@ -294,12 +295,12 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'tyru/caw.vim'
 Plug 'tpope/vim-fugitive'
 " UI
-Plug 'glepnir/oceanic-material'
-Plug 'joshdick/onedark.vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
+Plug 'ChristianChiarulli/nvcode-color-schemes.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
-Plug 'sainnhe/artify.vim'
 Plug 'niklaas/lightline-gitdiff'
 
 Plug 'kyazdani42/nvim-web-devicons'
@@ -483,19 +484,19 @@ syntax on
  command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
  " Show all diagnostics.
- nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+ nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
  " Manage extensions.
- " nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+ " nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
  " Show commands.
- nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+ nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
  " Find symbol of current document.
- nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+ nnoremap <silent> <leader>ol  :<C-u>CocList outline<cr>
  " Search workspace symbols.
- nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+ nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
  " Do default action for next item.
- nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+ nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
  " Do default action for previous item.
- nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+ nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 
  nmap <leader>do <Plug>(coc-codeaction)
 
@@ -533,7 +534,7 @@ autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
  autocmd filetype python nnoremap ,rf :AsyncRun -mode=term -pos=tmux python3 %<CR>
 
  nnoremap <leader>lc :source $MYVIMRC<CR>
- nnoremap <leader>ev :e $MYVIMRC<CR>
+ nnoremap <leader>oc :e $MYVIMRC<CR>
 
  " Visualize tabs and newlines
  set listchars=tab:▸\ ,eol:¬
@@ -541,7 +542,7 @@ autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
  " Color scheme (terminal)
  set background=dark
  " colorscheme oceanic_material
- colorscheme onedark
+ colorscheme nvcode
 
  " fix cursor color in gvim
  " highlight Cursor guifg=white guibg=black
@@ -594,7 +595,7 @@ endfunction
 \ "\<C-s>": 'SB',
 \ 't': 'T',
 \ },
-\ 'colorscheme': 'onedark',
+\ 'colorscheme': 'one',
 \ 'active': {
 \   'left': [ [ 'mode', 'paste' ],
 \             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],
