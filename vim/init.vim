@@ -164,7 +164,7 @@ nmap <silent> <A-w>    :BufferClose<CR>
 nmap <silent> <Leader>xu    <Plug>BufKillUndo
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 "map <leader>q gqip
 
@@ -292,7 +292,8 @@ Plug 'lervag/vimtex'
 Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/tmux-complete.vim'
-Plug 'tyru/caw.vim'
+Plug 'tpope/vim-commentary'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'tpope/vim-fugitive'
 " UI
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -795,4 +796,11 @@ lua << EOF
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
   }
+
+  require'nvim-treesitter.configs'.setup {
+    context_commentstring = {
+      enable = true
+    }
+  }
+
 EOF
