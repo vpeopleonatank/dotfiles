@@ -33,6 +33,10 @@ sudo ln -s $HOME/.dotfiles/tool/vim/lua $HOME/.config/nvim/lua
 
 sudo ln -s $HOME/.dotfiles/tool/snippets $HOME/.config/snippets
 
+
+mkdir -p $HOME/.config/jesseduffield/lazygit
+sudo ln -s $HOME/.dotfiles/tool/lazygit/config.yml $HOME/.config/jesseduffield/lazygit/config.yml
+
 # config tmux
 echo 'source ~/.dotfiles/tool/tmux/config.tmux' >$HOME/.tmux.conf
 echo "Installed Tmux configuration successfully ^~^"
