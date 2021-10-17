@@ -277,12 +277,15 @@ Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 Plug 'liuchengxu/vista.vim'
 nnoremap <leader>i :Vista<CR>
 Plug 'Asheq/close-buffers.vim'
-Plug 'thaerkh/vim-workspace'
-" let g:workspace_autosave_always = 0
-let g:workspace_autosave = 0
-let g:workspace_session_directory = $HOME . '/.cache/.nvim/sessions/'
-let g:workspace_undodir= $HOME . '/.cache/.nvim/.undodir'
-nnoremap <leader>ts :ToggleWorkspace<CR>
+" Plug 'thaerkh/vim-workspace'
+" " let g:workspace_autosave_always = 0
+" let g:workspace_autosave = 0
+" let g:workspace_session_directory = $HOME . '/.cache/.nvim/sessions/'
+" let g:workspace_undodir= $HOME . '/.cache/.nvim/.undodir'
+" nnoremap <leader>ts :ToggleWorkspace<CR>
+Plug 'rmagatti/auto-session'
+nnoremap <leader>ss :SaveSession<CR>
+nnoremap <leader>sl :RestoreSession<CR>
 
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install()  }  }
 let g:doge_doc_standard_python = 'google'
@@ -300,6 +303,11 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 
 Plug 'ChristianChiarulli/nvcode-color-schemes.vim'
 Plug 'sheerun/vim-polyglot'
+augroup filetype_jsx
+    autocmd!
+    autocmd FileType javascript set filetype=javascriptreact
+    autocmd FileType typescript set filetype=typescriptreact
+augroup END
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'niklaas/lightline-gitdiff'
@@ -485,21 +493,21 @@ syntax on
  command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
  " Show all diagnostics.
- nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
+ nnoremap <silent> <leader>ld  :<C-u>CocList diagnostics<cr>
  " Manage extensions.
  " nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
  " Show commands.
  nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
  " Find symbol of current document.
- nnoremap <silent> <leader>ol  :<C-u>CocList outline<cr>
+ nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
  " Search workspace symbols.
- nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
+ nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
  " Do default action for next item.
  nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
  " Do default action for previous item.
  nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 
- nmap <leader>do <Plug>(coc-codeaction)
+ nmap <leader>la <Plug>(coc-codeaction)
 
  " Resume latest coc list.
  " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
@@ -802,5 +810,17 @@ lua << EOF
       enable = true
     }
   }
+
+  local opts = {
+    log_level = 'info',
+    auto_session_enable_last_session = false,
+    auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
+    -- auto_session_enabled = true,
+    auto_save_enabled = false,
+    auto_restore_enabled = false,
+    -- auto_session_suppress_dirs = nil,
+  }
+
+  require('auto-session').setup(opts)
 
 EOF
