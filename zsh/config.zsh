@@ -97,7 +97,6 @@ znap source zdharma/fast-syntax-highlighting
 znap source zsh-users/zsh-completions
 znap source agkozak/zsh-z
 znap source Tarrasch/zsh-autoenv 
-znap source marzocchi/zsh-notify
 
 znap eval trapd00r/LS_COLORS '{ command -v gdircolors >/dev/null 2>&1  } && { gdircolors -b LS_COLORS } || { dircolors -b LS_COLORS }'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -121,7 +120,7 @@ command -v floaterm >/dev/null 2>&1 && EDITOR="floaterm"
 
 source $HOME/.dotfiles/tool/zsh/zaliases.zsh
 source $HOME/.dotfiles/tool/zsh/zfunctions.zsh
-source $HOME/.dotfiles/tool/zsh/zenvs.zsh
+# source $HOME/.dotfiles/tool/zsh/zenvs.zsh
 # source $HOME/.dotfiles/tool/zsh
 
 
@@ -133,5 +132,5 @@ znap eval zoxide 'zoxide init zsh'
 
 # znap eval mcfly 'mcfly init zsh'
 
-eval $(thefuck --alias f)
+# eval $(thefuck --alias f)
 
