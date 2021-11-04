@@ -302,6 +302,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 Plug 'ChristianChiarulli/nvcode-color-schemes.vim'
+Plug 'martinsione/darkplus.nvim'
 Plug 'sheerun/vim-polyglot'
 augroup filetype_jsx
     autocmd!
@@ -550,8 +551,7 @@ autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
 
  " Color scheme (terminal)
  set background=dark
- " colorscheme oceanic_material
- colorscheme nvcode
+ colorscheme darkplus
 
  " fix cursor color in gvim
  " highlight Cursor guifg=white guibg=black
