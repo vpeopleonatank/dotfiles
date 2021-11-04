@@ -150,6 +150,11 @@ map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
 
+map <c-h> <C-w>h
+map <c-k> <C-w>k
+map <c-j> <C-w>j
+map <c-l> <C-w>l
+
 " Resize window
 nnoremap <leader>[ :vertical resize -5<cr>
 nnoremap <leader>] :vertical resize +5<cr>
