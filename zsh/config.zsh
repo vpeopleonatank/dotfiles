@@ -120,7 +120,7 @@ command -v floaterm >/dev/null 2>&1 && EDITOR="floaterm"
 
 source $HOME/.dotfiles/tool/zsh/zaliases.zsh
 source $HOME/.dotfiles/tool/zsh/zfunctions.zsh
-# source $HOME/.dotfiles/tool/zsh/zenvs.zsh
+source $HOME/.dotfiles/tool/zsh/zenvs.zsh
 # source $HOME/.dotfiles/tool/zsh
 
 

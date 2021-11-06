@@ -20,7 +20,6 @@ export FZF_DEFAULT_OPTS="--height 40% --layout=reverse"
 export PAGER="bat"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export PATH=$PATH:/usr/local/go/bin
 MANPATH=/usr/local/texlive/2020/texmf-dist/doc/man:$MANPATH;
 export MANPATH
 INFOPATH=/usr/local/texlive/2020/texmf-dist/doc/info:$INFOPATH;
@@ -30,6 +29,7 @@ export PATH=$PATH:/snap/bin
 
 export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/snapd/desktop"
 
+export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
 export CHEAT_CONFIG_PATH="~/.dotfiles/tool/cheat/conf.yml"
@@ -40,6 +40,7 @@ export CUDA_HOME=/usr/local/cuda
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 # export PATH="$PATH:/home/vpoat/.cargo/bin"
 export PATH=/usr/lib/jvm/jdk-11.0.11/bin:$PATH
+export PATH=$HOME/.npm-global/bin/:$PATH
 # export PATH=/usr/lib/jvm/java-16-openjdk-amd64/bin/:$PATH
 
 
@@ -56,5 +57,3 @@ LFCD="$HOME/.config/lf/lfcd.sh"                                #  pre-built bina
 if [ -f "$LFCD"  ]; then
         source "$LFCD"
 fi
-
-source $HOME/Downloads/root/bin/thisroot.sh
