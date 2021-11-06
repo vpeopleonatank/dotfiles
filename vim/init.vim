@@ -39,7 +39,7 @@ set si "Smart indent
 set modelines=0
 
 " Show line numbers
-set rnu
+set nu rnu
 " augroup numbertoggle
 "   autocmd!
 "   autocmd BufEnter,FocusGained,InsertLeave * set rnu
