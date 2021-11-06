@@ -15,7 +15,9 @@
   },
   "python.analysis.typeCheckingMode": "off",
   "python.formatting.provider": "black",
-  "python.linting.flake8Enabled": true,
   "explorer.icon.enableNerdfont": true,
-  "snippets.textmateSnippetsRoots": ["~/.config/snippets/"]
+  "snippets.textmateSnippetsRoots": ["~/.config/snippets/"],
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.enabled": true
 }

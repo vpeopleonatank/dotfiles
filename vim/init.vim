@@ -39,12 +39,12 @@ set si "Smart indent
 set modelines=0
 
 " Show line numbers
-set nu
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set rnu
-  autocmd BufLeave,FocusLost,InsertEnter * set nornu
-augroup END
+set rnu
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * set rnu
+"   autocmd BufLeave,FocusLost,InsertEnter * set nornu
+" augroup END
 
 
 " Show file stats
