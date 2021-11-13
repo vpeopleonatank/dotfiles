@@ -40,11 +40,11 @@ set modelines=0
 
 " Show line numbers
 set nu
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set rnu
-  autocmd BufLeave,FocusLost,InsertEnter * set nornu
-augroup END
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * set rnu
+"   autocmd BufLeave,FocusLost,InsertEnter * set nornu
+" augroup END
 
 
 " Show file stats
@@ -100,7 +100,7 @@ set incsearch
 set ignorecase
 set smartcase
 " set showmatch
-map <leader><space> :let @/=''<cr> " clear search
+map <leader><space> :noh<CR>
 
 set wildmenu
 set wildmode=longest:full,full
