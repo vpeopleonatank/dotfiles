@@ -302,7 +302,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/tmux-complete.vim'
 Plug 'tpope/vim-commentary'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-Plug 'tpope/vim-fugitive'
 " UI
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
@@ -400,6 +399,13 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'tyru/open-browser.vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'weirongxu/plantuml-previewer.vim'
+
+" Git plugin
+Plug 'AndrewRadev/linediff.vim'
+Plug 'tpope/vim-fugitive'
+nmap <leader>gs :G<CR>
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
 call plug#end()
 
 filetype plugin indent on
@@ -543,7 +549,7 @@ autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
 
  inoremap {<CR>  {<CR>}<Esc>O
 
- autocmd filetype cpp nnoremap ,r :AsyncRun -mode=term -pos=tmux  g++ -std=c++14 -O2 -Wall "%" -o "%:r".bin && "./%:r".bin <CR>
+ autocmd filetype cpp nnoremap ,rr :AsyncRun -mode=term -pos=tmux  g++ -std=c++14 -O2 -Wall "%" -o "%:r".bin && "./%:r".bin <CR>
  autocmd filetype cpp nnoremap ,rf :AsyncRun -mode=term -pos=tmux "%:r".bin<CR>
  autocmd filetype cpp nnoremap ,c :AsyncRun -mode=term -pos=tmux pcm tt<CR>
  autocmd filetype python nnoremap ,rf :AsyncRun -mode=term -pos=tmux python3 %<CR>

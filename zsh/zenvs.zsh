@@ -57,4 +57,21 @@ if [ -f "$LFCD"  ]; then
         source "$LFCD"
 fi
 
-source $HOME/Downloads/root/bin/thisroot.sh
+# source $HOME/Downloads/root/bin/thisroot.sh
+
+export PATH=~/.npm-global/bin:$PATH
+
+export FZF_DEFAULT_COMMAND='fdfind'
+
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '
+export PROJECT_HOME=$HOME/Devel
+source /home/vpoat/.local/bin/virtualenvwrapper.sh
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
