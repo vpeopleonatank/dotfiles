@@ -204,7 +204,7 @@ imap <c-f> <Right>
 imap <c-a> <ESC>^i
 imap <c-e> <End>
 imap <c-g> <ESC>o
-imap <c-k> <Esc>O
+imap <c-u> <Esc>O
 
 " command line mode
 cmap <C-p> <Up>

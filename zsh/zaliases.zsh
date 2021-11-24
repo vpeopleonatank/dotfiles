@@ -3,7 +3,7 @@ alias pt="ptipython"
 
 alias g="git" lg="EDITOR=nvim lazygit"
 alias t='tmux'
-alias ez='vim ~/.zshrc'
+alias ez='nvim ~/.zshrc'
 alias lsh='source ~/.zshrc'
 alias jl='jupyter-lab'
 alias ca='conda activate'
