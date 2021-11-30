@@ -36,6 +36,7 @@ alias paste_image='xclip -selection clipboard -t image/png -o >'
 alias downsub='youtube-dl --sub-lang en --write-auto-sub --sub-format srt  --skip-download '  # Only download sub
 alias downplaylistbest='youtube-dl -f best -cit '
 alias lv=lvim
+alias qi=quite-intriguing
 
 qg() {
   git add .
@@ -67,4 +68,17 @@ source_openvino() {
   cd /opt/intel/openvino_2021/inference_engine 
   source /opt/intel/openvino_2021/bin/setupvars.sh
   cd -
+}
+
+tl() {
+  # Fuzzy-search a list of TLDR pages, starting with an optional query.
+
+  # If any arguments are passed, build parameter to pass to fzf:
+  if [ $# -gt 0 ]; then
+    fzf_args="-q $* "
+  fi
+
+  tldr --list                                                       \
+    | fzf $fzf_args --preview "echo {} | xargs tldr --color always" \
+    | xargs -r tldr
 }
