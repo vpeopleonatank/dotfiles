@@ -86,6 +86,7 @@ function zvm_after_init() {
 
   zle -N ghq-fzf
   bindkey "^]" ghq-fzf
+  bindkey '^ ' autosuggest-accept
 }
  
 znap source wfxr/forgit
