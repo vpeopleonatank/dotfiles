@@ -33,8 +33,8 @@ alias piping_help='curl https://ppng.io/help'
 alias listening_port='sudo  netstat -tulpn | grep LISTEN'
 alias paste_image='xclip -selection clipboard -t image/png -o >'
 
-alias downsub='youtube-dl --sub-lang en --write-auto-sub --sub-format srt  --skip-download '  # Only download sub
-alias downplaylistbest='youtube-dl -f best -cit '
+alias downsub='yt-dlp --sub-lang en --write-auto-sub --sub-format srt  --skip-download '  # Only download sub
+alias downplaylistbest='yt-dlp -f best -ci '
 alias lv=lvim
 alias qi=quite-intriguing
 
