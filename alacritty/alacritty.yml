@@ -82,9 +82,16 @@ colors:
     background: '0x282a36'
     foreground: '0xf8f8f2'
 
+  # cursor:
+  #   text: '#000000'
+  #   cursor: '#528bff'
   cursor:
-    text: '#000000'
-    cursor: '#528bff'
+    text: CellBackground
+    cursor: CellForeground
+  vi_mode_cursor:
+    text: CellBackground
+    cursor: CellForeground
+
 
     # style:
     #   blink_interval: 10000
