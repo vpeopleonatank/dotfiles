@@ -264,7 +264,9 @@ let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'htmldjango']}
 Plug 'mg979/vim-visual-multi'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
+" Plug 'steelsojka/pears.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 noremap <leader>mo :MarkdownPreview<CR>
 noremap <leader>mc :MarkdownPreviewStop<CR>
@@ -847,5 +849,24 @@ lua << EOF
   }
 
   require('auto-session').setup(opts)
+  local remap = vim.api.nvim_set_keymap
+  local npairs = require('nvim-autopairs')
+  npairs.setup({map_cr=false})
+
+  -- skip it, if you use another global object
+  _G.MUtils= {}
+
+  MUtils.completion_confirm=function()
+    if vim.fn.pumvisible() ~= 0  then
+      return vim.fn["coc#_select_confirm"]()
+    else
+      return npairs.autopairs_cr()
+    end
+  end
+
+  remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
+  --require('nvim-autopairs').setup{
+  --  map_cr = false
+  --}
 
 EOF
