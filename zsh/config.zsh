@@ -42,9 +42,9 @@ source $HOME/.zsh/zsh-snap/znap.zsh
 
 znap source romkatv/powerlevel10k
 znap source jeffreytse/zsh-vi-mode
+znap source zsh-users/zsh-autosuggestions  # On same line
 function zvm_after_init() {
   ZSH_AUTOSUGGEST_STRATEGY=( history  )
-  znap source zsh-users/zsh-autosuggestions  # On same line
   export ZSH_AUTO_SUGGEST_USE_ASYNC=true
   znap eval junegunn/fzf 'command -v fzf >/dev/null 2>&1 || {./install --bin} >/dev/null'
   znap source junegunn/fzf shell/{completion,key-bindings}.zsh

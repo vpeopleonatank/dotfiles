@@ -408,6 +408,9 @@ Plug 'tpope/vim-fugitive'
 nmap <leader>gs :G<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
+
+Plug 'folke/zen-mode.nvim'
+nmap <leader>z :ZenMode<CR>
 call plug#end()
 
 filetype plugin indent on
@@ -868,5 +871,6 @@ lua << EOF
   --require('nvim-autopairs').setup{
   --  map_cr = false
   --}
+  require("zen-mode").setup {}
 
 EOF
