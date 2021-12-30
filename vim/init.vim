@@ -554,7 +554,7 @@ autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
 
  inoremap {<CR>  {<CR>}<Esc>O
 
- autocmd filetype cpp nnoremap ,rr :AsyncRun -mode=term -pos=tmux  g++ -std=c++14 -O2 -Wall "%" -o "%:r".bin && "./%:r".bin <CR>
+ autocmd filetype cpp nnoremap ,rr :AsyncRun -mode=term -pos=tmux  g++ -std=c++14 -O2 -Wall "%" -o "%:r".bin && "%:r".bin <CR>
  autocmd filetype cpp nnoremap ,rf :AsyncRun -mode=term -pos=tmux "%:r".bin<CR>
  autocmd filetype cpp nnoremap ,c :AsyncRun -mode=term -pos=tmux pcm tt<CR>
  autocmd filetype python nnoremap ,rf :AsyncRun -mode=term -pos=tmux python3 %<CR>
