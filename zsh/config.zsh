@@ -94,7 +94,7 @@ znap source zpm-zsh/colors
 znap source zpm-zsh/ls
 znap source hlissner/zsh-autopair
 znap source MichaelAquilina/zsh-you-should-use
-znap source zdharma/fast-syntax-highlighting
+znap source zdharma-continuum/fast-syntax-highlighting
 znap source zsh-users/zsh-completions
 znap source agkozak/zsh-z
 znap source Tarrasch/zsh-autoenv 

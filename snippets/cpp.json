@@ -14,7 +14,7 @@
       "",
       "int main() {",
       "  fastio;",
-      "  ${1:// code goes here}",
+      "  ${1:}",
       "  return 0;",
       "}"
     ],
@@ -27,10 +27,32 @@
       "cin >> ${1:t};",
       "",
       "while(${1:t}--) {",
-      "   ${2:// code goes here}",
+      "   ${2:}",
       "}"
     ],
     "description": "Input test cases"
+  },
+  "Create template for usaco" : {
+    "prefix": "cpus",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "",
+      "using namespace std;",
+      "",
+       "void setIO(string s, int status) {",
+        "  if (status) {",
+        "    freopen((s + \".in\").c_str(), \"r\", stdin);",
+        "    freopen((s + \".out\").c_str(), \"w\", stdout);",
+        "  }",
+      "}",
+
+      "",
+      "int main() {",
+      "  setIO(\"${1:problemname}\", 0);",
+      "  return 0;",
+      "}"
+    ],
+    "description": "Creates a quick start template"
   }
 }
 
