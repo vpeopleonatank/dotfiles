@@ -3,11 +3,9 @@ set -u
 
 # config vim
 echo 'source $HOME/.dotfiles/tool/vim/.vimrc' >$HOME/.vimrc
-# if [ ! -d $HOME/.config/nvim ]; then
-#     echo "Neovim setup"
-#     mkdir $HOME/.config/nvim
-# fi
-#echo -e "set runtimepath^=~/.vim runtimepath+=~/.vim/after\nlet &packpath = &runtimepath\nsource $HOME/.dotfiles/tool/vim/config.vim" >$HOME/.config/nvim/init.vim
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "PlugInstall for vim"
 vim +PlugInstall +qall > /dev/null
@@ -41,21 +39,6 @@ sudo ln -s $HOME/.dotfiles/tool/lazygit/config.yml $HOME/.config/jesseduffield/l
 echo 'source ~/.dotfiles/tool/tmux/config.tmux' >$HOME/.tmux.conf
 echo "Installed Tmux configuration successfully ^~^"
 
-# install oh-my-zsh
-if [ ! -d $HOME/.dotfiles/oh-my-zsh ]; then
-    echo "install Oh-my-zsh"
-    git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.dotfiles/oh-my-zsh
-else
-    echo "Oh-my-zsh is installed"
-fi
-# install powerlevel9k
-# if [ ! -d $HOME/.dotfiles/oh-my-zsh/themes/powerlevel9k ]; then
-#     echo "install powerlevel9k"
-#     git clone https://github.com/Powerlevel9k/powerlevel9k.git $HOME/.dotfiles/oh-my-zsh/themes/powerlevel9k
-# else
-#     echo "Powerlevel9k is installed"
-# fi
-
 # install fonts
 if [ ! -d $HOME/.dotfiles/fonts ]; then
     echo "install fonts"
@@ -65,49 +48,6 @@ else
     echo "fonts is installed"
 fi
 
-
-# install zsh-vi-mode
-if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
-    echo "install zsh-vi-mode"
-    git clone https://github.com/jeffreytse/zsh-vi-mode \
-      $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-vi-mode
-else
-    echo "zsh-vi-mode is installed"
-fi
-
-
-# install syntax-highlighting
-if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
-    echo "install syntax-highlighting"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-else
-    echo "syntax_highlighting is installed"
-fi
-# autosuggestions
-if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-    echo "install autosuggestions"
-    git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-autosuggestions
-else
-    echo "autosuggestions is installed"
-fi
-
-
-# install syntax-highlighting
-if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zshmarks ]; then
-    echo "install zshmarks"
-    git clone https://github.com/jocelynmallon/zshmarks $HOME/.dotfiles/oh-my-zsh/custom/plugins/zshmarks
-else
-    echo "zshmarks is installed"
-fi
-
-# zsh-z
-
-if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-z ]; then
-    echo "install zsh-z"
-    git clone  https://github.com/agkozak/zsh-z $HOME/.dotfiles/oh-my-zsh/custom/plugins/zsh-z
-else
-    echo "zsh-z is installed"
-fi
 # nodejs
 if [ ! -d $HOME/.dotfiles/nodejs/bin ]; then
     echo "install nodejs"
@@ -116,18 +56,6 @@ if [ ! -d $HOME/.dotfiles/nodejs/bin ]; then
 else
     echo "node is installed"
 fi
-# fzf
-if [ ! -d $HOME/.dotfiles/oh-my-zsh/custom/plugins/fzf ]; then
-    echo "install FZF"
-    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.dotfiles/oh-my-zsh/custom/plugins/fzf
-    $HOME/.dotfiles/oh-my-zsh/custom/plugins/fzf/install
-else
-    echo "FZF is installed"
-fi
-
-export ZSH=$HOME/.dotfiles/oh-my-zsh
-$HOME/.dotfiles/oh-my-zsh/tools/install.sh
-echo 'Complete OH MY ZSH'
 echo 'source $HOME/.dotfiles/tool/zsh/config.zsh' >$HOME/.zshrc
 
 # install powerlevel10k for zsh
@@ -166,17 +94,6 @@ fi
 ln -s ~/.dotfiles/tool/kitty/kitty.conf ~/.config/kitty/kitty.conf
 
 
-# script
-# if [ ! -d $HOME/.scripts ]; then
-#   mkdir $HOME/.scripts
-# else
-#   echo "$HOME/.scripts dir existed"
-# fi
-# ln -s $HOME/.dotfiles/tool/scripts/generate_template.sh $HOME/.scripts/generate_template.sh
-# ln -s /home/vpoat/.dotfiles/tool/scripts/download_prob.py $HOME/.scripts/download_prob.py
-# ln -s /home/vpoat/.dotfiles/tool/scripts/make_prob.sh $HOME/.scripts/make_prob.sh
-# ln -s /home/vpoat/.dotfiles/tool/scripts/grader.sh $HOME/.scripts/grader.sh
-
 
 if [ ! -d $HOME/.vim/UltiSnips ]; then
   mkdir $HOME/.vim/UltiSnips
@@ -202,13 +119,6 @@ echo "turn off tmux auto restore"
 touch ~/tmux_no_auto_restore
 
 function install_fonts() {
-
-    # Install JetBrainsMono font
-    # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
-
-    # Install FiraCode font
-    #!/usr/bin/env bash
-
     fonts_dir="${HOME}/.local/share/fonts"
     if [ ! -d "${fonts_dir}" ]; then
       echo "mkdir -p $fonts_dir"
@@ -231,18 +141,6 @@ function install_fonts() {
     echo "Found existing file $file_path"
       fi;
     done
-
-    # for type in Bold Light Medium Regular Retina; do
-    #   file_path="${HOME}/.local/share/fonts/FiraCode-${type}.ttf"
-    #   file_url="https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true"
-    #   if [ ! -e "${file_path}" ]; then
-    #       echo "wget -O $file_path $file_url"
-    #       wget -O "${file_path}" "${file_url}"
-    #   else
-    # echo "Found existing file $file_path"
-    #   fi;
-    # done
-
     echo "fc-cache -f"
     sudo fc-cache -f
 }
@@ -281,9 +179,9 @@ install_fonts
 # change_gnome_tittle_bar
 
 # Install gdb-dashboard
-echo "Install gdb-dashboard"
-pip install pygments
-wget -P ~ https://git.io/.gdbinit
-mkdir $HOME/.gdbinit.d/
-touch $HOME/.gdbinit.d/init
-echo "dashboard -layout  expressions history stack breakpoints source variables" > $HOME/.gdbinit.d/init
+# echo "Install gdb-dashboard"
+# pip install pygments
+# wget -P ~ https://git.io/.gdbinit
+# mkdir $HOME/.gdbinit.d/
+# touch $HOME/.gdbinit.d/init
+# echo "dashboard -layout  expressions history stack breakpoints source variables" > $HOME/.gdbinit.d/init
