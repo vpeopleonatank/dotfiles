@@ -49,6 +49,7 @@
       "",
       "int main() {",
       "  setIO(\"${1:problemname}\", 0);",
+      "  ${2}",
       "  return 0;",
       "}"
     ],
