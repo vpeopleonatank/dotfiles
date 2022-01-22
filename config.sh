@@ -59,7 +59,11 @@ fi
 echo 'source $HOME/.dotfiles/tool/zsh/config.zsh' >$HOME/.zshrc
 
 # install powerlevel10k for zsh
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+if [ ! -d $HOME/powerlevel10k ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+else
+    echo "powerlevel10k is installed"
+fi
 exec $(which zsh)
 source $HOME/.zshrc
 p10k configure
