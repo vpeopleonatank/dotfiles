@@ -4,12 +4,12 @@ set -u
 # config vim
 echo 'source $HOME/.dotfiles/tool/vim/.vimrc' >$HOME/.vimrc
 
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-echo "PlugInstall for vim"
-vim +PlugInstall +qall > /dev/null
-echo "Installed Vim configuration successfully ^~^"
+#curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#
+#echo "PlugInstall for vim"
+#vim +PlugInstall +qall > /dev/null
+#echo "Installed Vim configuration successfully ^~^"
 
 echo "Symlink vim and neovim 's coc-settings.json"
 # sudo ln -s $HOME/.dotfiles/tool/vim/coc-settings-nvim.json $HOME/.config/nvim/coc-settings.json
