@@ -257,6 +257,7 @@ set -g @plugin 'tmux-plugins/tmux-cowboy'  # Kill with prefix + *
 set -g @continuum-save-interval '0'
 set -g @continuum-restore 'on'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+set -g @plugin 'jaclu/tmux-menus'
 # set -g @plugin 'tmux-plugins/tmux-net-speed'
 # set -g @plugin 'samoshkin/tmux-plugin-sysstat'
 
