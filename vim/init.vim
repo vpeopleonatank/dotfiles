@@ -570,6 +570,7 @@ autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
  set background=dark
  " colorscheme darkplus
 let g:onedark_style = 'warm'
+let g:tokyonight_style = "night"
  colorscheme tokyonight
 
  " fix cursor color in gvim
