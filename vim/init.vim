@@ -309,6 +309,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 
 Plug 'ChristianChiarulli/nvcode-color-schemes.vim'
 Plug 'navarasu/onedark.nvim'
+Plug 'folke/tokyonight.nvim'
 " Plug 'sheerun/vim-polyglot'
 " augroup filetype_jsx
 "     autocmd!
@@ -569,7 +570,7 @@ autocmd CursorMoved \[coc-explorer\]* :call <SID>ShowFilename()
  set background=dark
  " colorscheme darkplus
 let g:onedark_style = 'warm'
- colorscheme onedark
+ colorscheme tokyonight
 
  " fix cursor color in gvim
  " highlight Cursor guifg=white guibg=black
@@ -622,7 +623,7 @@ endfunction
 \ "\<C-s>": 'SB',
 \ 't': 'T',
 \ },
-\ 'colorscheme': 'one',
+\ 'colorscheme': 'tokyonight',
 \ 'active': {
 \   'left': [ [ 'mode', 'paste' ],
 \             [ 'currentfunction', 'readonly', 'filename', 'modified', 'gitstatus', 'cocstatus', 'blame' ],
