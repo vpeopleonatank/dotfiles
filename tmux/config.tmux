@@ -30,7 +30,7 @@ setw -q -g utf8 on
 set -g history-limit 10000                 # boost history
 
 # edit configuration
-bind e new-window -n "~/.tmux.conf" "EDITOR=\${EDITOR//mvim/vim} && EDITOR=\${EDITOR//gvim/vim} && \${EDITOR:-vim} ~/.tmux.conf && tmux source ~/.tmux.conf && tmux display \"~/.tmux.conf sourced\""
+bind e new-window -n "~/.tmux.conf" "\${EDITOR:-nvim} ~/.tmux.conf && tmux source ~/.tmux.conf && tmux display \"~/.tmux.conf sourced\""
 
 # reload configuration
 bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
@@ -144,24 +144,7 @@ bind U run "cut -c3- ~/.tmux.conf | sh -s _urlview #{pane_id}"
 
 bind F run "cut -c3- ~/.tmux.conf | sh -s _fpp #{pane_id}"
 
-
-
-
 # -- vim-tmux-navigator -------------------------------------------
-
-# Smart pane switching with awareness of Vim splits.
-# See: https://github.com/christoomey/vim-tmux-navigator
-#is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-#    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-#bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
-#bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
-#bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
-#bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
-#tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-#if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-#    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
-#if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-#    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
 
 bind P paste-buffer
 bind-key -T copy-mode-vi v send-keys -X begin-selection
@@ -176,7 +159,6 @@ bind-key -T copy-mode-vi 'C-k' select-pane -U
 bind-key -T copy-mode-vi 'C-l' select-pane -R
 bind-key -T copy-mode-vi 'C-\' select-pane -l
 
-
 # monitor windows for activity
 setw -g monitor-activity on
 
@@ -186,34 +168,6 @@ set -sg escape-time 0
 # display pane numbers for longer
 set -g display-panes-time 2000
 
-# set -g status-left-length 20
-# set -g status-left '[#S:#H]'
-# set -g status-left '#{?pane_input_off,#[fg=colour160],#[fg=colour136]}[#[fg=colour136]#S:#I.#P#{?pane_input_off,#[fg=colour160],#[fg=colour136]}] '
-# set -g status-right '#[fg=colour33]%d %b %Y #{?client_prefix,#[fg=colour160],#[fg=colour61]}- #[fg=colour64]%I:%M %p #{?client_prefix,#[fg=colour160],#[fg=colour61]}- #[fg=colour37]#([ -f $HOME/.name ] && cat $HOME/.name || hostname)'
-
-# increase scrollback lines
-set -g history-limit 65536
-
-# keybinding to clear history
-bind C-k clear-history \; display-message "history cleared"
-
-# C-b ! breaks current pane into separate window
-# join a pane/window from the current session into the current window
-bind @ command-prompt -p "create pane from:" "join-pane -s ':%%'"
-
-# reload the .tmux.conf file with Ctrl-r
-bind C-r source-file ~/.tmux.conf \; display-message "configuration reloaded"
-
-# toggle passthrough of prefix
-bind P if-shell "[ \"$(tmux show-options -g prefix)\" = \"prefix C-a\" ]" '\
-    set -g prefix C-b; display-message "passthrough enabled"; refresh-client -S; \
-    ' '\
-    set -g prefix C-a; display-message "passthrough disabled"; refresh-client -S; \
-    '
-# set -g status-left '[#S:#H]'
-set -g status-left '#{?pane_input_off,#[fg=colour160],#[fg=colour136]}[#[fg=colour136]#S:#I.#P#{?pane_input_off,#[fg=colour160],#[fg=colour136]}] '
-set -g status-right '#[fg=colour33]%d %b %Y #{?client_prefix,#[fg=colour160],#[fg=colour61]}- #[fg=colour64]%I:%M %p #{?client_prefix,#[fg=colour160],#[fg=colour61]}- #[fg=colour37]#([ -f $HOME/.name ] && cat $HOME/.name || hostname)'
-
 # increase scrollback lines
 set -g history-limit 65536
 
@@ -234,23 +188,56 @@ bind P if-shell "[ \"$(tmux show-options -g prefix)\" = \"prefix C-a\" ]" '\
     set -g prefix C-a; display-message "passthrough disabled"; refresh-client -S; \
     '
 
-#### color (Solarized 256)
-set -g status-style bg=colour235,fg=colour136
-setw -g window-status-style fg=colour244
-setw -g window-status-current-style fg=colour166
-setw -g window-status-activity-style fg=colour61
-setw -g window-status-bell-style fg=colour61
-set -g pane-border-style fg=colour235
-set -g pane-active-border-style fg=colour240
-set -g message-style bg=colour235,fg=colour166
+# increase scrollback lines
+set -g history-limit 65536
 
-# pane number display
-set -g display-panes-active-colour colour166 #blue
-set -g display-panes-colour colour33 #orange
+# keybinding to clear history
+bind C-k clear-history \; display-message "history cleared"
 
-# clock
-setw -g clock-mode-colour colour64 #green
+# C-b ! breaks current pane into separate window
+# join a pane/window from the current session into the current window
+bind @ command-prompt -p "create pane from:" "join-pane -s ':%%'"
 
+# reload the .tmux.conf file with Ctrl-r
+bind C-r source-file ~/.tmux.conf \; display-message "configuration reloaded"
+
+# toggle passthrough of prefix
+bind P if-shell "[ \"$(tmux show-options -g prefix)\" = \"prefix C-a\" ]" '\
+    set -g prefix C-b; display-message "passthrough enabled"; refresh-client -S; \
+    ' '\
+    set -g prefix C-a; display-message "passthrough disabled"; refresh-client -S; \
+    '
+
+# Tokyonight night theme
+set -g mode-style "fg=#7aa2f7,bg=#3b4261"
+
+set -g message-style "fg=#7aa2f7,bg=#3b4261"
+set -g message-command-style "fg=#7aa2f7,bg=#3b4261"
+
+set -g pane-border-style "fg=#3b4261"
+set -g pane-active-border-style "fg=#7aa2f7"
+
+set -g status "on"
+set -g status-justify "left"
+
+set -g status-style "fg=#7aa2f7,bg=#1f2335"
+
+set -g status-left-length "100"
+set -g status-right-length "100"
+
+set -g status-left-style NONE
+set -g status-right-style NONE
+
+set -g status-left "#[fg=#15161E,bg=#7aa2f7,bold] #S #[fg=#7aa2f7,bg=#1f2335,nobold,nounderscore,noitalics]"
+set -g status-right "#[fg=#1f2335,bg=#1f2335,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#1f2335] #{prefix_highlight} #[fg=#3b4261,bg=#1f2335,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261] %Y-%m-%d  %I:%M %p #[fg=#7aa2f7,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#15161E,bg=#7aa2f7,bold] #h "
+
+setw -g window-status-activity-style "underscore,fg=#a9b1d6,bg=#1f2335"
+setw -g window-status-separator ""
+setw -g window-status-style "NONE,fg=#a9b1d6,bg=#1f2335"
+setw -g window-status-format "#[fg=#1f2335,bg=#1f2335,nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=#1f2335,bg=#1f2335,nobold,nounderscore,noitalics]"
+setw -g window-status-current-format "#[fg=#1f2335,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261,bold] #I  #W #F #[fg=#3b4261,bg=#1f2335,nobold,nounderscore,noitalics]"
+
+# Plugin 
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-cowboy'  # Kill with prefix + *
@@ -258,20 +245,6 @@ set -g @continuum-save-interval '0'
 set -g @continuum-restore 'on'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 set -g @plugin 'jaclu/tmux-menus'
-# set -g @plugin 'tmux-plugins/tmux-net-speed'
-# set -g @plugin 'samoshkin/tmux-plugin-sysstat'
-
-set -g @plugin 'dracula/tmux'
-set -g @dracula-show-powerline false
-set -g @dracula-military-time true
-set -g @dracula-show-flags false
-set -g @dracula-show-left-icon session
-set -g @dracula-left-icon-padding 1
-set -g @dracula-border-contrast true
-set -g @dracula-day-month true
-set -g @dracula-plugins "cpu-usage ram-usage time"
-
-
 
 set -g @continuum-restore 'on'
 
