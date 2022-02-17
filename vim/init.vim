@@ -412,6 +412,8 @@ nmap <leader>gf :diffget //2<CR>
 
 Plug 'folke/zen-mode.nvim'
 nmap <leader>z :ZenMode<CR>
+
+Plug 'dstein64/vim-startuptime'
 call plug#end()
 
 filetype plugin indent on

@@ -1,9 +1,3 @@
-fg() {
-  git add .
-  git commit -m "update"
-  git push
-}
-
 get_compile_command() {
   mkdir build; cd build;
   cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
