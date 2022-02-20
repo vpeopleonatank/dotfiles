@@ -40,6 +40,7 @@
       "using namespace std;",
       "",
        "void setIO(string s, int inputFromFile) {",
+          "ios_base::sync_with_stdio(0); cin.tie(0);",
         "  if (inputFromFile) {",
         "    freopen((s + \".in\").c_str(), \"r\", stdin);",
         "    freopen((s + \".out\").c_str(), \"w\", stdout);",
