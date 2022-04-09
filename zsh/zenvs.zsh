@@ -75,3 +75,4 @@ eval "$(pyenv init --path)"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
