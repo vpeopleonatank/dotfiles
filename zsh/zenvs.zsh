@@ -36,8 +36,8 @@ export CHEAT_CONFIG_PATH="~/.dotfiles/tool/cheat/conf.yml"
 export CHEAT_USE_FZF=true
 export GLFW_IM_MODULE=ibus
 
-export CUDA_HOME=/usr/local/cuda
-export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+# export CUDA_HOME=/usr/local/cuda
+# export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 # export PATH="$PATH:/home/vpoat/.cargo/bin"
 export PATH=/usr/lib/jvm/jdk-11.0.11/bin:$PATH
 # export PATH=/usr/lib/jvm/java-16-openjdk-amd64/bin/:$PATH

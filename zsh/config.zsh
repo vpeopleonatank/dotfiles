@@ -138,9 +138,21 @@ eval $(thefuck --alias f)
 
 function _switch_cuda {
    v=$1
-   export PATH=$PATH:/usr/local/cuda-$v/bin
-   export CUDADIR=/usr/local/cuda-$v
-   export CUDA_HOME=/usr/local/cuda-$v
-   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-$v/lib64
+   # export PATH=$PATH:/usr/local/cuda-$v/bin
+   # export CUDADIR=/usr/local/cuda-$v
+   # export CUDA_HOME=/usr/local/cuda-$v
+   # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-$v/lib64
+   export PATH=$PATH:/usr/lib/cuda/bin
+   export CUDADIR=/usr/lib/cuda
+   export CUDA_HOME=/usr/lib/cuda
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/cuda/lib64
 }
-_switch_cuda 10.2
+# _switch_cuda 10.1
+
+function tel {
+  arg=$1
+  add_p=$(echo $arg | cut -d "/" -f 3)
+  add=$(echo $add_p | cut -d ":" -f 1)
+  port=$(echo $add_p | cut -d ":" -f 2)
+  telnet $add $port
+}
