@@ -40,14 +40,8 @@ cd git-*
 make prefix=/usr/local/
 sudo make prefix=/usr/local install
 
-### Visualization
-
-
-<img src='./docs/plot.png'>
-
-### CLI tools
-```
-fzf
-zoxide
-pet
+### Neovim common command
+- Diff view current file with it in another branch
+```bash
+:DiffviewOpen [branch_name]  -uno -- %
 ```
