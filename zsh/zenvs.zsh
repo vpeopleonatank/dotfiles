@@ -25,8 +25,6 @@ export PATH=$PATH:/snap/bin
 
 export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/snapd/desktop"
 
-export PATH=$PATH:$(go env GOPATH)/bin
-export GOPATH=$(go env GOPATH)
 export CHEAT_CONFIG_PATH="~/.dotfiles/tool/cheat/conf.yml"
 export CHEAT_USE_FZF=true
 export GLFW_IM_MODULE=ibus
