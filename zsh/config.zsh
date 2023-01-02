@@ -109,7 +109,10 @@ source $HOME/.dotfiles/tool/zsh/zaliases.zsh
 source $HOME/.dotfiles/tool/zsh/zfunctions.zsh
 source $HOME/.dotfiles/tool/zsh/zenvs.zsh
 
-znap eval zoxide 'zoxide init zsh'
+if [ "$(command -v zoxide)" ]
+then
+  znap eval zoxide 'zoxide init zsh'
+fi
 
 function _switch_cuda {
    v=$1
