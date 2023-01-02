@@ -46,17 +46,7 @@ function install_zoxide() {
   cargo install zoxide --locked
 }
 
-command_exists() {
-    hash "$1" &>/dev/null
-}
-
-# install vim stable
-if command_exists vim; then
-    echo "vim is installed"
-else
-    echo "require vim but it's not installed. Install it first"
-    apt-get install -y vim vim-gtk3
-fi
+sudo apt install tmux python3-dev python3-pip wget curl vim vim-gtk3 -y
 
 # install vim-plug for vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -70,7 +60,6 @@ if command_exists snap; then
     snap install --beta nvim --classic
 fi
 
-sudo apt install tmux python3-dev python3-pip wget -y
 pip3 install neovim
 install_nodejs
 # Install pyenv
