@@ -1,11 +1,6 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-# source $HOME/.dotfiles/tool/zsh/config.zsh
 
 # Zstyles
 zstyle ':autocomplete:tab:*' insert-unambiguous yes # Make Tab first insert any common substring, before inserting full completions
@@ -102,16 +97,6 @@ znap source marzocchi/zsh-notify
 
 znap eval trapd00r/LS_COLORS '{ command -v gdircolors >/dev/null 2>&1  } && { gdircolors -b LS_COLORS } || { dircolors -b LS_COLORS }'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# znap eval fuck 'thefuck --alias'
-# znap eval pip 'python3 -m pip completion --zsh'
-# znap eval kitty 'kitty + complete setup zsh'
-# 
-
-# Load the aliases and custon functions and some:
-# for file in ~/dotfiles/zsh/{zaliases,zfunctions}; do
-# 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
-# done
-# unset file
 
 EDITOR="nvim"
 command -v floaterm >/dev/null 2>&1 && EDITOR="floaterm"
@@ -123,25 +108,11 @@ command -v floaterm >/dev/null 2>&1 && EDITOR="floaterm"
 source $HOME/.dotfiles/tool/zsh/zaliases.zsh
 source $HOME/.dotfiles/tool/zsh/zfunctions.zsh
 source $HOME/.dotfiles/tool/zsh/zenvs.zsh
-# source $HOME/.dotfiles/tool/zsh
-
-
-
-# eval "$(mcfly init zsh)"
-# eval "$(zoxide init zsh)"
 
 znap eval zoxide 'zoxide init zsh'
 
-# znap eval mcfly 'mcfly init zsh'
-
-eval $(thefuck --alias f)
-
 function _switch_cuda {
    v=$1
-   # export PATH=$PATH:/usr/local/cuda-$v/bin
-   # export CUDADIR=/usr/local/cuda-$v
-   # export CUDA_HOME=/usr/local/cuda-$v
-   # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-$v/lib64
    export PATH=$PATH:/usr/lib/cuda/bin
    export CUDADIR=/usr/lib/cuda
    export CUDA_HOME=/usr/lib/cuda

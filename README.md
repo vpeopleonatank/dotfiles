@@ -1,17 +1,36 @@
 # dotfiles
-A set of vim/nvim, zsh, and tmux configuration files.
+A set of nvim, lvim, zsh, and tmux configuration files.
 
 ### Basic Installation
 
-Dotfiles is installed by running one of the following commands in your terminal. You can install this via the command-line with `git`.
+- Install git:
 ```bash
-git clone https://github.com/vpeopleonatank/dotfiles.git $HOME/.dotfiles/tool
-bash $HOME/.dotfiles/tool/config.sh
-
-For detail:
-    if you not in ['vim/nvim', 'zsh', 'tmux', 'vim-plug', 'node']:
-        sudo bash $HOME/.dotfiles/tool/install.sh
+sudo apt install git -y
 ```
+then install zsh and powerline10k, logout and relogin user to apply default shell to zsh,(make sure after this step, zsh is default shell)
+```bash
+mkdir -p $HOME/.dotfiles/tool
+git clone https://github.com/vpeopleonatank/dotfiles.git $HOME/.dotfiles/tool
+bash $HOME/.dotfiles/tool/setup_zsh.sh
+
+```
+- Install cli programs (tmux, python3, nodejs, go, lazygit, lazydocker, rust, ripgrep, bat, exa, fdfind, neovim, kitty terminal)
+```bash
+sudo bash $HOME/.dotfiles/tool/install.sh
+
+```
+- Symlink and install neovim 's plugins
+```bash
+sudo bash $HOME/.dotfiles/tool/config.sh
+
+```
+After running this step, type `tmux` then Press `Ctrl + q + I` to install tmux 's plugins
+
+- Install lunarvim
+```bash
+LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+```
+
 ### Visualization
 
 
