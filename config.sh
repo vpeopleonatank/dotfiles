@@ -38,7 +38,7 @@ fi
 echo 'source ~/.dotfiles/tool/tmux/config.tmux' >$HOME/.tmux.conf
 
 echo "Symlink Tmux configuration successfully ^~^"
-if [ ! -d $HOME/.config/jesseduffield/lazygit ]; then
+if [ ! -d $HOME/.config/jesseduffield/lazygit ];
 then
   mkdir -p $HOME/.config/jesseduffield/lazygit
 fi
