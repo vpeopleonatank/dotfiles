@@ -42,6 +42,10 @@ function install_fdfind() {
   cargo install fd-find
 }
 
+function install_zoxide() {
+  cargo install zoxide --locked
+}
+
 command_exists() {
     hash "$1" &>/dev/null
 }
@@ -84,5 +88,6 @@ install_ripgrep
 install_bat
 install_exa
 install_fdfind
+install_zoxide
 install_neovim
 install_kitty

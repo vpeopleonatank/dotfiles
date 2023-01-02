@@ -93,7 +93,7 @@ znap source zdharma-continuum/fast-syntax-highlighting
 znap source zsh-users/zsh-completions
 znap source agkozak/zsh-z
 znap source Tarrasch/zsh-autoenv 
-znap source marzocchi/zsh-notify
+#znap source marzocchi/zsh-notify
 
 znap eval trapd00r/LS_COLORS '{ command -v gdircolors >/dev/null 2>&1  } && { gdircolors -b LS_COLORS } || { dircolors -b LS_COLORS }'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
