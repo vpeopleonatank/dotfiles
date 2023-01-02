@@ -4,6 +4,10 @@ function install_nodejs() {
 }
 
 function install_go() {
+  if [ ! -d "$HOME/.local/bin/" ]
+  then
+    mkdir -p "$HOME/.local/bin/" 
+  fi
   curl -sL -o ~/.local/bin/gvm https://github.com/andrewkroh/gvm/releases/download/v0.5.0/gvm-linux-amd64
   sudo chmod +x ~/.local/bin/gvm
   eval "$(gvm 1.19.4)"
