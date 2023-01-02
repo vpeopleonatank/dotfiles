@@ -1,6 +1,7 @@
 function install_nodejs() {
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
   nvm install node # "node" is an alias for the latest version
+  npm install --global yarn
 }
 
 function install_go() {
@@ -59,6 +60,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 pip3 install neovim
+sudo snap install universal-ctags
 install_nodejs
 # Install pyenv
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
