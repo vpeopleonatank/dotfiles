@@ -55,11 +55,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-if command_exists snap; then
-    echo "Snap install"
-    snap install --beta nvim --classic
-fi
-
 pip3 install neovim
 install_nodejs
 # Install pyenv
