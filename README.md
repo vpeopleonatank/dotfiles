@@ -17,7 +17,7 @@ bash $HOME/.dotfiles/tool/setup_zsh.sh
 ```
 - Install cli programs (tmux, python3, nodejs, go, lazygit, lazydocker, rust, ripgrep, bat, exa, fdfind, zoxide, neovim, kitty terminal)
 ```bash
-sudo bash $HOME/.dotfiles/tool/install.sh
+bash $HOME/.dotfiles/tool/install.sh
 
 ```
 - Symlink and install neovim 's plugins
