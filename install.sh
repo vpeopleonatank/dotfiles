@@ -1,6 +1,7 @@
 function install_nodejs() {
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-  source ~/.zshrc
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
   nvm install node # "node" is an alias for the latest version
   npm install --global yarn
 }
@@ -13,11 +14,11 @@ function install_go() {
   curl -sL -o ~/.local/bin/gvm https://github.com/andrewkroh/gvm/releases/download/v0.5.0/gvm-linux-amd64
   sudo chmod +x ~/.local/bin/gvm
   eval "$(gvm 1.19.4)"
-  go version
 }
 
 function install_rust() {
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  source $HOME/.cargo/env
 }
 
 function install_neovim() {
