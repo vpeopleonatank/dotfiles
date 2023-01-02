@@ -50,7 +50,7 @@ function install_zoxide() {
   cargo install zoxide --locked
 }
 
-sudo apt install tmux python3-dev python3-pip wget curl vim vim-gtk3 -y
+sudo apt install tmux python3-dev python3-pip wget curl vim vim-gtk3 xclip -y
 
 # install vim-plug for vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
