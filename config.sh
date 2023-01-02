@@ -26,6 +26,7 @@ sudo ln -s $HOME/.dotfiles/tool/vim/lua $HOME/.config/nvim/lua
 sudo ln -s $HOME/.dotfiles/tool/snippets $HOME/.config/snippets
 echo "Install neovim Plugins"
 nvim +PlugInstall +qa
+nvim +"CocInstall coc-explorer coc-json coc-tsserver"
 
 # config tmux
 if [ ! -d $HOME/.tmux/plugins/tpm ]; then
