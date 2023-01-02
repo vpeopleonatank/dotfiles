@@ -9,7 +9,6 @@ sudo apt install git -y
 ```
 then install zsh and powerline10k, logout and relogin user to apply default shell to zsh,(make sure after this step, zsh is default shell)
 ```bash
-mkdir -p $HOME/.dotfiles/tool
 git clone https://github.com/vpeopleonatank/dotfiles.git $HOME/.dotfiles/tool
 bash $HOME/.dotfiles/tool/setup_zsh.sh
 
