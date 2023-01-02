@@ -31,6 +31,14 @@ After running this step, type `tmux` then Press `Ctrl + q + I` to install tmux '
 ```bash
 LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
+### Install git from source
+sudo apt-get install libcurl4-openssl-dev -y
+cd /tmp
+curl -o git.tar.gz https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.38.1.tar.gz
+tar -zxf git.tar.gz
+cd git-*
+make prefix=/usr/local/
+sudo make prefix=/usr/local install
 
 ### Visualization
 
