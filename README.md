@@ -22,7 +22,7 @@ bash $HOME/.dotfiles/tool/install.sh
 ```
 - Symlink and install neovim 's plugins
 ```bash
-sudo bash $HOME/.dotfiles/tool/config.sh
+bash $HOME/.dotfiles/tool/config.sh
 
 ```
 After running this step, type `tmux` then Press `Ctrl + q + I` to install tmux 's plugins
