@@ -864,11 +864,11 @@ lua << EOF
   _G.MUtils= {}
 
   MUtils.completion_confirm=function()
-    if vim.fn.pumvisible() ~= 0  then
-      return vim.fn["coc#_select_confirm"]()
-    else
-      return npairs.autopairs_cr()
-    end
+      if vim.fn["coc#pum#visible"]() ~= 0  then
+          return vim.fn["coc#pum#confirm"]()
+      else
+          return npairs.autopairs_cr()
+      end
   end
 
   remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
