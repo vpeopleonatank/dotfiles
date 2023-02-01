@@ -9,7 +9,7 @@ function install_nodejs() {
 function install_go() {
   if [ ! -d "$HOME/.local/bin/" ]
   then
-    mkdir -p "$HOME/.local/bin/" 
+    mkdir -p "$HOME/.local/bin/"
   fi
   curl -sL -o ~/.local/bin/gvm https://github.com/andrewkroh/gvm/releases/download/v0.5.0/gvm-linux-amd64
   sudo chmod +x ~/.local/bin/gvm
@@ -61,14 +61,14 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-pip3 install neovim
+pip3 install neovim pygments
 sudo snap install universal-ctags
 install_nodejs
 # Install pyenv
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 install_rust
 install_go
-# Install lazygit and lazydocker 
+# Install lazygit and lazydocker
 go install github.com/jesseduffield/lazygit@latest
 go install github.com/jesseduffield/lazydocker@latest
 
@@ -80,3 +80,6 @@ install_fdfind
 install_zoxide
 install_neovim
 install_kitty
+
+echo "Install gdb-dashboard"
+wget -P ~ https://git.io/.gdbinit
