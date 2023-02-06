@@ -37,6 +37,7 @@ alias downsub='yt-dlp --sub-lang en --write-auto-sub --sub-format srt  --skip-do
 alias downplaylistbest='yt-dlp -f best -ci '
 alias lv=lvim
 alias qi=quite-intriguing
+alias lazydocker="TERM=screen-256color lazydocker"
 
 qg() {
   git add .

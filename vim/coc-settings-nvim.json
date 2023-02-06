@@ -17,5 +17,8 @@
   "python.formatting.provider": "black",
   "python.linting.flake8Enabled": true,
   "explorer.icon.enableNerdfont": true,
-  "snippets.textmateSnippetsRoots": ["~/.config/snippets/"]
+  "snippets.textmateSnippetsRoots": [
+    "~/.config/snippets/"
+  ],
+  "snippets.ultisnips.pythonPrompt": false
 }
