@@ -12,7 +12,7 @@ alias gt="bash ~/.scripts/generate_template.sh"
 alias countdown='~/git/countdown/countdown'
 alias cd_basic_algo_codelearn='cd /mnt/vpoat/Data/Code/algo_merge/contest/codelearn/basic_algo'
 alias psudo='sudo env PATH="$PATH"'
-alias lzd='sudo lazydocker'
+alias lzd='lazydocker'
 # alias vno='HOME=$(mktemp -d) vim -u NONE -U NONE -N -i NONE -u $HOME/.dotfiles/tool/vim/.vimrc_server'
 alias vno='vim -u $HOME/.dotfiles/tool/vim/.vimrc_server -U NONE -N -i NONE'
 alias za='zathura'
