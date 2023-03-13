@@ -76,6 +76,8 @@ bind < swap-pane -U       # swap current pane with the previous one
 # swap window
 bind -n C-M-Left { swap-window -t -1; previous-window }
 bind -n C-M-Right { swap-window -t +1; next-window }
+bind -n M-Left { swap-window -t -1; previous-window }
+bind -n M-Right { swap-window -t +1; next-window }
 
 # maximize current pane
 bind + run 'cut -c3- ~/.tmux.conf | sh -s _maximize_pane "#{session_name}" #D'
