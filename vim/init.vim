@@ -281,7 +281,7 @@ Plug 'qpkorr/vim-bufkill'
 
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 nnoremap <leader>i :Vista<CR>
 Plug 'Asheq/close-buffers.vim'
 " Plug 'thaerkh/vim-workspace'
@@ -605,9 +605,9 @@ function! LightlineGitGlobalStatus() abort
   return global_git_status
 endfunction
 
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
+" function! NearestMethodOrFunction() abort
+"   return get(b:, 'vista_nearest_method_or_function', '')
+" endfunction
 
  let g:lightline = {
 \ 'enable': {
@@ -651,7 +651,7 @@ endfunction
    \   'gitdiff': 'middle',
    \ },
 \ }
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 " 
 
  " Remap <C-i>
