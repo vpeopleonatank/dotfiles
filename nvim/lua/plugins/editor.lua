@@ -205,4 +205,27 @@ return {
 			require("telescope").load_extension("file_browser")
 		end,
 	},
+	{
+		"RRethy/vim-illuminate",
+		event = "LazyFile",
+		opts = {
+			delay = 200,
+			large_file_cutoff = 2000,
+			large_file_overrides = {
+				providers = { "lsp", "treesitter", "regex" },
+			},
+		},
+		config = function(_, opts)
+			require("illuminate").configure(opts)
+		end,
+		keys = {
+			{
+				"<leader>ti",
+				function()
+					require("illuminate").toggle_buf()
+				end,
+				desc = "Toggle vim-illuminate for current buffer",
+			},
+		},
+	},
 }
