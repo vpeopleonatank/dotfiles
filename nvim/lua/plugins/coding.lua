@@ -98,8 +98,8 @@ return {
 		"CRAG666/code_runner.nvim",
 		config = true,
 		keys = {
-			{ "<leader>r", "<cmd>RunCode<cr>", desc = "Run Code" },
-			{ "<leader>f", "<cmd>RunFile<cr>", desc = "Run File" },
+			{ "<leader>rr", "<cmd>RunCode<cr>", desc = "Run Code" },
+			{ "<leader>rf", "<cmd>RunFile<cr>", desc = "Run File" },
 		},
 	},
 }
