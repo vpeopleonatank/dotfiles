@@ -42,4 +42,4 @@ if [ ! -d $HOME/.config/jesseduffield/lazygit ]; then
 fi
 sudo ln -s $HOME/.dotfiles/tool/lazygit/config.yml $HOME/.config/jesseduffield/lazygit/config.yml
 
-sudo ln -s /home/vpoat/.dotfiles/tool/nvim /home/vpoat/.config/nvim
+sudo ln -s $HOME/.dotfiles/tool/nvim $HOME/.config/nvim

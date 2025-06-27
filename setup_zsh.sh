@@ -27,11 +27,9 @@ function install_fonts() {
     fi
 
     for type in Bold Medium Italic 'Bold Italic'; do
-      file_path="${HOME}/.local/share/fonts/JetBrainsMono-${type}.ttf"
-      file_url="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/${type}/complete/JetBrains%20Mono%20${type}%20Nerd%20Font%20Complete%20Mono.ttf?raw=true"
-      if [ "$type" == "Bold Italic" ]; then
-        file_url="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/BoldItalic/complete/JetBrains%20Mono%20${type}%20Nerd%20Font%20Complete%20Mono.ttf?raw=true"
-      fi
+	    file_name="JetBrainsMonoNerdFontMono-${type}.ttf"
+	  file_path="${HOME}/.local/share/fonts/${file_name}"
+	  file_url="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/${type}/${file_name}"
 
     if [ ! -e "${file_path}" ]; then
           echo "wget -O $file_path $file_url"

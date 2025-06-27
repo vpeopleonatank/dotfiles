@@ -203,6 +203,9 @@ bind @ command-prompt -p "create pane from:" "join-pane -s ':%%'"
 # reload the .tmux.conf file with Ctrl-r
 bind C-r source-file ~/.tmux.conf \; display-message "configuration reloaded"
 
+# bind key to run tui app
+bind g display-popup -E -xC -yC -w 80% -h 80% -d "#{pane_current_path}" lazygit
+
 # toggle passthrough of prefix
 bind P if-shell "[ \"$(tmux show-options -g prefix)\" = \"prefix C-a\" ]" '\
     set -g prefix C-b; display-message "passthrough enabled"; refresh-client -S; \
