@@ -38,6 +38,7 @@ alias downplaylistbest='yt-dlp -f best -ci '
 alias lv=lvim
 alias qi=quite-intriguing
 alias lazydocker="TERM=screen-256color lazydocker"
+alias dcl="docker compose logs -f -t --tail=100"
 
 qg() {
   git add .
