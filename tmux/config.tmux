@@ -100,8 +100,16 @@ bind -n M-k select-pane -U
 bind -n M-j select-pane -D
 
 
-bind -n C-M-l next-window
-bind -n C-M-h previous-window
+# bind -n C-M-l next-window
+# bind -n C-M-k previous-window
+
+# Window navigation without prefix
+# bind -n C-Right next-window
+# bind -n C-Left previous-window
+
+# Alternative 2: Vi-style with Alt
+bind -n M-n next-window
+bind -n M-p previous-window
 
 # switch windows alt+number
 bind-key -n M-1 select-window -t 1
