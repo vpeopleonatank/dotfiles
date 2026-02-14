@@ -34,11 +34,11 @@ gui:
   showCommandLog: true
   commandLogSize: 8
 git:
-  paging:
-    colorArg: always
-    useConfig: false
-    externalDiffCommand: difft --color=always --display=inline --syntax-highlight=on --tab-width=2
-    # pager: delta --dark --paging=never --syntax-theme base16-256 -s
+  pagers:
+    - colorArg: always
+      useConfig: false
+      externalDiffCommand: difft --color=always --display=inline --syntax-highlight=on --tab-width=2
+      # pager: delta --dark --paging=never --syntax-theme base16-256 -s
   merging:
     # only applicable to unix users
     manualCommit: false

@@ -22,6 +22,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/snap/bin
+export PATH="$PATH:$HOME/.local/bin"
 
 export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/snapd/desktop"
 
@@ -62,14 +63,3 @@ then
 fi
 
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-
-
-if [ "$(command -v gvm)" ]
-then
-  eval "$(gvm 1.19.4)"
-fi
-
-if [ "$(command -v go)" ]
-then
-  export PATH=$PATH:$(go env GOPATH)/bin 
-fi
