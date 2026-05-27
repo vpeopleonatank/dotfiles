@@ -39,6 +39,7 @@ alias lv=lvim
 alias qi=quite-intriguing
 alias lazydocker="TERM=screen-256color lazydocker"
 alias dcl="docker compose logs -f -t --tail=100"
+alias cld='claude --dangerously-skip-permissions'
 
 qg() {
   git add .

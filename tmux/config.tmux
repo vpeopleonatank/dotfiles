@@ -253,6 +253,7 @@ setw -g window-status-current-format "#[fg=#1f2335,bg=#3b4261,nobold,nounderscor
 # Plugin 
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'timvw/tmux-assistant-resurrect'
 set -g @plugin 'tmux-plugins/tmux-cowboy'  # Kill with prefix + *
 set -g @continuum-save-interval '0'
 set -g @continuum-restore 'on'
