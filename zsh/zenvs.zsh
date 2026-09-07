@@ -37,10 +37,23 @@ if [ -f "$HOME/.cargo/env"  ]; then
   source $HOME/.cargo/env
 fi
 
-HISTFILE=~/.zsh_history
-HISTSIZE=999999999
-SAVEHIST=$HISTSIZE
-setopt SHARE_HISTORY
+# HISTFILE=~/.zsh_history
+# HISTSIZE=999999999
+# SAVEHIST=$HISTSIZE
+# setopt SHARE_HISTORY
+
+unset HISTFILE  # macOS /etc/zshrc sets it; unset stops zsh reading or writing the file
+HISTSIZE=100000 # In-memory events for up-arrow and ! expansion
+SAVEHIST=0      # Never write a history file
+
+setopt BANG_HIST            # Treat the '!' character specially during expansion
+setopt HIST_IGNORE_DUPS     # Don't record an entry that was just recorded again
+setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate
+setopt HIST_FIND_NO_DUPS    # Do not display a line previously found
+setopt HIST_IGNORE_SPACE    # Don't record an entry starting with a space
+setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks before recording entry
+setopt HIST_VERIFY          # Do not execute immediately upon history expansion
+
 
 WORDCHARS=${WORDCHARS/\/}
 

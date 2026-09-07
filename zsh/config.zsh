@@ -39,7 +39,12 @@ znap source romkatv/powerlevel10k
 znap source jeffreytse/zsh-vi-mode
 znap source zsh-users/zsh-autosuggestions  # On same line
 function zvm_after_init() {
-  ZSH_AUTOSUGGEST_STRATEGY=( history  )
+  # ZSH_AUTOSUGGEST_STRATEGY=( history  )
+
+  _zsh_autosuggest_strategy_zhist() {
+    suggestion=$(zhist search -limit 1 -- "$1")
+  }
+  ZSH_AUTOSUGGEST_STRATEGY=(zhist)
   export ZSH_AUTO_SUGGEST_USE_ASYNC=true
   znap eval junegunn/fzf 'command -v fzf >/dev/null 2>&1 || {./install --bin} >/dev/null'
   znap source junegunn/fzf shell/{completion,key-bindings}.zsh
@@ -65,7 +70,7 @@ function zvm_after_init() {
   bindkey -M vicmd '^X' run-again
 
   zle -N pet-select
-  bindkey '^[p' pet-select
+  #bindkey '^[p' pet-select
   function ghq-fzf() {
     local selected_dir=$(ghq list | fzf --query="$LBUFFER")
 
@@ -107,7 +112,7 @@ command -v floaterm >/dev/null 2>&1 && EDITOR="floaterm"
 
 source $HOME/.dotfiles/tool/zsh/zaliases.zsh
 source $HOME/.dotfiles/tool/zsh/zfunctions.zsh
-source $HOME/.dotfiles/tool/zsh/zenvs.zsh
+#source $HOME/.dotfiles/tool/zsh/zenvs.zsh
 
 if [ "$(command -v zoxide)" ]
 then
@@ -158,3 +163,4 @@ _dotnet_zsh_complete()
 
 compdef _dotnet_zsh_complete dotnet
 
+eval "$(zhist init)"
