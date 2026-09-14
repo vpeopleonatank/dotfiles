@@ -74,8 +74,9 @@ Vim and Neovim configuration are not owned by this repository. The tracked
 
 When `zhist` and compatible `fzf` are installed, startup initializes zhist late
 with `zhist init -no-arrow-binds`. This keeps native and vi-mode arrow behavior;
-`Ctrl-R` is owned by zhist. `Ctrl-X` retains the configured `run-again` meaning
-in Zsh maps, while the zhist picker has its own `Ctrl-X` action.
+`Ctrl-R` is owned by zhist and opens with the current command-line text as its
+initial search. `Ctrl-X` retains the configured `run-again` meaning in Zsh maps,
+while the zhist picker has its own `Ctrl-X` action.
 
 Import legacy history once, only when the source exists and the zhist store is
 absent or empty:

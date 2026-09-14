@@ -140,6 +140,22 @@ mkdir -p "$EMPTY_HOME"
 HOME="$EMPTY_HOME" XDG_CONFIG_HOME="$EMPTY_HOME/.config" PATH="$EMPTY_BIN:$MINIMAL_PATH" zsh -f -i -c \
   "source '$ROOT/zsh/config.zsh'; [[ \"\$DOTFILES_ZHIST_INITIALIZED\" -eq 0 && \"\$HISTFILE\" == \"\$HOME/.zsh_history\" && \"\$SAVEHIST\" -eq 100000 && \"\$ZSH_AUTOSUGGEST_STRATEGY\" == history ]]"
 
+ZHIST_BIN="$TEST_HOME/zhist-bin"
+mkdir -p "$ZHIST_BIN"
+cat > "$ZHIST_BIN/zhist" <<'EOF'
+#!/bin/sh
+case "${1:-}" in
+  init) printf '%s\n' '_fhistory_select() {' '  fzf --ansi --reverse' '}' ;;
+  search) printf 'git status\n' ;;
+esac
+EOF
+printf '%s\n' '#!/bin/sh' 'printf "%s\\n" "$@" > "$FZF_LOG"' 'exit 0' > "$ZHIST_BIN/fzf"
+chmod +x "$ZHIST_BIN/zhist" "$ZHIST_BIN/fzf"
+ZHIST_HOME="$TEST_HOME/zhist-home"
+mkdir -p "$ZHIST_HOME"
+FZF_LOG="$TEST_HOME/fzf-args" HOME="$ZHIST_HOME" XDG_CONFIG_HOME="$ZHIST_HOME/.config" PATH="$ZHIST_BIN:$MINIMAL_PATH" zsh -f -i -c \
+  "source '$ROOT/zsh/config.zsh'; suggestion=; _zsh_autosuggest_strategy_zhist git; BUFFER='git status'; _fhistory_select; grep -Fxq -- '--query=git status' \"\$FZF_LOG\" && [[ \"\$DOTFILES_ZHIST_INITIALIZED\" -eq 1 && \"\$ZSH_AUTOSUGGEST_STRATEGY\" == zhist && \"\$suggestion\" == 'git status' ]]"
+
 MATRIX_LOG="$TEST_HOME/matrix.log"
 BREW_LOG="$TEST_HOME/brew.log" HOME="$TEST_HOME" PATH="$STUB_BIN:$MINIMAL_PATH" \
   bash "$ROOT/setup_zsh.sh" --install-packages --dry-run > "$MATRIX_LOG"

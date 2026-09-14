@@ -36,8 +36,16 @@ dotfiles_init_zhist() {
   if command -v zhist >/dev/null 2>&1 && command -v fzf >/dev/null 2>&1; then
     local zhist_init
     if zhist_init="$(zhist init -no-arrow-binds 2>/dev/null)" && [[ -n "$zhist_init" ]] && eval "$zhist_init"; then
+      local fhistory_select fzf_query
+      fhistory_select=${functions[_fhistory_select]}
+      if [[ -n "$fhistory_select" ]]; then
+        # zhist's picker starts fzf with an empty query. Preserve its widget
+        # while seeding fzf from the command line buffer for Ctrl-R.
+        fzf_query='fzf --query="$BUFFER" --ansi'
+        functions[_fhistory_select]=${fhistory_select/fzf --ansi/$fzf_query}
+      fi
       _zsh_autosuggest_strategy_zhist() {
-        REPLY="$(zhist search -limit 1 -- "$1")"
+        typeset -g suggestion="$(zhist search -limit 1 -- "$1")"
       }
       ZSH_AUTOSUGGEST_STRATEGY=(zhist)
       unset HISTFILE
