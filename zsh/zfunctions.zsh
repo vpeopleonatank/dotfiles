@@ -1,95 +1,82 @@
 get_compile_command() {
-  mkdir build; cd build;
+  mkdir -p build || return
+  cd build || return
   cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
-  cd ..
-  ln -s $(pwd)/build/compile_commands.json $(pwd)/compile_commands.json
+  cd .. || return
+  ln -sf "$(pwd)/build/compile_commands.json" "$(pwd)/compile_commands.json"
 }
 
-
 show-process() {
-ps -eo size,pid,user,command --sort -size | \
-  awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |\
-  cut -d "" -f2 | cut -d "-" -f1
+  ps -eo pid,user,comm | sed 1d | sort -k1n
 }
 
 sync_jupyter() {
-  fname="$PWD"/"$1".ipynb
-  jupytext --sync $fname
-  ipython $fname
+  local file="$PWD/$1.ipynb"
+  jupytext --sync "$file" && ipython "$file"
 }
 
 source_openvino() {
-  cd /opt/intel/openvino_2021/inference_engine 
-  source /opt/intel/openvino_2021/bin/setupvars.sh
-  cd -
+  local openvino_root=/opt/intel/openvino_2021
+  if [[ ! -r "$openvino_root/bin/setupvars.sh" ]]; then
+    print "OpenVINO 2021 is not installed at $openvino_root" >&2
+    return 1
+  fi
+  cd "$openvino_root/inference_engine" || return
+  source "$openvino_root/bin/setupvars.sh"
+  cd - >/dev/null || return
 }
 
-function com {
-  g++ -Wall -Wextra -Wshadow -D_GLIBCXX_ASSERTIONS -DDEBUG -ggdb3 -fmax-errors=2 -o $1{,.cpp}
+com() {
+  g++ -Wall -Wextra -Wshadow -D_GLIBCXX_ASSERTIONS -DDEBUG -ggdb3 -fmax-errors=2 -o "$1"{,.cpp}
 }
 
-function debug {
-  if [[ -z "$2" ]] then 
-    (echo "run < $1.in" && cat) | gdb -q $1
+debug() {
+  if [[ -z "$2" ]]; then
+    (echo "run < $1.in" && cat) | gdb -q "$1"
   else
-    (echo "run < $2" && cat) | gdb -q $1
+    (echo "run < $2" && cat) | gdb -q "$1"
   fi
 }
 
-# cd on quit
-n ()
-{
-    # Block nesting of nnn in subshells
-    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
-        echo "nnn is already running"
-        return
-    fi
-
-    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
-    # To cd on quit only on ^G, remove the "export" as in:
-    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-    # NOTE: NNN_TMPFILE is fixed, should not be modified
-    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-
-    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
-    # stty start undef
-    # stty stop undef
-    # stty lwrap undef
-    # stty lnext undef
-
-    nnn "$@"
-
-    if [ -f "$NNN_TMPFILE" ]; then
-            . "$NNN_TMPFILE"
-            rm -f "$NNN_TMPFILE" > /dev/null
-    fi
+n() {
+  if [[ -n "${NNNLVL:-}" && "${NNNLVL:-0}" -ge 1 ]]; then
+    echo 'nnn is already running'
+    return
+  fi
+  export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+  nnn "$@"
+  if [[ -f "$NNN_TMPFILE" ]]; then
+    source "$NNN_TMPFILE"
+    rm -f "$NNN_TMPFILE"
+  fi
 }
 
-kill_unattached()
-{
-  tmux list-sessions | grep -v attached | awk 'BEGIN{FS=":"}{print $1}' | xargs -n 1 tmux kill-session -t || echo No sessions to kill
+kill_unattached() {
+  local session
+  while IFS= read -r session; do
+    [[ -n "$session" ]] && tmux kill-session -t "$session"
+  done < <(tmux list-sessions 2>/dev/null | grep -v attached | awk -F: '{print $1}')
 }
 
-pet-select () 
-{ 
-    # temporary fix termbox in tmux
-    TERM="${TERM/#tmux/screen}"
-    BUFFER=$(pet search --query "$READLINE_LINE");
-    READLINE_LINE=$BUFFER;
-    READLINE_POINT=${#BUFFER}
+pet-select() {
+  if (( ! $+commands[pet] )); then
+    return 1
+  fi
+  BUFFER=$(pet search --query "$BUFFER")
+  CURSOR=${#BUFFER}
 }
 
-en_nvm()
-{
+en_nvm() {
   export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  [[ -r "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+  [[ -r "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
 }
 
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
+y() {
+  local tmp cwd
+  tmp=$(mktemp -t yazi-cwd.XXXXXX) || return
+  yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd < "$tmp"
+  [[ -n "$cwd" && "$cwd" != "$PWD" ]] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
 }

@@ -1,78 +1,58 @@
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-# <<< conda initialize <<<
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse"
-
-export PAGER="bat"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:/snap/bin
-export PATH="$PATH:$HOME/.local/bin"
-
-export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/snapd/desktop"
-
-export CHEAT_CONFIG_PATH="~/.dotfiles/tool/cheat/conf.yml"
+export CHEAT_CONFIG_PATH="${DOTFILES_ROOT:-$HOME}/cheat/conf.yml"
 export CHEAT_USE_FZF=true
-export GLFW_IM_MODULE=ibus
+export PATH="$HOME/.local/bin:$PATH"
 
-export PATH=/usr/lib/jvm/jdk-11.0.11/bin:$PATH
-
-
-if [ -f "$HOME/.cargo/env"  ]; then
-  source $HOME/.cargo/env
+if (( $+commands[rg] )); then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+elif (( $+commands[fd] )); then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 fi
 
-# HISTFILE=~/.zsh_history
-# HISTSIZE=999999999
-# SAVEHIST=$HISTSIZE
-# setopt SHARE_HISTORY
-
-unset HISTFILE  # macOS /etc/zshrc sets it; unset stops zsh reading or writing the file
-HISTSIZE=100000 # In-memory events for up-arrow and ! expansion
-SAVEHIST=0      # Never write a history file
-
-setopt BANG_HIST            # Treat the '!' character specially during expansion
-setopt HIST_IGNORE_DUPS     # Don't record an entry that was just recorded again
-setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate
-setopt HIST_FIND_NO_DUPS    # Do not display a line previously found
-setopt HIST_IGNORE_SPACE    # Don't record an entry starting with a space
-setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks before recording entry
-setopt HIST_VERIFY          # Do not execute immediately upon history expansion
-
-
-WORDCHARS=${WORDCHARS/\/}
-
-LFCD="$HOME/.config/lf/lfcd.sh"                                #  pre-built binary, make sure to use absolute path
-if [ -f "$LFCD"  ]; then
-        source "$LFCD"
+if (( $+commands[bat] )); then
+  export PAGER="bat"
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
-export PATH=~/.npm-global/bin:$PATH
+if [[ -x "$HOME/anaconda3/bin/conda" ]]; then
+  __conda_setup="$($HOME/anaconda3/bin/conda shell.zsh hook 2>/dev/null)"
+  if [[ $? -eq 0 ]]; then
+    eval "$__conda_setup"
+  elif [[ -r "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
+    source "$HOME/anaconda3/etc/profile.d/conda.sh"
+  fi
+  unset __conda_setup
+fi
 
-export FZF_DEFAULT_COMMAND='fd'
+if [[ -r "$HOME/.cargo/env" ]]; then
+  source "$HOME/.cargo/env"
+fi
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if [ "$(command -v pyenv)" ]
-then
+if (( $+commands[pyenv] )); then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  if pyenv commands 2>/dev/null | grep -qx 'virtualenv-init'; then
+    eval "$(pyenv virtualenv-init -)"
+  fi
 fi
 
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+if [[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/lf/lfcd.sh" ]]; then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/lf/lfcd.sh"
+fi
+
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+
+setopt BANG_HIST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+
+WORDCHARS=${WORDCHARS/\/}

@@ -47,16 +47,9 @@ cheatpaths:
   # Once downloaded, ensure that 'path' below points to the location at which
   # you downloaded the community cheatsheets.
   - name: community
-    path: /home/vpoat/.config/cheat/cheatsheets/community
+    path: ~/.config/cheat/cheatsheets/community
     tags: [ community ]
     readonly: true
-
-  # If you have personalized cheatsheets, list them last. They will take
-  # precedence over the more global cheatsheets.
-  - name: personal
-    path: /home/vpoat/.dotfiles/tool/cheat/cheatsheets/personal
-    tags: [ personal ]
-    readonly: false
 
   # While it requires no configuration here, it's also worth noting that
   # 'cheat' will automatically append directories named '.cheat' within the

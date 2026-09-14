@@ -1,3 +1,4 @@
 .git/
 .undordir/
 *.zwc
+zsh/local.zsh

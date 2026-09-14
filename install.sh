@@ -1,85 +1,122 @@
-function install_nodejs() {
-  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-  nvm install node # "node" is an alias for the latest version
-  npm install --global yarn
+#!/usr/bin/env bash
+
+set -u
+
+resolve_entrypoint() {
+  local path="$1" directory target
+  while [ -L "$path" ]; do
+    directory=$(cd -P "$(dirname "$path")" && pwd) || return 1
+    target=$(readlink "$path") || return 1
+    case "$target" in /*) path="$target" ;; *) path="$directory/$target" ;; esac
+  done
+  directory=$(cd -P "$(dirname "$path")" && pwd) || return 1
+  printf '%s/%s\n' "$directory" "$(basename "$path")"
 }
 
-function install_go() {
-  if [ ! -d "$HOME/.local/bin/" ]
-  then
-    mkdir -p "$HOME/.local/bin/"
+SCRIPT_PATH=$(resolve_entrypoint "${BASH_SOURCE[0]}") || exit 1
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+. "$SCRIPT_DIR/scripts/dotfiles-lib.sh"
+DOTFILES_ROOT=$(dotfiles_repo_root_from_script "$SCRIPT_PATH") || exit 1
+export DOTFILES_ROOT
+
+install_core=0 install_tools=0 install_zhist=0
+usage() {
+  cat <<'EOF'
+Usage: install.sh [options]
+
+No package or network action runs without an explicit option.
+
+  --install-core       Install zsh, git, tmux, curl, and wget.
+  --install-tools      Install optional fzf, ripgrep, bat, and fd packages.
+  --install-zhist      Install zhist and verify compatible fzf.
+  --all                Enable all supported package groups.
+  --dry-run            Report commands without changing the host.
+  -h, --help           Show this help.
+EOF
+}
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --install-core) install_core=1 ;;
+    --install-tools) install_tools=1 ;;
+    --install-zhist) install_zhist=1 ;;
+    --all) install_core=1; install_tools=1; install_zhist=1 ;;
+    --dry-run) DOTFILES_DRY_RUN=1 ;;
+    -h|--help) usage; exit 0 ;;
+    *) printf 'Unknown option: %s\n' "$1" >&2; usage >&2; exit 2 ;;
+  esac
+  shift
+done
+if [ "$install_core" -eq 0 ] && [ "$install_tools" -eq 0 ] && [ "$install_zhist" -eq 0 ]; then usage; exit 0; fi
+if ! dotfiles_detect_platform; then dotfiles_print_platform_guidance; exit 1; fi
+dotfiles_platform_summary
+
+package_install() {
+  local package_list="$1"
+  local -a package_array
+  read -r -a package_array <<< "$package_list"
+  if [ "$DOTFILES_PACKAGE_MANAGER" = brew ]; then
+    dotfiles_run brew install "${package_array[@]}"
+  else
+    if [ "${DOTFILES_DRY_RUN:-0}" -ne 1 ]; then dotfiles_require_command sudo || return 1; fi
+    dotfiles_run sudo apt-get update || return 1
+    dotfiles_run sudo apt-get install -y "${package_array[@]}"
   fi
-  curl -sL -o ~/.local/bin/gvm https://github.com/andrewkroh/gvm/releases/download/v0.5.0/gvm-linux-amd64
-  sudo chmod +x ~/.local/bin/gvm
-  eval "$(gvm 1.19.4)"
 }
+if [ "$install_core" -eq 1 ]; then package_install 'zsh git tmux curl wget' || exit 1; fi
+if [ "$install_tools" -eq 1 ]; then
+  if [ "$DOTFILES_PACKAGE_MANAGER" = brew ]; then package_install 'fzf ripgrep bat fd'; else package_install 'fzf ripgrep bat fd-find'; fi
+  [ "$?" -eq 0 ] || exit 1
+fi
 
-function install_rust() {
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  source $HOME/.cargo/env
+fzf_version_ok() {
+  local version major minor
+  version=$(fzf --version 2>/dev/null | awk 'NR == 1 {print $1}')
+  major=${version%%.*}; minor=${version#*.}; minor=${minor%%.*}
+  if [ "${major:-0}" -gt 0 ]; then return 0; fi
+  [ "${minor:-0}" -ge 45 ]
 }
-
-function install_neovim() {
-  wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -O ~/.local/bin/nvim
-  sudo chmod u+x ~/.local/bin/nvim
+verify_zhist_dependencies() {
+  export PATH="$HOME/.local/bin:$PATH"
+  command -v zhist >/dev/null 2>&1 || { printf 'zhist is not available on PATH after provisioning.\n' >&2; return 1; }
+  command -v fzf >/dev/null 2>&1 || { printf 'fzf >= 0.45 is required for zhist.\n' >&2; return 1; }
+  fzf_version_ok || { printf 'fzf is too old for zhist; upgrade to >= 0.45.\n' >&2; return 1; }
+  printf 'Verified zhist and compatible fzf.\n'
 }
-
-function install_exa() {
-  cargo install exa
+install_zhist_macos() {
+  if [ "${DOTFILES_DRY_RUN:-0}" -eq 1 ]; then printf 'Would run brew tap overflowy/tap and brew install overflowy/tap/zhist\n'; return 0; fi
+  dotfiles_run brew tap overflowy/tap || return 1
+  dotfiles_run brew install overflowy/tap/zhist
 }
-
-function install_ripgrep() {
-  cargo install ripgrep
+install_zhist_linux() {
+  local asset="zhist_1.2.1_linux_${DOTFILES_ARCH}.tar.gz" base_url="https://github.com/overflowy/zhist/releases/download/v1.2.1"
+  local target="$HOME/.local/bin/zhist" temp expected actual archive
+  [ "$DOTFILES_ARCH" = amd64 ] || [ "$DOTFILES_ARCH" = arm64 ] || { printf 'No Linux zhist asset is published for architecture: %s\n' "$DOTFILES_ARCH" >&2; return 1; }
+  if [ -L "$target" ]; then printf 'Conflict: zhist symlink retained: %s\n' "$target" >&2; return 2; fi
+  if [ -x "$target" ]; then printf 'zhist already exists: %s\n' "$target"; return 0; fi
+  if [ -e "$target" ]; then printf 'Conflict: non-executable zhist target retained: %s\n' "$target" >&2; return 1; fi
+  if [ "${DOTFILES_DRY_RUN:-0}" -eq 1 ]; then printf 'Would download and verify pinned asset %s into %s\n' "$asset" "$target"; return 0; fi
+  dotfiles_require_command tar || return 1
+  if command -v curl >/dev/null 2>&1; then download() { curl -fsSL -o "$1" "$2"; }; elif command -v wget >/dev/null 2>&1; then download() { wget -qO "$1" "$2"; }; else printf 'A network downloader is required for the pinned Linux zhist asset.\n' >&2; return 1; fi
+  temp=$(mktemp -d) || return 1
+  trap 'rm -rf "$temp"' RETURN
+  archive="$temp/$asset"
+  download "$archive" "$base_url/$asset" || return 1
+  download "$temp/checksums.txt" "$base_url/checksums.txt" || return 1
+  expected=$(awk -v name="$asset" '$2 == name {print $1}' "$temp/checksums.txt")
+  [ -n "$expected" ] || { printf 'No checksum was published for %s.\n' "$asset" >&2; return 1; }
+  if command -v sha256sum >/dev/null 2>&1; then actual=$(sha256sum "$archive" | awk '{print $1}'); else actual=$(shasum -a 256 "$archive" | awk '{print $1}'); fi
+  [ "$actual" = "$expected" ] || { printf 'Checksum mismatch for %s.\n' "$asset" >&2; return 1; }
+  mkdir -p "$HOME/.local/bin" || return 1
+  tar -xzf "$archive" -C "$temp" || return 1
+  [ -f "$temp/zhist" ] || { printf 'Pinned archive did not contain the expected zhist executable.\n' >&2; return 1; }
+  install -m 0755 "$temp/zhist" "$target"
 }
-
-function install_kitty() {
-  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-  ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
-  cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications
-}
-
-function install_bat() {
-  cargo install --locked bat
-}
-
-function install_fdfind() {
-  cargo install fd-find
-}
-
-function install_zoxide() {
-  cargo install zoxide --locked
-}
-
-sudo apt install tmux python3-dev python3-pip wget curl vim vim-gtk3 xclip -y
-
-# install vim-plug for vim
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-# install vim-plug for neovim
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-pip3 install neovim pygments
-sudo snap install universal-ctags
-install_nodejs
-# Install pyenv
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-install_rust
-install_go
-# Install lazygit and lazydocker
-go install github.com/jesseduffield/lazygit@latest
-go install github.com/jesseduffield/lazydocker@latest
-
-mkdir -p ~/.local/bin/
-install_ripgrep
-install_bat
-install_exa
-install_fdfind
-install_zoxide
-install_neovim
-install_kitty
-
-echo "Install gdb-dashboard"
-wget -P ~ https://git.io/.gdbinit
+if [ "$install_zhist" -eq 1 ]; then
+  if ! command -v fzf >/dev/null 2>&1; then package_install fzf || exit 1; fi
+  if [ "$DOTFILES_OS" = macos ]; then install_zhist_macos || exit 1; else install_zhist_linux || exit 1; fi
+  if [ "${DOTFILES_DRY_RUN:-0}" -eq 1 ]; then
+    printf 'Would verify zhist and compatible fzf after installation.\n'
+  else
+    verify_zhist_dependencies || exit 1
+  fi
+fi
