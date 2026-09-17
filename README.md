@@ -97,6 +97,12 @@ new store has been checked.
 Machine-specific exports, aliases, and any personal Cheat path belong in the
 ignored `zsh/local.zsh` file. `DOTFILES_LOCAL_CONFIG` can point to another
 local file.
+
+When NVM is installed in `$NVM_DIR`, `~/.config/nvm`, or `~/.nvm`, startup
+registers lightweight wrappers for `nvm`, `node`, `npm`, `npx`, and `corepack`.
+NVM and its completions load on the first use of one of those commands. Run
+`en_nvm` to initialize it explicitly in the current shell.
+
 When migrating an older checkout, copy the host-specific settings you still
 need into that file instead of committing them. Committed startup checks
 optional tool paths defensively; unavailable paths are skipped without startup

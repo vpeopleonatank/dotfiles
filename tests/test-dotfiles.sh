@@ -130,6 +130,17 @@ mkdir -p "$HISTORY_HOME"
 HOME="$HISTORY_HOME" PATH="$MINIMAL_PATH" zsh -f -i -c \
   "source '$ROOT/zsh/config.zsh'; [[ \"\$HISTFILE\" == \"$HISTORY_HOME/.zsh_history\" ]] && [[ \"\$SAVEHIST\" -eq 100000 ]]"
 
+NVM_HOME="$TEST_HOME/nvm-home"
+mkdir -p "$NVM_HOME/.config/nvm/bin"
+printf '%s\n' \
+  'printf loaded > "$NVM_LOAD_LOG"' \
+  'nvm() { printf "nvm:%s\n" "$*"; }' \
+  'export PATH="$NVM_DIR/bin:$PATH"' > "$NVM_HOME/.config/nvm/nvm.sh"
+printf '%s\n' '#!/bin/sh' 'printf "node:%s\n" "$*"' > "$NVM_HOME/.config/nvm/bin/node"
+chmod +x "$NVM_HOME/.config/nvm/bin/node"
+NVM_DIR="$NVM_HOME/.config/nvm" NVM_LOAD_LOG="$NVM_HOME/nvm-loaded" HOME="$NVM_HOME" XDG_CONFIG_HOME="$NVM_HOME/.config" PATH="$MINIMAL_PATH" \
+  zsh -f -i -c "source '$ROOT/zsh/config.zsh'; [[ ! -e \"\$NVM_LOAD_LOG\" ]] && [[ \"\$(node --version)\" == 'node:--version' ]] && [[ -e \"\$NVM_LOAD_LOG\" ]] && [[ \"\$(nvm current)\" == 'nvm:current' ]]"
+
 EMPTY_BIN="$TEST_HOME/empty-zhist-bin"
 mkdir -p "$EMPTY_BIN"
 printf '%s\n' '#!/bin/sh' 'exit 0' > "$EMPTY_BIN/zhist"

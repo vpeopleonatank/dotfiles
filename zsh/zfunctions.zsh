@@ -66,10 +66,32 @@ pet-select() {
   CURSOR=${#BUFFER}
 }
 
-en_nvm() {
-  export NVM_DIR="$HOME/.nvm"
-  [[ -r "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+dotfiles_load_nvm() {
+  unfunction nvm node npm npx corepack 2>/dev/null
+  [[ -r "$NVM_DIR/nvm.sh" ]] || return 127
+  source "$NVM_DIR/nvm.sh"
   [[ -r "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+}
+
+dotfiles_enable_lazy_nvm() {
+  if [[ -z ${NVM_DIR:-} ]]; then
+    if [[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/nvm/nvm.sh" ]]; then
+      export NVM_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/nvm"
+    else
+      export NVM_DIR="$HOME/.nvm"
+    fi
+  fi
+  [[ -r "$NVM_DIR/nvm.sh" ]] || return 0
+
+  nvm() { dotfiles_load_nvm && nvm "$@" }
+  node() { dotfiles_load_nvm && command node "$@" }
+  npm() { dotfiles_load_nvm && command npm "$@" }
+  npx() { dotfiles_load_nvm && command npx "$@" }
+  corepack() { dotfiles_load_nvm && command corepack "$@" }
+}
+
+en_nvm() {
+  dotfiles_load_nvm
 }
 
 y() {

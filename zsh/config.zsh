@@ -3,11 +3,11 @@ if [[ -z ${DOTFILES_ROOT:-} ]]; then
 fi
 typeset -g DOTFILES_ROOT
 
-source "$DOTFILES_ROOT/zsh/zenvs.zsh"
-
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+source "$DOTFILES_ROOT/zsh/zenvs.zsh"
 
 zstyle ':autocomplete:tab:*' insert-unambiguous yes
 zstyle ':completion:*' group-name ''
@@ -111,6 +111,7 @@ fi
 
 source "$DOTFILES_ROOT/zsh/zaliases.zsh"
 source "$DOTFILES_ROOT/zsh/zfunctions.zsh"
+dotfiles_enable_lazy_nvm
 
 local_config="${DOTFILES_LOCAL_CONFIG:-$DOTFILES_ROOT/zsh/local.zsh}"
 if [[ -r "$local_config" ]]; then
