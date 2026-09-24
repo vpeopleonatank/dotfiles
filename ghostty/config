@@ -1,18 +1,27 @@
 # Ghostty terminal configuration used by tmux on macOS.
 # Translate Command shortcuts into Meta (Alt/Escape-prefixed) sequences so
 # tmux's existing M-* bindings work identically on macOS and Linux.
-keybind = super+h=text:\x1bh
-keybind = super+j=text:\x1bj
-keybind = super+k=text:\x1bk
-keybind = super+l=text:\x1bl
-keybind = super+n=text:\x1bn
-keybind = super+p=text:\x1bp
-keybind = super+1=text:\x1b1
-keybind = super+2=text:\x1b2
-keybind = super+3=text:\x1b3
-keybind = super+4=text:\x1b4
-keybind = super+5=text:\x1b5
-keybind = super+6=text:\x1b6
-keybind = super+7=text:\x1b7
-keybind = super+8=text:\x1b8
-keybind = super+9=text:\x1b9
+keybind = super+h=esc:h
+keybind = super+j=esc:j
+keybind = super+k=esc:k
+keybind = super+l=esc:l
+keybind = super+n=esc:n
+keybind = super+p=esc:p
+keybind = super+1=esc:1
+keybind = super+digit_1=esc:1
+keybind = super+2=esc:2
+keybind = super+digit_2=esc:2
+keybind = super+3=esc:3
+keybind = super+digit_3=esc:3
+keybind = super+4=esc:4
+keybind = super+digit_4=esc:4
+keybind = super+5=esc:5
+keybind = super+digit_5=esc:5
+keybind = super+6=esc:6
+keybind = super+digit_6=esc:6
+keybind = super+7=esc:7
+keybind = super+digit_7=esc:7
+keybind = super+8=esc:8
+keybind = super+digit_8=esc:8
+keybind = super+9=esc:9
+keybind = super+digit_9=esc:9

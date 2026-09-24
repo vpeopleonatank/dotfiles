@@ -73,6 +73,28 @@ dotfiles_load_nvm() {
   [[ -r "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
 }
 
+dotfiles_export_nvm_node_path() {
+  local nvm_version nvm_node_bin nvm_default_alias nvm_current_link
+
+  # Resolve NVM's default version without sourcing nvm.sh, so startup stays lazy.
+  nvm_default_alias="$NVM_DIR/alias/default"
+  if [[ -r "$nvm_default_alias" ]]; then
+    IFS= read -r nvm_version < "$nvm_default_alias"
+    nvm_version="${nvm_version##*/}"
+    nvm_node_bin="$NVM_DIR/versions/node/$nvm_version/bin"
+    if [[ -x "$nvm_node_bin/node" ]]; then
+      [[ ":$PATH:" == *":$nvm_node_bin:"* ]] || export PATH="$nvm_node_bin:$PATH"
+      return 0
+    fi
+  fi
+
+  # Some NVM setups expose the selected version through a current symlink.
+  nvm_current_link="$NVM_DIR/versions/node/current/bin"
+  if [[ -x "$nvm_current_link/node" && ":$PATH:" != *":$nvm_current_link:"* ]]; then
+    export PATH="$nvm_current_link:$PATH"
+  fi
+}
+
 dotfiles_enable_lazy_nvm() {
   if [[ -z ${NVM_DIR:-} ]]; then
     if [[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/nvm/nvm.sh" ]]; then
@@ -82,6 +104,7 @@ dotfiles_enable_lazy_nvm() {
     fi
   fi
   [[ -r "$NVM_DIR/nvm.sh" ]] || return 0
+  dotfiles_export_nvm_node_path
 
   nvm() { dotfiles_load_nvm && nvm "$@" }
   node() { dotfiles_load_nvm && command node "$@" }
