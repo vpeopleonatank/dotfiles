@@ -105,6 +105,7 @@ mkdir -p "$CONFIG_HOME/.config/nvim"
 printf '%s\n' 'external nvim config' > "$CONFIG_HOME/.config/nvim/marker"
 HOME="$CONFIG_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/config.sh"
 assert_link_target "$CONFIG_HOME/.config/kitty/kitty.conf" "$ROOT/kitty/kitty.conf"
+assert_link_target "$CONFIG_HOME/.config/ghostty/config" "$ROOT/ghostty/config"
 assert_link_target "$CONFIG_HOME/.tmux.conf" "$ROOT/tmux/config.tmux"
 [ -f "$CONFIG_HOME/.config/nvim/marker" ] || fail 'external nvim config changed'
 

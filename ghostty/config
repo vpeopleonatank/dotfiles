@@ -1,0 +1,18 @@
+# Ghostty terminal configuration used by tmux on macOS.
+# Translate Command shortcuts into Meta (Alt/Escape-prefixed) sequences so
+# tmux's existing M-* bindings work identically on macOS and Linux.
+keybind = super+h=text:\x1bh
+keybind = super+j=text:\x1bj
+keybind = super+k=text:\x1bk
+keybind = super+l=text:\x1bl
+keybind = super+n=text:\x1bn
+keybind = super+p=text:\x1bp
+keybind = super+1=text:\x1b1
+keybind = super+2=text:\x1b2
+keybind = super+3=text:\x1b3
+keybind = super+4=text:\x1b4
+keybind = super+5=text:\x1b5
+keybind = super+6=text:\x1b6
+keybind = super+7=text:\x1b7
+keybind = super+8=text:\x1b8
+keybind = super+9=text:\x1b9

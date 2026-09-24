@@ -1,7 +1,10 @@
 set -g mouse on
 # set-option -sa terminal-overrides ',XXX:RGB'
-tmux_conf_copy_to_os_clipboard=true # copy and paster with xclip
-bind -Tcopy-mode-vi M-y send -X copy-pipe "xclip -i -sel p -f | xclip -i -sel c" \; display-message "copied to system clipboard"
+tmux_conf_copy_to_os_clipboard=true
+# Use xclip on Linux and pbcopy on macOS.
+bind -Tcopy-mode-vi M-y if-shell '[ "$(uname -s)" = Darwin ]' \
+  'send -X copy-pipe "pbcopy"' \
+  'send -X copy-pipe "xclip -i -sel p -f | xclip -i -sel c"' \; display-message "copied to system clipboard"
 # -- general -------------------------------------------------------------------
 # set -g default-terminal "tmux-256color"
 # set -ga terminal-overrides ",screen-256color:Tc"
@@ -160,8 +163,12 @@ bind P paste-buffer
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi y send-keys -X rectangle-toggle
 unbind -T copy-mode-vi Enter
-bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'xclip -se c -i'
-bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'xclip -se c -i'
+bind-key -T copy-mode-vi Enter if-shell '[ "$(uname -s)" = Darwin ]' \
+  'send-keys -X copy-pipe-and-cancel "pbcopy"' \
+  'send-keys -X copy-pipe-and-cancel "xclip -se c -i"'
+bind-key -T copy-mode-vi MouseDragEnd1Pane if-shell '[ "$(uname -s)" = Darwin ]' \
+  'send-keys -X copy-pipe-and-cancel "pbcopy"' \
+  'send-keys -X copy-pipe-and-cancel "xclip -se c -i"'
 
 bind-key -T copy-mode-vi 'C-h' select-pane -L
 bind-key -T copy-mode-vi 'C-j' select-pane -D

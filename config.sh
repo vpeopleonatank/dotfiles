@@ -33,6 +33,7 @@ done
 failures=0
 for link_pair in \
   "$DOTFILES_ROOT/kitty/kitty.conf|$HOME/.config/kitty/kitty.conf" \
+  "$DOTFILES_ROOT/ghostty/config|$HOME/.config/ghostty/config" \
   "$DOTFILES_ROOT/tmux/config.tmux|$HOME/.tmux.conf" \
   "$DOTFILES_ROOT/lazygit/config.yml|$HOME/.config/jesseduffield/lazygit/config.yml" \
   "$DOTFILES_ROOT/snippets|$HOME/.config/snippets"; do
