@@ -174,9 +174,13 @@ MATRIX_LOG="$TEST_HOME/matrix.log"
 BREW_LOG="$TEST_HOME/brew.log" HOME="$TEST_HOME" PATH="$STUB_BIN:$MINIMAL_PATH" \
   bash "$ROOT/setup_zsh.sh" --install-packages --dry-run > "$MATRIX_LOG"
 BREW_LOG="$TEST_HOME/brew.log" HOME="$TEST_HOME" PATH="$STUB_BIN:$MINIMAL_PATH" \
+  bash "$ROOT/install.sh" --install-tools --dry-run >> "$MATRIX_LOG"
+BREW_LOG="$TEST_HOME/brew.log" HOME="$TEST_HOME" PATH="$STUB_BIN:$MINIMAL_PATH" \
   bash "$ROOT/install.sh" --install-zhist --dry-run >> "$MATRIX_LOG"
 assert_file_contains "$MATRIX_LOG" 'brew install zsh git'
 assert_file_contains "$MATRIX_LOG" 'brew install fzf'
+assert_file_contains "$MATRIX_LOG" 'brew install node'
+assert_file_contains "$MATRIX_LOG" 'npm install -g markdownlint-cli'
 assert_file_contains "$MATRIX_LOG" 'brew tap overflowy/tap'
 
 LINUX_BIN="$TEST_HOME/linux-bin"

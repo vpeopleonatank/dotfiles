@@ -49,6 +49,10 @@ bash install.sh --install-tools
 bash install.sh --install-zhist
 ```
 
+`--install-tools` also installs `markdownlint-cli` globally with npm. If npm
+is not already available from an active Node/NVM installation, the script
+installs Node.js and npm through the supported system package manager first.
+
 The Linux zhist path downloads and verifies the pinned `v1.2.1` amd64 or arm64
 release asset. zhist remains optional; without it, native persistent Zsh
 history uses `~/.zsh_history`.

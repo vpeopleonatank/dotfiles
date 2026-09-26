@@ -27,7 +27,7 @@ Usage: install.sh [options]
 No package or network action runs without an explicit option.
 
   --install-core       Install zsh, git, tmux, curl, and wget.
-  --install-tools      Install optional fzf, ripgrep, bat, and fd packages.
+  --install-tools      Install optional CLI tools and markdownlint-cli.
   --install-zhist      Install zhist and verify compatible fzf.
   --all                Enable all supported package groups.
   --dry-run            Report commands without changing the host.
@@ -63,9 +63,38 @@ package_install() {
   fi
 }
 if [ "$install_core" -eq 1 ]; then package_install 'zsh git tmux curl wget' || exit 1; fi
+
+install_markdownlint() {
+  if [ "${DOTFILES_DRY_RUN:-0}" -eq 1 ]; then
+    if ! command -v npm >/dev/null 2>&1; then
+      if [ "$DOTFILES_PACKAGE_MANAGER" = brew ]; then
+        package_install node || return 1
+      else
+        package_install 'nodejs npm' || return 1
+      fi
+    fi
+    dotfiles_run npm install -g markdownlint-cli
+    return 0
+  fi
+
+  if ! command -v npm >/dev/null 2>&1; then
+    if [ "$DOTFILES_PACKAGE_MANAGER" = brew ]; then
+      package_install node || return 1
+    else
+      package_install 'nodejs npm' || return 1
+    fi
+  fi
+  dotfiles_require_command npm || {
+    printf 'npm is required to install markdownlint-cli.\n' >&2
+    return 1
+  }
+  dotfiles_run npm install -g markdownlint-cli
+}
+
 if [ "$install_tools" -eq 1 ]; then
   if [ "$DOTFILES_PACKAGE_MANAGER" = brew ]; then package_install 'fzf ripgrep bat fd'; else package_install 'fzf ripgrep bat fd-find'; fi
   [ "$?" -eq 0 ] || exit 1
+  install_markdownlint || exit 1
 fi
 
 fzf_version_ok() {
