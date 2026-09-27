@@ -39,6 +39,12 @@ fi
 
 bash -n "$ROOT/setup_zsh.sh" "$ROOT/config.sh" "$ROOT/install.sh" "$ROOT/scripts/dotfiles-lib.sh"
 zsh -n "$ROOT/zsh/config.zsh" "$ROOT/zsh/zenvs.zsh" "$ROOT/zsh/zaliases.zsh" "$ROOT/zsh/zfunctions.zsh"
+assert_file_contains "$ROOT/powershell/profile.ps1" 'function global:nv'
+assert_file_contains "$ROOT/powershell/profile.ps1" 'function global:vimdiff'
+assert_file_contains "$ROOT/setup-powershell.ps1" '# >>> dotfiles managed PowerShell >>>'
+if command -v pwsh >/dev/null 2>&1; then
+  pwsh -NoLogo -NoProfile -Command ". '$ROOT/powershell/profile.ps1'; if ((Get-Alias g).Definition -ne 'git' -or -not (Get-Command nv -CommandType Function -ErrorAction Stop) -or -not (Get-Command vimdiff -CommandType Function -ErrorAction Stop)) { exit 1 }"
+fi
 assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/ppm'"
 assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/psmux-resurrect'"
 assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/psmux-continuum'"

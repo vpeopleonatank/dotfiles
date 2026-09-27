@@ -9,7 +9,7 @@ Automated provisioning is limited to:
 - macOS with Homebrew, on amd64 or arm64;
 - Debian or Ubuntu Linux with APT, on amd64 or arm64.
 
-Windows is supported for Neovim and psmux configuration through PowerShell.
+Windows is supported for PowerShell aliases, Neovim, and psmux configuration.
 Shell, tmux, and package provisioning remain limited to macOS and Debian/Ubuntu.
 The scripts never require root for files below `$HOME`.
 
@@ -84,6 +84,17 @@ That option installs only PPM (the psmux plugin manager); start psmux and press
 `Prefix + I` to fetch the declared plugins. psmux's native clipboard support
 replaces tmux-yank, and plugins without maintained psmux ports are not loaded.
 PowerShell predictions stay enabled without psmux's extra prediction dimming.
+
+Install the portable PowerShell shortcuts into the current host's user profile:
+
+```powershell
+.\setup-powershell.ps1
+```
+
+They provide `g`, `lg`, `t`, `v`, `nv`, `jl`, and `lzd`, plus `vimdiff`, `ez`,
+`lsh`, `dcl`, `downsub`, and `downplaylistbest`, matching the corresponding
+Linux/macOS command shortcuts where the tools are installed. Reopen PowerShell
+after setup, or run `lsh` in the current session.
 
 Set up Neovim on Windows (PowerShell; Neovim must already be installed):
 
