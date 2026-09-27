@@ -8,7 +8,7 @@ set -g mouse on
 set -g default-shell pwsh
 set -g default-terminal 'xterm-256color'
 set -g allow-predictions on
-set -g prediction-dimming on
+set -g prediction-dimming off
 set -s escape-time 10
 set -s focus-events on
 

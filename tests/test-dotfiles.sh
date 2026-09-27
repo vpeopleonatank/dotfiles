@@ -45,6 +45,7 @@ assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/p
 assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/psmux-prefix-highlight'"
 assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/psmux-vim-navigator'"
 assert_file_not_contains "$ROOT/psmux/config.psmux" "tmux-plugins/tpm"
+assert_file_contains "$ROOT/psmux/config.psmux" "set -g prediction-dimming off"
 
 printf '%s\n' '# user-owned content' 'export KEEP_ME=1' > "$TEST_HOME/.zshrc"
 HOME="$TEST_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/setup_zsh.sh"

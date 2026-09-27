@@ -83,6 +83,7 @@ ports for TPM, resurrect, continuum, prefix highlight, and vim navigation:
 That option installs only PPM (the psmux plugin manager); start psmux and press
 `Prefix + I` to fetch the declared plugins. psmux's native clipboard support
 replaces tmux-yank, and plugins without maintained psmux ports are not loaded.
+PowerShell predictions stay enabled without psmux's extra prediction dimming.
 
 Set up Neovim on Windows (PowerShell; Neovim must already be installed):
 
