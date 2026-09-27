@@ -1,6 +1,6 @@
 # dotfiles
 
-Portable shell, terminal, tmux, snippets, and utility configuration.
+Portable shell, terminal, tmux/psmux, snippets, and utility configuration.
 
 ## Supported setup
 
@@ -9,7 +9,8 @@ Automated provisioning is limited to:
 - macOS with Homebrew, on amd64 or arm64;
 - Debian or Ubuntu Linux with APT, on amd64 or arm64.
 
-Other systems receive diagnostics and no guessed package or network command.
+Windows is supported for Neovim and psmux configuration through PowerShell.
+Shell, tmux, and package provisioning remain limited to macOS and Debian/Ubuntu.
 The scripts never require root for files below `$HOME`.
 
 ## Install
@@ -70,9 +71,30 @@ TPM is an explicit network action:
 bash config.sh --install-tpm
 ```
 
-Vim and Neovim configuration are not owned by this repository. The tracked
-`vim/` and `nvim/` trees are removed, and `config.sh` does not alter an existing
-`~/.config/nvim` target or install editor plugins.
+On Windows, psmux reads the tracked `psmux/config.psmux` file through the
+`~/.psmux.conf` symlink when `psmux` is on `PATH`. It keeps the shared key
+bindings and Tokyo Night styling while using the maintained public Windows
+ports for TPM, resurrect, continuum, prefix highlight, and vim navigation:
+
+```powershell
+.\setup-psmux.ps1 -InstallPlugins
+```
+
+That option installs only PPM (the psmux plugin manager); start psmux and press
+`Prefix + I` to fetch the declared plugins. psmux's native clipboard support
+replaces tmux-yank, and plugins without maintained psmux ports are not loaded.
+
+Set up Neovim on Windows (PowerShell; Neovim must already be installed):
+
+```powershell
+.\setup-nvim.ps1
+```
+
+The script links the tracked `nvim/` tree to `%LOCALAPPDATA%\nvim`, preserves
+an existing config as a conflict, and supports `-DryRun`.
+
+On macOS or Linux, `config.sh` links the same tree to
+`$XDG_CONFIG_HOME/nvim` (or `~/.config/nvim`).
 
 ## zhist migration
 

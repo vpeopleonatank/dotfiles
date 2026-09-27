@@ -18,6 +18,12 @@ assert_file_contains() {
   grep -Fq "$2" "$1" || fail "$1 does not contain $2"
 }
 
+assert_file_not_contains() {
+  if grep -Fq "$2" "$1"; then
+    fail "$1 unexpectedly contains $2"
+  fi
+}
+
 assert_link_target() {
   [ -L "$1" ] || fail "expected symlink: $1"
   [ "$(readlink "$1")" = "$2" ] || fail "unexpected symlink target: $1"
@@ -33,6 +39,12 @@ fi
 
 bash -n "$ROOT/setup_zsh.sh" "$ROOT/config.sh" "$ROOT/install.sh" "$ROOT/scripts/dotfiles-lib.sh"
 zsh -n "$ROOT/zsh/config.zsh" "$ROOT/zsh/zenvs.zsh" "$ROOT/zsh/zaliases.zsh" "$ROOT/zsh/zfunctions.zsh"
+assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/ppm'"
+assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/psmux-resurrect'"
+assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/psmux-continuum'"
+assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/psmux-prefix-highlight'"
+assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/psmux-vim-navigator'"
+assert_file_not_contains "$ROOT/psmux/config.psmux" "tmux-plugins/tpm"
 
 printf '%s\n' '# user-owned content' 'export KEEP_ME=1' > "$TEST_HOME/.zshrc"
 HOME="$TEST_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/setup_zsh.sh"
@@ -102,12 +114,20 @@ assert_link_target "$OPTIONAL_HOME/powerlevel10k" "$TEST_HOME/foreign-p10k"
 
 CONFIG_HOME="$TEST_HOME/config-home"
 mkdir -p "$CONFIG_HOME/.config/nvim"
-printf '%s\n' 'external nvim config' > "$CONFIG_HOME/.config/nvim/marker"
+rmdir "$CONFIG_HOME/.config/nvim"
 HOME="$CONFIG_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/config.sh"
 assert_link_target "$CONFIG_HOME/.config/kitty/kitty.conf" "$ROOT/kitty/kitty.conf"
 assert_link_target "$CONFIG_HOME/.config/ghostty/config" "$ROOT/ghostty/config"
 assert_link_target "$CONFIG_HOME/.tmux.conf" "$ROOT/tmux/config.tmux"
-[ -f "$CONFIG_HOME/.config/nvim/marker" ] || fail 'external nvim config changed'
+assert_link_target "$CONFIG_HOME/.config/nvim" "$ROOT/nvim"
+
+EXTERNAL_NVIM_HOME="$TEST_HOME/external-nvim-home"
+mkdir -p "$EXTERNAL_NVIM_HOME/.config/nvim"
+printf '%s\n' 'external nvim config' > "$EXTERNAL_NVIM_HOME/.config/nvim/marker"
+if HOME="$EXTERNAL_NVIM_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/config.sh"; then
+  fail 'external Neovim config did not report a conflict'
+fi
+assert_file_contains "$EXTERNAL_NVIM_HOME/.config/nvim/marker" 'external nvim config'
 
 CONFLICT_HOME="$TEST_HOME/conflict-home"
 mkdir -p "$CONFLICT_HOME"

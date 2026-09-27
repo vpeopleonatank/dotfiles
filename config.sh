@@ -42,6 +42,11 @@ for link_pair in \
   dotfiles_link "$source_path" "$target_path" || failures=$((failures + 1))
 done
 
+if [ -d "$DOTFILES_ROOT/nvim" ]; then
+  nvim_config_root="${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
+  dotfiles_link "$DOTFILES_ROOT/nvim" "$nvim_config_root" || failures=$((failures + 1))
+fi
+
 if [ -L "$HOME/tmux_no_auto_restore" ]; then
   printf 'Conflict: tmux marker symlink retained: %s\n' "$HOME/tmux_no_auto_restore" >&2
   failures=$((failures + 1))
@@ -63,5 +68,4 @@ if [ "$install_tpm" -eq 1 ]; then
   else failures=$((failures + 1)); fi
 fi
 
-printf 'Vim and Neovim configuration is external; no editor paths were changed.\n'
 exit "$failures"
