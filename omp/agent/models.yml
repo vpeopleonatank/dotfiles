@@ -24,3 +24,9 @@ providers:
         reasoning: true
         input: [text, image]
         contextWindow: 272000
+  anthropic:
+    modelOverrides:
+      claude-opus-5-5:
+        contextWindow: 272000
+      claude-sonnet-5:
+        contextWindow: 272000
