@@ -145,12 +145,13 @@ On Windows:
 .\setup-omp.ps1
 ```
 
-Both scripts use `http://127.0.0.1:8317/v1` and the local proxy's default
-token. Set `OMP_CPA_GUI_BASE_URL` and `OMP_CPA_GUI_API_KEY`, or pass
-`--base-url` / `--api-key` on macOS/Linux and `-BaseUrl` / `-ApiKey` on
-Windows, to use another gateway. Existing `~/.omp/agent/models.yml` and
-`config.yml` are retained by default; use `--force` or `-Force` to back up and
-replace both files.
+Both scripts use `http://127.0.0.1:8317/v1` and configure OMP to resolve the
+proxy bearer token from `OMP_CPA_GUI_API_KEY`. Set that environment variable
+before launching OMP. Set `OMP_CPA_GUI_BASE_URL`, or pass `--base-url` on
+macOS/Linux and `-BaseUrl` on Windows, to use another gateway. Use
+`--api-key-env` or `-ApiKeyEnvironment` to reference a different environment
+variable. Existing `~/.omp/agent/models.yml` and `config.yml` are retained by
+default; use `--force` or `-Force` to back up and replace both files.
 
 On macOS or Linux, `config.sh` links the same tree to
 `$XDG_CONFIG_HOME/nvim` (or `~/.config/nvim`).
