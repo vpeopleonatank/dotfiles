@@ -126,17 +126,22 @@ Set up Neovim on Windows (PowerShell; Neovim must already be installed):
 The script links the tracked `nvim/` tree to `%LOCALAPPDATA%\nvim`, preserves
 an existing config as a conflict, and supports `-DryRun`.
 
-## Oh My Pi with the local Codex proxy
+## Oh My Pi with Claude subscription and local Codex proxy
 
-The setup scripts install [Oh My Pi](https://omp.sh/) when needed and configure
-its `cpa-gui` provider to match the local Codex proxy. They configure Terra as
-the default model, Luna for lightweight work, GPT-6 Sol for thorough, planning,
-vision, and task work, and Astra for Advisor.
+The tracked OMP configuration uses only a `cpa-gui` custom provider for the
+local Codex proxy. Claude uses OMP's built-in `anthropic` provider,
+authenticated through your Claude subscription; this repository does not store
+a Claude API key.
 
-On macOS or Linux:
+The default, Smol, Slow, Vision, Plan, Designer, Commit, and Task roles use
+Claude. Default and Slow fall back to GPT-6 Sol through `cpa-gui`; Smol falls
+back to Terra. Advisor uses Astra and falls back to Claude Fable. Tiny and
+Memory are left unset so OMP continues to auto-select them.
+
+On macOS or Linux, link the files with the other managed configuration:
 
 ```bash
-bash setup-omp.sh
+bash config.sh
 ```
 
 On Windows:
@@ -145,13 +150,11 @@ On Windows:
 .\setup-omp.ps1
 ```
 
-Both scripts use `http://127.0.0.1:8317/v1` and configure OMP to resolve the
-proxy bearer token from `OMP_CPA_GUI_API_KEY`. Set that environment variable
-before launching OMP. Set `OMP_CPA_GUI_BASE_URL`, or pass `--base-url` on
-macOS/Linux and `-BaseUrl` on Windows, to use another gateway. Use
-`--api-key-env` or `-ApiKeyEnvironment` to reference a different environment
-variable. Existing `~/.omp/agent/models.yml` and `config.yml` are retained by
-default; use `--force` or `-Force` to back up and replace both files.
+The linked files use `http://127.0.0.1:8317/v1` and resolve the proxy bearer
+token from `OMP_CPA_GUI_API_KEY`; set it before launching OMP. Sign in to
+Claude once in OMP before using a Claude role. Existing
+`~/.omp/agent/models.yml` and `config.yml` are retained as conflicts rather
+than replaced.
 
 On macOS or Linux, `config.sh` links the same tree to
 `$XDG_CONFIG_HOME/nvim` (or `~/.config/nvim`).

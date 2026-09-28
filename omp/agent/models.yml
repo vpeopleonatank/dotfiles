@@ -1,0 +1,26 @@
+providers:
+  cpa-gui:
+    baseUrl: http://127.0.0.1:8317/v1
+    api: openai-responses
+    apiKey: OMP_CPA_GUI_API_KEY
+    models:
+      - id: gpt-5.6-luna
+        reasoning: true
+        input: [text, image]
+        contextWindow: 272000
+      - id: gpt-5.6-terra
+        reasoning: true
+        input: [text, image]
+        contextWindow: 272000
+      - id: gpt-5.6-sol
+        reasoning: true
+        input: [text, image]
+        contextWindow: 272000
+      - id: gpt-6-sol
+        reasoning: true
+        input: [text, image]
+        contextWindow: 272000
+      - id: gpt-6-astra
+        reasoning: true
+        input: [text, image]
+        contextWindow: 272000

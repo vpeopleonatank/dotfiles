@@ -64,10 +64,11 @@ assert_file_contains "$ROOT/herdr/config.toml" 'previous_tab = ["prefix+ctrl+h",
 assert_file_contains "$ROOT/herdr/config.toml" 'next_tab = ["prefix+ctrl+l", "alt+n"]'
 assert_file_contains "$ROOT/herdr/config.toml" 'resize_pane_left = "prefix+shift+h"'
 assert_file_contains "$ROOT/setup-herdr.ps1" "Join-Path \$env:APPDATA 'herdr'"
-assert_file_contains "$ROOT/setup-omp.sh" 'https://omp.sh/install'
-assert_file_contains "$ROOT/setup-omp.sh" 'api: openai-responses'
-assert_file_contains "$ROOT/setup-omp.ps1" 'https://omp.sh/install.ps1'
-assert_file_contains "$ROOT/setup-omp.ps1" 'cpa-gui/gpt-6-astra:high'
+assert_file_contains "$ROOT/omp/agent/models.yml" 'api: openai-responses'
+assert_file_contains "$ROOT/omp/agent/config.yml" 'anthropic/claude-opus-5-5:low'
+assert_file_contains "$ROOT/omp/agent/config.yml" 'cpa-gui/gpt-6-astra:high'
+assert_file_not_contains "$ROOT/setup-omp.sh" 'https://omp.sh/install'
+assert_file_not_contains "$ROOT/setup-omp.ps1" 'https://omp.sh/install.ps1'
 
 printf '%s\n' '# user-owned content' 'export KEEP_ME=1' > "$TEST_HOME/.zshrc"
 HOME="$TEST_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/setup_zsh.sh"
@@ -142,6 +143,8 @@ HOME="$CONFIG_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/config.sh"
 assert_link_target "$CONFIG_HOME/.config/kitty/kitty.conf" "$ROOT/kitty/kitty.conf"
 assert_link_target "$CONFIG_HOME/.config/ghostty/config" "$ROOT/ghostty/config"
 assert_link_target "$CONFIG_HOME/.config/herdr/config.toml" "$ROOT/herdr/config.toml"
+assert_link_target "$CONFIG_HOME/.omp/agent/models.yml" "$ROOT/omp/agent/models.yml"
+assert_link_target "$CONFIG_HOME/.omp/agent/config.yml" "$ROOT/omp/agent/config.yml"
 assert_link_target "$CONFIG_HOME/.tmux.conf" "$ROOT/tmux/config.tmux"
 assert_link_target "$CONFIG_HOME/.config/nvim" "$ROOT/nvim"
 

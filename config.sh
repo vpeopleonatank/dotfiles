@@ -35,6 +35,8 @@ for link_pair in \
   "$DOTFILES_ROOT/kitty/kitty.conf|$HOME/.config/kitty/kitty.conf" \
   "$DOTFILES_ROOT/ghostty/config|$HOME/.config/ghostty/config" \
   "$DOTFILES_ROOT/herdr/config.toml|$HOME/.config/herdr/config.toml" \
+  "$DOTFILES_ROOT/omp/agent/models.yml|$HOME/.omp/agent/models.yml" \
+  "$DOTFILES_ROOT/omp/agent/config.yml|$HOME/.omp/agent/config.yml" \
   "$DOTFILES_ROOT/tmux/config.tmux|$HOME/.tmux.conf" \
   "$DOTFILES_ROOT/lazygit/config.yml|$HOME/.config/jesseduffield/lazygit/config.yml" \
   "$DOTFILES_ROOT/snippets|$HOME/.config/snippets"; do
