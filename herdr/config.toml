@@ -1,0 +1,49 @@
+# Shared Herdr configuration for Windows, Linux, and macOS.
+#
+# It mirrors the portable portion of tmux/config.tmux.  Herdr reads this from
+# ~/.config/herdr/config.toml on Linux/macOS and %APPDATA%\herdr\config.toml on
+# Windows.
+
+onboarding = false
+
+[terminal]
+default_shell = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+new_cwd = "follow"
+
+[keys]
+# Keep the tmux prefix used by this repository.
+prefix = "ctrl+q"
+
+# Tabs/windows.
+new_tab = "prefix+c"
+previous_tab = ["prefix+ctrl+h", "alt+p"]
+next_tab = ["prefix+ctrl+l", "alt+n"]
+switch_tab = "prefix+1..9"
+
+# Panes.
+split_horizontal = "prefix+minus"
+split_vertical = "prefix+_"
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+resize_pane_left = "prefix+shift+h"
+resize_pane_down = "prefix+shift+j"
+resize_pane_up = "prefix+shift+k"
+resize_pane_right = "prefix+shift+l"
+zoom = ["prefix+plus", "ctrl+alt+j"]
+
+# Commands and copy mode.
+copy_mode = "prefix+["
+reload_config = "prefix+ctrl+r"
+
+[ui]
+mouse_capture = true
+pane_borders = "auto"
+tab_bar_position = "top"
+[ui.toast]
+delivery = "system"
+
+[advanced]
+# Match tmux's configured 65,536-line history with a practical byte limit.
+scrollback_limit_bytes = 10000000

@@ -9,7 +9,7 @@ Automated provisioning is limited to:
 - macOS with Homebrew, on amd64 or arm64;
 - Debian or Ubuntu Linux with APT, on amd64 or arm64.
 
-Windows is supported for PowerShell aliases, Neovim, and psmux configuration.
+Windows is supported for PowerShell aliases, Neovim, psmux, and Herdr configuration.
 Shell, tmux, and package provisioning remain limited to macOS and Debian/Ubuntu.
 The scripts never require root for files below `$HOME`.
 
@@ -84,6 +84,27 @@ That option installs only PPM (the psmux plugin manager); start psmux and press
 `Prefix + I` to fetch the declared plugins. psmux's native clipboard support
 replaces tmux-yank, and plugins without maintained psmux ports are not loaded.
 PowerShell predictions stay enabled without psmux's extra prediction dimming.
+Use `Alt` + `1` through `9` to select the corresponding psmux window.
+
+Herdr uses the same portable tmux-style bindings on Windows, macOS, and Linux:
+`Ctrl-Q` is the prefix; `Prefix` + `-` or `_` splits panes; `Prefix` +
+`H/J/K/L` focuses panes; `Prefix` + `Shift-H/J/K/L` resizes panes; `Prefix` +
+`Ctrl-H/Ctrl-L` changes tabs; and
+`Prefix` + `1` through `9` selects a tab. On macOS or Linux, `config.sh`
+links the configuration to `~/.config/herdr/config.toml`:
+
+```bash
+bash config.sh
+```
+
+On Windows, link it to `%APPDATA%\herdr\config.toml`:
+
+```powershell
+.\setup-herdr.ps1
+```
+
+Install Herdr separately, then reload a running server after changes with
+`herdr server reload-config`.
 
 Install the portable PowerShell shortcuts into the current host's user profile:
 
@@ -104,6 +125,32 @@ Set up Neovim on Windows (PowerShell; Neovim must already be installed):
 
 The script links the tracked `nvim/` tree to `%LOCALAPPDATA%\nvim`, preserves
 an existing config as a conflict, and supports `-DryRun`.
+
+## Oh My Pi with the local Codex proxy
+
+The setup scripts install [Oh My Pi](https://omp.sh/) when needed and configure
+its `cpa-gui` provider to match the local Codex proxy. They configure Terra as
+the default model, Luna for lightweight work, GPT-6 Sol for thorough, planning,
+vision, and task work, and Astra for Advisor.
+
+On macOS or Linux:
+
+```bash
+bash setup-omp.sh
+```
+
+On Windows:
+
+```powershell
+.\setup-omp.ps1
+```
+
+Both scripts use `http://127.0.0.1:8317/v1` and the local proxy's default
+token. Set `OMP_CPA_GUI_BASE_URL` and `OMP_CPA_GUI_API_KEY`, or pass
+`--base-url` / `--api-key` on macOS/Linux and `-BaseUrl` / `-ApiKey` on
+Windows, to use another gateway. Existing `~/.omp/agent/models.yml` and
+`config.yml` are retained by default; use `--force` or `-Force` to back up and
+replace both files.
 
 On macOS or Linux, `config.sh` links the same tree to
 `$XDG_CONFIG_HOME/nvim` (or `~/.config/nvim`).

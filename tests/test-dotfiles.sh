@@ -37,7 +37,7 @@ if DOTFILES_ROOT="$SOURCE_ROOT" dotfiles_link "$SOURCE_ROOT/source" "$TEST_HOME/
   fail 'repository source symlink escaped the repository'
 fi
 
-bash -n "$ROOT/setup_zsh.sh" "$ROOT/config.sh" "$ROOT/install.sh" "$ROOT/scripts/dotfiles-lib.sh"
+bash -n "$ROOT/setup_zsh.sh" "$ROOT/setup-omp.sh" "$ROOT/config.sh" "$ROOT/install.sh" "$ROOT/scripts/dotfiles-lib.sh"
 zsh -n "$ROOT/zsh/config.zsh" "$ROOT/zsh/zenvs.zsh" "$ROOT/zsh/zaliases.zsh" "$ROOT/zsh/zfunctions.zsh"
 assert_file_contains "$ROOT/powershell/profile.ps1" 'function global:nv'
 assert_file_contains "$ROOT/powershell/profile.ps1" 'function global:vimdiff'
@@ -53,7 +53,21 @@ assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/p
 assert_file_not_contains "$ROOT/psmux/config.psmux" "tmux-plugins/tpm"
 assert_file_contains "$ROOT/psmux/config.psmux" "set -g prediction-dimming off"
 assert_file_contains "$ROOT/psmux/config.psmux" 'bind g new-window -n lazygit -c "#{pane_current_path}" lazygit'
+assert_file_contains "$ROOT/psmux/config.psmux" 'bind -n M-1 select-window -t 1'
+assert_file_contains "$ROOT/psmux/config.psmux" 'bind -n M-9 select-window -t 9'
 assert_file_not_contains "$ROOT/psmux/config.psmux" 'bind g display-popup'
+assert_file_contains "$ROOT/herdr/config.toml" 'prefix = "ctrl+q"'
+assert_file_contains "$ROOT/herdr/config.toml" 'split_horizontal = "prefix+minus"'
+assert_file_contains "$ROOT/herdr/config.toml" 'split_vertical = "prefix+_"'
+assert_file_contains "$ROOT/herdr/config.toml" 'switch_tab = "prefix+1..9"'
+assert_file_contains "$ROOT/herdr/config.toml" 'previous_tab = ["prefix+ctrl+h", "alt+p"]'
+assert_file_contains "$ROOT/herdr/config.toml" 'next_tab = ["prefix+ctrl+l", "alt+n"]'
+assert_file_contains "$ROOT/herdr/config.toml" 'resize_pane_left = "prefix+shift+h"'
+assert_file_contains "$ROOT/setup-herdr.ps1" "Join-Path \$env:APPDATA 'herdr'"
+assert_file_contains "$ROOT/setup-omp.sh" 'https://omp.sh/install'
+assert_file_contains "$ROOT/setup-omp.sh" 'api: openai-responses'
+assert_file_contains "$ROOT/setup-omp.ps1" 'https://omp.sh/install.ps1'
+assert_file_contains "$ROOT/setup-omp.ps1" 'cpa-gui/gpt-6-astra:high'
 
 printf '%s\n' '# user-owned content' 'export KEEP_ME=1' > "$TEST_HOME/.zshrc"
 HOME="$TEST_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/setup_zsh.sh"
@@ -127,6 +141,7 @@ rmdir "$CONFIG_HOME/.config/nvim"
 HOME="$CONFIG_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/config.sh"
 assert_link_target "$CONFIG_HOME/.config/kitty/kitty.conf" "$ROOT/kitty/kitty.conf"
 assert_link_target "$CONFIG_HOME/.config/ghostty/config" "$ROOT/ghostty/config"
+assert_link_target "$CONFIG_HOME/.config/herdr/config.toml" "$ROOT/herdr/config.toml"
 assert_link_target "$CONFIG_HOME/.tmux.conf" "$ROOT/tmux/config.tmux"
 assert_link_target "$CONFIG_HOME/.config/nvim" "$ROOT/nvim"
 
