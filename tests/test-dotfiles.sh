@@ -52,6 +52,8 @@ assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/p
 assert_file_contains "$ROOT/psmux/config.psmux" "set -g @plugin 'psmux-plugins/psmux-vim-navigator'"
 assert_file_not_contains "$ROOT/psmux/config.psmux" "tmux-plugins/tpm"
 assert_file_contains "$ROOT/psmux/config.psmux" "set -g prediction-dimming off"
+assert_file_contains "$ROOT/psmux/config.psmux" 'bind g new-window -n lazygit -c "#{pane_current_path}" lazygit'
+assert_file_not_contains "$ROOT/psmux/config.psmux" 'bind g display-popup'
 
 printf '%s\n' '# user-owned content' 'export KEEP_ME=1' > "$TEST_HOME/.zshrc"
 HOME="$TEST_HOME" PATH="$MINIMAL_PATH" bash "$ROOT/setup_zsh.sh"
