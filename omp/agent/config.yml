@@ -6,8 +6,8 @@ modelRoles:
   commit: anthropic/claude-opus-5-5:medium
   task: anthropic/claude-opus-5-5:high
   advisor: cpa-gui/gpt-6-astra:high
-  smol: anthropic/claude-sonnet-5
-  default: anthropic/claude-opus-5-5:medium
+  smol: anthropic/claude-sonnet-5-5:medium
+  default: anthropic/claude-sonnet-5-5:medium
 retry:
   fallbackChains:
     default:

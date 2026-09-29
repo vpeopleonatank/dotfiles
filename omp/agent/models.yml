@@ -30,3 +30,5 @@ providers:
         contextWindow: 272000
       claude-sonnet-5:
         contextWindow: 272000
+      claude-sonnet-5-5:
+        contextWindow: 272000
