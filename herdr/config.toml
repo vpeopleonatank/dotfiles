@@ -47,3 +47,6 @@ delivery = "system"
 [advanced]
 # Match tmux's configured 65,536-line history with a practical byte limit.
 scrollback_limit_bytes = 10000000
+
+[update]
+channel = "preview"
